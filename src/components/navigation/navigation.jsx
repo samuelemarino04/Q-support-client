@@ -1,24 +1,53 @@
-import { Navbar, Nav, Container } from 'react-bootstrap'
+import { useContext } from 'react'
+import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { ThemeContext } from '../../contexts/theme.context'
+import { AuthContext } from '../../contexts/auth.context'
+
 
 
 const Navigation = () => {
 
+    const { theme, switchTheme, invertedTheme } = useContext(ThemeContext)
+    const { loggedUser, logout } = useContext(AuthContext)
+
     return (
-        <Navbar bg="dark" data-bs-theme="dark" className='mb-5' expand="lg">
+        <Navbar bg={invertedTheme}
+            data-bs-theme={invertedTheme}
+            className='mb-3'
+            expand="lg">
             <Container>
-                <Navbar.Brand href="#home">Logo</Navbar.Brand>
+                <Navbar.Brand>Logo</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Link to={'/'} className='nav-link'>Home</Link>
-                        <Link to={'/'} className='nav-link'>Creatives list</Link>
-                        <Link to={'/crear'} className='nav-link'>Events</Link>
-
+                        <Link to={'/events'} className='nav-link'>Events</Link>
+                    </Nav>
+                    <Nav>
+                        {
+                            loggedUser &&
+                            <>
+                                <Link to={'/'} className='nav-link'>My profile</Link>
+                                <span className='nav-link' onClick={logout}>Logout</span>
+                            </>
+                        }
+                        {
+                            !loggedUser &&
+                            <>
+                                <Link to={'/signup'} className='nav-link mr-auto'>Sign Up</Link>
+                                <Link to={'/login'} className='nav-link mr-auto'>Login</Link>
+                            </>
+                        }
                     </Nav>
                 </Navbar.Collapse>
+                <div className="d-flex">
+                    <Button variant='primary' size='sm' onClick={switchTheme} style={{ marginRight: 10 }}>Mode {theme === 'dark' ? 'light' : 'dark'}</Button>
+                    <span class="navbar-text">Hi, {loggedUser ? loggedUser.username : 'user'}!</span>
+                </div>
             </Container>
         </Navbar>
+
     )
 }
 
