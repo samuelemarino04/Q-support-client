@@ -2,3 +2,15 @@ body {
   font-family: sans-serif;
   font-weight: 100;
 }
+
+footer {
+  background-color: #212429;
+  color: white;
+  font-size: .6em;
+  padding: 4px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+}
