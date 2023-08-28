@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom'
 import SignupPage from '../pages/SignupPage/SignupPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
+import NotFoundPage from '../pages/NotFoundPage'
 
 const AppRoutes = () => {
 
     return (
         <Routes>
-            <Route path={'/registro'} element={<SignupPage />} />
-            <Route path={'/inicio-sesion'} element={<LoginPage />} />
-
+            <Route path={'/signup'} element={<SignupPage />} />
+            <Route path={'/login'} element={<LoginPage />} />
             <Route path={'*'} element={<NotFoundPage />} />
         </Routes>
     )

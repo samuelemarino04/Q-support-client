@@ -55,8 +55,8 @@ Base URL /auth
 |URL             | DESCRIPTION                | PROTECTED |
 |---------------------------------------------------------|
 | /              | Index Page                 |           |
-| /registro      | signup page                |           |
-| /inicio-sesion | login page                 |           |
+| /signup        | signup page                |           |
+| /login         | login page                 |           |
 | /events        | events page                |           |
 | /details/:id   | events details page        |           |
 | /edit          | edit events details        | *         |
