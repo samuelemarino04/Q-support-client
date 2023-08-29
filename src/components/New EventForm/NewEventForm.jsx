@@ -24,7 +24,18 @@ const NewEventForm = ({ fireFinalActions }) => {
 
     const handleInputChange = e => {
         const { value, name } = e.currentTarget
-        setEventData({ ...eventData, [name]: value })
+        if (name.includes(".")) {
+            const [parentField, nestedField] = name.split(".");
+            setEventData({
+                ...eventData,
+                [parentField]: {
+                    ...eventData[parentField],
+                    [nestedField]: value
+                }
+            });
+        } else {
+            setEventData({ ...eventData, [name]: value });
+        }
     }
 
     const handleEventSubmit = e => {
