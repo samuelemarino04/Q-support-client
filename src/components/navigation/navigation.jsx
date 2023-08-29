@@ -42,7 +42,7 @@ const Navigation = () => {
                     </Nav>
                 </Navbar.Collapse>
                 <div className="d-flex">
-                    <Button variant='primary' size='sm' onClick={switchTheme} style={{ marginRight: 10 }}>Mode {theme === 'dark' ? 'light' : 'dark'}</Button>
+                    <Button variant='dark' size='sm' onClick={switchTheme} style={{ marginRight: 10, borderRadius: 15 }}>Mode {theme === 'dark' ? 'light' : 'dark'}</Button>
                     <span class="navbar-text">Hi, {loggedUser ? loggedUser.username : 'user'}!</span>
                 </div>
             </Container>

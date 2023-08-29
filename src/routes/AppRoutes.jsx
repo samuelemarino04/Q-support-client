@@ -3,6 +3,7 @@ import SignupPage from '../pages/SignupPage/SignupPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
 import NotFoundPage from '../pages/NotFoundPage'
 
+
 const AppRoutes = () => {
 
     return (
