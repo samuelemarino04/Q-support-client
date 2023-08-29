@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import eventsService from "../../services/events.services";
 
-const NewEventForm = ({ fireFinalActions }) => {
+const NewEventForm = ({ }) => {
     const [eventData, setEventData] = useState({
         title: '',
         icon: '',
@@ -14,27 +16,38 @@ const NewEventForm = ({ fireFinalActions }) => {
             city: '',
             country: ''
         },
-        location: {
-            type: 'Point',
-            coordinates: [0, 0]
-        },
+        // location: {
+        //     type: 'Point',
+        //     coordinates: [0, 0]
+        // },
         date: '',
         organizer: ''
     })
 
     const handleInputChange = e => {
         const { value, name } = e.currentTarget
-        setEventData({ ...eventData, [name]: value })
+        if (name.includes(".")) {
+            const [parentField, nestedField] = name.split(".");
+            setEventData({
+                ...eventData,
+                [parentField]: {
+                    ...eventData[parentField],
+                    [nestedField]: value
+                }
+            });
+        } else {
+            setEventData({ ...eventData, [name]: value });
+        }
     }
 
     const handleEventSubmit = e => {
         e.preventDefault()
 
 
-        eventServices
+        eventsService
             .saveEvent(eventData)
             .then(() => {
-                fireFinalActions()
+                // fireFinalActions()
             })
             .catch(err => console.log(err))
     }
@@ -63,23 +76,14 @@ const NewEventForm = ({ fireFinalActions }) => {
                         name="description"
                         onChange={handleInputChange} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="attendees">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control type="text"
-                        value={eventData.attendees}
-                        name="attendees"
-                        onChange={handleInputChange} />
-                </Form.Group>
-
                 <Form.Group className="mb-3" controlId="address">
                     <Form.Label>Address</Form.Label>
                     <Form.Control type="text"
-                        value={eventData.address.street}
-                        name="address.street"
-                        placeholder="Street"
+                        value={eventData.address}
+                        name="address"
                         onChange={handleInputChange}
                     />
-                    <Form.Control
+                    {/* <Form.Control
                         type="number"
                         value={eventData.address.number}
                         name="address.number"
@@ -106,9 +110,9 @@ const NewEventForm = ({ fireFinalActions }) => {
                         name="address.country"
                         placeholder="Country"
                         onChange={handleInputChange}
-                    />
+                    /> */}
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="location">
+                {/* <Form.Group className="mb-3" controlId="location">
                     <Form.Label>Location</Form.Label>
                     <Form.Control
                         type="number"
@@ -124,7 +128,7 @@ const NewEventForm = ({ fireFinalActions }) => {
                         placeholder="Longitude"
                         onChange={handleInputChange}
                     />
-                </Form.Group>
+            </Form.Group> */}
                 <Form.Group className="mb-3" controlId="date">
                     <Form.Label>Date</Form.Label>
                     <Form.Control type="date"
@@ -132,17 +136,14 @@ const NewEventForm = ({ fireFinalActions }) => {
                         name="date"
                         onChange={handleInputChange} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="organizer">
-                    <Form.Label>Organizer</Form.Label>
-                    <Form.Control type="text"
-                        value={eventData.organizer}
-                        name="organizer"
-                        onChange={handleInputChange} />
-                </Form.Group>
+                <Button variant="dark" type="submit" className='mt-2'>
+                    Submit Event
+                </Button>
             </Form>
-        </div>
+        </div >
 
     )
 }
+
 export default NewEventForm
 

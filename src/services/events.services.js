@@ -2,8 +2,10 @@ import axios from 'axios'
 
 class EventService {
     constructor() {
+        // console.log('QUE ES ESTOOOOOOO----------------', `${import.meta.env.VITE_API_URL} /events`)
+
         this.api = axios.create({
-            baseUrl: `${import.meta.env.VITE_API_URL}/events`
+            baseURL: `${import.meta.env.VITE_API_URL}/events`
         })
     }
 
@@ -16,7 +18,7 @@ class EventService {
     }
 
     saveEvent(eventData) {
-        return this.api.post(`/saveEvent`, eventData)
+        return this.api.post('/saveEvent', eventData)
     }
 }
 const eventsService = new EventService()
