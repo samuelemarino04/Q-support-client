@@ -5,6 +5,9 @@ import NotFoundPage from '../pages/NotFoundPage'
 import NewEventForm from '../components/New EventForm/NewEventForm'
 import ProfilePage from '../pages/ProfilePage/ProfilePage'
 import PrivateRoute from './PrivateRoute'
+import CreativePage from '../pages/CreativePage/CreativePage'
+import SubscriptionForm from '../components/SubscriptionForm/SubscriptionForm'
+
 
 
 
@@ -19,6 +22,10 @@ const AppRoutes = () => {
             </Route>
             <Route path={'*'} element={<NotFoundPage />} />
             <Route path={'/saveEvent'} element={<NewEventForm />} />
+            <Route path={'/creative/:creative_id'} element={<CreativePage />} />
+            <Route path={'*'} element={<NotFoundPage />} />
+            <Route path={'/newevent'} element={<NewEventForm />} />
+            <Route path={'/newsubscription'} element={<SubscriptionForm />} />
 
         </Routes>
     )
