@@ -6,7 +6,7 @@ Base URL /events
 
 | HTTP METHOD| URI PATH                 | DESCRIPTION                       |
 |----------- |--------------------------|-----------------------------------|
-| GET        | /getAllEvents            | All Events list                   |
+| GET        | /getAllEvent            | All Events list                   |
 | POST       | /saveEvent               | create new event                  |
 | GET        | /:id                     | Matching ID event details         |
 | PUT        | /:id/edit                | Edit matching ID event            |

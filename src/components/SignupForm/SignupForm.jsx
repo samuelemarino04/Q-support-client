@@ -19,52 +19,85 @@ const SignupForm = () => {
         setSignupData({ ...signupData, [name]: value })
     }
 
+    const calculateAge = (dateOfBirth) => {
+        const birthDate = new Date(dateOfBirth)
+        const today = new Date()
+        const age = today.getFullYear() - birthDate.getFullYear()
+        const monthDiff = today.getMonth() - birthDate.getMonth()
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            return age - 1
+        }
+        return age
+    }
+
     const handleFormSubmit = e => {
 
         e.preventDefault()
 
+        const age = calculateAge(signupData.birth)
+
+        if (age < 18) {
+            console.log("You must be 18 or older to sign up.")
+            return
+        }
+
         authService
             .signup(signupData)
-            .then(() => navigate('/galeria'))
+            .then(() => navigate('/login'))
             .catch(err => console.log(err))
     }
 
     return (
+        <div>
+            <p>By signing up to Q+Creatives you are accepting our <a href="#">Terms and Conditions</a>.
+                Learn more about how we process your data in our <a href="#">Privacy policy</a>
+                and our <a href="#">Cookies policy</a>.</p>
 
-        <Form onSubmit={handleFormSubmit}>
+            <Form onSubmit={handleFormSubmit}>
 
-            <Form.Group className="mb-3" controlId="username">
-                <Form.Label>User name</Form.Label>
-                <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
-            </Form.Group>
-
-
-            <Form.Group className="mb-3" controlId="role">
-                <Form.Label>Role</Form.Label>
-                <Form.Control as="select" value={signupData.role} onChange={handleInputChange} name="role">
-                    <option value="USER">User</option>
-                    <option value="CREATIVE">Creative</option>
-                </Form.Control>
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="username">
+                    <Form.Label>User name</Form.Label>
+                    <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
+                </Form.Group>
 
 
-            <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={signupData.password} onChange={handleInputChange} name="password" />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="role">
+                    <Form.Label>Role</Form.Label>
+                    <Form.Control as="select" value={signupData.role} onChange={handleInputChange} name="role">
+                        <option value="USER">User</option>
+                        <option value="CREATIVE">Creative</option>
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="birth">
+                    <Form.Label>Birth Date</Form.Label>
+                    <Form.Control
+                        type="date"
+                        value={signupData.birth}
+                        onChange={handleInputChange}
+                        name="birth"
+                    />
+                </Form.Group>
 
 
-            <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={signupData.email} onChange={handleInputChange} name="email" />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" value={signupData.password} onChange={handleInputChange} name="password" />
+                </Form.Group>
 
 
-            <div className="d-grid">
-                <Button variant="dark" type="submit">Register</Button>
-            </div>
+                <Form.Group className="mb-3" controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" value={signupData.email} onChange={handleInputChange} name="email" />
+                </Form.Group>
 
-        </Form>
+
+                <div className="d-grid">
+                    <Button variant="dark" type="submit">Register</Button>
+                </div>
+
+            </Form>
+        </div>
     )
 }
 
