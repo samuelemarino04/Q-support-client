@@ -5,6 +5,7 @@ import NotFoundPage from '../pages/NotFoundPage'
 import ProfilePage from '../pages/ProfilePage/ProfilePage'
 
 
+
 const AppRoutes = () => {
 
     return (
