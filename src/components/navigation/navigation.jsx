@@ -28,7 +28,7 @@ const Navigation = () => {
                         {
                             loggedUser &&
                             <>
-                                <Link to={'/'} className='nav-link'>My profile</Link>
+                                <Link to={'/userProfile'} className='nav-link'>My profile</Link>
                                 <span className='nav-link' onClick={logout}>Logout</span>
                             </>
                         }

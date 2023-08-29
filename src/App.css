@@ -4,14 +4,12 @@ body {
 }
 
 footer {
-  background-color: #212429;
   color: white;
   font-size: .6em;
-  padding: 4px;
   text-align: center;
   bottom: 0;
   width: 100%;
-  height: 40px;
+  height: 50px;
   left: 0;
 }
 

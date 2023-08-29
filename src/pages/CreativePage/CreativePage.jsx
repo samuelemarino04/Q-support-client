@@ -1,6 +1,8 @@
+import CreativeProfile from "../../components/CreativeProfile/CreativeProfile"
+
 const CreativePage = () => {
     return (
-        <h1>hey</h1>
+        <CreativeProfile></CreativeProfile>
     )
 }
 

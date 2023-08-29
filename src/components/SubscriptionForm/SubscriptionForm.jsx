@@ -1,9 +1,8 @@
 import Row from 'react-bootstrap/Row';
-import { Container } from 'react-bootstrap';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Container, FloatingLabel, Form, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
+import subscriptionService from '../../services/subscription.services';
+import { useNavigate } from "react-router-dom"
 
 
 const SubscriptionForm = () => {
@@ -22,13 +21,20 @@ const SubscriptionForm = () => {
 
     });
 
+
+    const navigate = useNavigate()
     const handleInputChange = (e) => {
         const { value, name } = e.currentTarget;
         setFormData({ ...formData, [name]: value });
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();;
+        e.preventDefault();
+
+        subscriptionService
+            .saveSubscription(formData)
+            .then(() => navigate('/login'))
+            .catch(err => console.log(err))
     }
 
     return (
