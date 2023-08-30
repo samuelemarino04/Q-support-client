@@ -28,6 +28,10 @@ const CreativeProfile = () => {
                         Tab content for Subscriptions
                     </Tab>
 
+                    <Tab eventKey="work" title="Work">
+                        Tab content for work, gallery of images, music etc.
+                    </Tab>
+
                     {/* <Tab eventKey="contact" title="Open Projects" disabled>
                     Tab content for Contact
                 </Tab>
