@@ -3,18 +3,19 @@ import { Form, Button } from "react-bootstrap"
 import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
-import calculateAge from "../../../utils/calculateAge"
+import calculateAge from "../../utils/calculateAge"
+
+
 
 const SignupForm = () => {
 
     const [signupData, setSignupData] = useState({
         username: '',
         birth: '',
-        imageUrl: '',
-        role: 'USER',
+        avatar: '',
+        role: '',
         email: '',
         password: '',
-        avatar: 'https://i.stack.imgur.com/l60Hf.png',
         pronouns: ''
     })
 
@@ -27,7 +28,6 @@ const SignupForm = () => {
         setSignupData({ ...signupData, [name]: value })
     }
 
-    //para subir imágenes a cloudinary  👇 
     const handleFileUpload = e => {
 
         setLoadingImage(true)
@@ -38,14 +38,13 @@ const SignupForm = () => {
         uploadServices
             .uploadimage(formData)
             .then(({ data }) => {
-                setSignupData({ ...signupData, imageurl: data.cloudinary_url })
+                setSignupData({ ...signupData, avatar: data.cloudinary_url })
                 setLoadingImage(false)
             })
             .catch(err => {
                 console.log(err)
                 setLoadingImage(false)
             })
-
     }
 
     const handleFormSubmit = e => {
@@ -60,7 +59,7 @@ const SignupForm = () => {
         }
 
         authService
-            .signup(signupData)
+            .signup({ ...signupData, role: roleValue })
             .then(() => navigate('/login'))
             .catch(err => console.log(err))
     }
@@ -72,16 +71,15 @@ const SignupForm = () => {
                 and our <a href="#">Cookies policy</a>.</p>
 
             <Form onSubmit={handleFormSubmit}>
-                {/* para subir imágenes a cloudinary  👇 */}
-                <Form.Group className="mb-3" controlId="image">
-                    <Form.Label>Imagen (URL)</Form.Label>
-                    <Form.Control type="file" onChange={handleFileUpload} />
-                </Form.Group>
-                {/* para subir imágenes a cloudinary 👆 */}
 
                 <Form.Group className="mb-3" controlId="username">
                     <Form.Label>User name</Form.Label>
                     <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="image">
+                    <Form.Label>Avatar</Form.Label>
+                    <Form.Control type="file" onChange={handleFileUpload} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="pronouns">
@@ -89,19 +87,14 @@ const SignupForm = () => {
                     <Form.Control type="text" value={signupData.pronouns} onChange={handleInputChange} name="pronouns" />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="avatar">
-                    <Form.Label>Avatar</Form.Label>
-                    <Form.Control type="text" value={signupData.avatar} onChange={handleInputChange} name="avatar" />
-                </Form.Group>
-
                 <Form.Group className="mb-3" controlId="role">
-                    <Form.Label>Role</Form.Label>
+                    <Form.Label>Creative or patron?</Form.Label>
                     <Form.Control as="select" value={signupData.role} onChange={handleInputChange} name="role">
-                        <option value="">choose one rol</option>
-                        <option value="USER">User</option>
+                        <option value="USER">Patron</option>
                         <option value="CREATIVE">Creative</option>
                     </Form.Control>
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="birth">
                     <Form.Label>Birth Date</Form.Label>
                     <Form.Control
@@ -111,7 +104,6 @@ const SignupForm = () => {
                         name="birth"
                     />
                 </Form.Group>
-
 
                 <Form.Group className="mb-3" controlId="password">
                     <Form.Label>Password</Form.Label>

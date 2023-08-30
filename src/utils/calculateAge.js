@@ -9,4 +9,4 @@ function calculateAge(dateOfBirth) {
     }
     return age
 }
-module.exports = calculateAge
+export default calculateAge
