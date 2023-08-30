@@ -8,9 +8,11 @@ const SignupForm = () => {
     const [signupData, setSignupData] = useState({
         username: '',
         birth: '',
-        role: 'USER',
+        role: '',
         email: '',
         password: '',
+        avatar: 'https://i.stack.imgur.com/l60Hf.png',
+        pronouns: ''
     })
 
     const navigate = useNavigate()
@@ -60,15 +62,24 @@ const SignupForm = () => {
                     <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
                 </Form.Group>
 
+                <Form.Group className="mb-3" controlId="pronouns">
+                    <Form.Label>Pronouns</Form.Label>
+                    <Form.Control type="text" value={signupData.pronouns} onChange={handleInputChange} name="pronouns" />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="avatar">
+                    <Form.Label>Avatar</Form.Label>
+                    <Form.Control type="text" value={signupData.avatar} onChange={handleInputChange} name="avatar" />
+                </Form.Group>
 
                 <Form.Group className="mb-3" controlId="role">
                     <Form.Label>Role</Form.Label>
                     <Form.Control as="select" value={signupData.role} onChange={handleInputChange} name="role">
+                        <option value="">choose one rol</option>
                         <option value="USER">User</option>
                         <option value="CREATIVE">Creative</option>
                     </Form.Control>
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="birth">
                     <Form.Label>Birth Date</Form.Label>
                     <Form.Control
