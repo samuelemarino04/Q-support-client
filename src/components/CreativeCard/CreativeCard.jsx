@@ -10,7 +10,7 @@ const CreativeCard = ({ _id, username, avatar }) => {
                 <div className="Card">
                     <div className="upper-container">
                         <div className="image-container">
-                            <img src="https://media.vogue.mx/photos/5de92ccaf1bbef0008e5a100/2:3/w_1920,c_limit/the-devil-wears-prada-miranda-priestly.jpg" alt="#" height='100px' width='100px' />
+                            <img src={avatar} alt="#" height='100px' width='100px' />
                         </div>
                     </div>
                     <div className="lower-container">
