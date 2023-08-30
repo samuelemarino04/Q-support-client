@@ -2,6 +2,8 @@ import { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import eventsService from "../../services/events.services";
+import uploadServices from "../../services/upload.services"
+
 
 const NewEventForm = ({ }) => {
     const [eventData, setEventData] = useState({
@@ -24,6 +26,8 @@ const NewEventForm = ({ }) => {
         organizer: ''
     })
 
+    const [loadingImage, setLoadingImage] = useState(false)
+
     const handleInputChange = e => {
 
         const { value, name } = e.currentTarget
@@ -42,6 +46,28 @@ const NewEventForm = ({ }) => {
         } else {
             setEventData({ ...eventData, [name]: value });
         }
+    }
+
+    const handleFileUpload = e => {
+
+        setLoadingImage(true)
+
+        const formData = new FormData()
+        formData.append('imageData', e.target.files[0])
+
+        console.log('--------------------FOTITOOOO', formData)
+
+        uploadServices
+            .uploadimage(formData)
+            .then(({ data }) => {
+                setEventData({ ...eventData, icon: data.cloudinary_url })
+                setLoadingImage(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoadingImage(false)
+            })
+
     }
 
     const handleEventSubmit = e => {
@@ -66,12 +92,12 @@ const NewEventForm = ({ }) => {
                         name="title"
                         onChange={handleInputChange} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="icon">
+                <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Icon</Form.Label>
-                    <Form.Control type="text"
-                        value={eventData.icon}
+                    <Form.Control type="file"
+                        // value={eventData.icon}
                         name="icon"
-                        onChange={handleInputChange} />
+                        onChange={handleFileUpload} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="description">
                     <Form.Label>Description</Form.Label>
@@ -83,11 +109,12 @@ const NewEventForm = ({ }) => {
                 <Form.Group className="mb-3" controlId="address">
                     <Form.Label>Address</Form.Label>
                     <Form.Control type="text"
-                        value={eventData.address}
-                        name="address"
+                        value={eventData.address.street}
+                        name="address.street"
+                        placeholder="Street"
                         onChange={handleInputChange}
                     />
-                    {/* <Form.Control
+                    <Form.Control
                         type="number"
                         value={eventData.address.number}
                         name="address.number"
@@ -114,7 +141,7 @@ const NewEventForm = ({ }) => {
                         name="address.country"
                         placeholder="Country"
                         onChange={handleInputChange}
-                    /> */}
+                    />
                 </Form.Group>
                 {/* <Form.Group className="mb-3" controlId="location">
                     <Form.Label>Location</Form.Label>
@@ -132,7 +159,7 @@ const NewEventForm = ({ }) => {
                         placeholder="Longitude"
                         onChange={handleInputChange}
                     />
-            </Form.Group> */}
+                </Form.Group> */}
                 <Form.Group className="mb-3" controlId="date">
                     <Form.Label>Date</Form.Label>
                     <Form.Control type="date"

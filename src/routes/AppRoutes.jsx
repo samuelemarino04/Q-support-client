@@ -8,6 +8,7 @@ import PrivateRoute from './PrivateRoute'
 import CreativePage from '../pages/CreativePage/CreativePage'
 import SubscriptionForm from '../components/SubscriptionForm/SubscriptionForm'
 import Homepage from '../pages/Homepage/Homepage'
+import EventPage from '../pages/EventPage/EventPage'
 
 const AppRoutes = () => {
 
@@ -19,6 +20,7 @@ const AppRoutes = () => {
             <Route path={'/saveEvent'} element={<NewEventForm />} />
             <Route path={'/creative/:creative_id'} element={<CreativePage />} />
             <Route path={'/newsubscription'} element={<SubscriptionForm />} />
+            <Route path={'/events'} element={<EventPage />} />
 
             <Route element={<PrivateRoute />}>
                 <Route path={'/userProfile'} element={<ProfilePage />} />

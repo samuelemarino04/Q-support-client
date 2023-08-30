@@ -3,7 +3,8 @@ import { Form, Button } from "react-bootstrap"
 import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
-import calculateAge from "../../../utils/calculateAge"
+import calculateAge from "../../utils/calculateAge"
+
 
 const SignupForm = () => {
 
