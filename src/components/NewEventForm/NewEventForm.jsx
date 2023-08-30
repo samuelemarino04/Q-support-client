@@ -25,24 +25,28 @@ const NewEventForm = ({ }) => {
     })
 
     const handleInputChange = e => {
+
         const { value, name } = e.currentTarget
+
         if (name.includes(".")) {
-            const [parentField, nestedField] = name.split(".");
+
+            const [parentField, nestedField] = name.split(".")
+
             setEventData({
                 ...eventData,
                 [parentField]: {
                     ...eventData[parentField],
                     [nestedField]: value
                 }
-            });
+            })
         } else {
             setEventData({ ...eventData, [name]: value });
         }
     }
 
     const handleEventSubmit = e => {
-        e.preventDefault()
 
+        e.preventDefault()
 
         eventsService
             .saveEvent(eventData)

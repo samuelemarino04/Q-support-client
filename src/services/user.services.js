@@ -7,7 +7,7 @@ class UserService {
         })
     }
 
-    getUser() {
+    getUsers() {
         return this.api.get(`/getAllUsers`)
     }
 

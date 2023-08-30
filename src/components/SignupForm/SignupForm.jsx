@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap"
 import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
-
+import calculateAge from "../../../utils/calculateAge"
 
 const SignupForm = () => {
 
@@ -21,10 +21,12 @@ const SignupForm = () => {
     const [loadingImage, setLoadingImage] = useState(false)
 
     const navigate = useNavigate()
+
     const handleInputChange = e => {
         const { value, name } = e.target
         setSignupData({ ...signupData, [name]: value })
     }
+
     //para subir imágenes a cloudinary  👇 
     const handleFileUpload = e => {
 
@@ -45,21 +47,8 @@ const SignupForm = () => {
             })
 
     }
-    //para subir imágenes a cloudinary 👆
-    const calculateAge = (dateOfBirth) => {
-        const birthDate = new Date(dateOfBirth)
-        const today = new Date()
-        const age = today.getFullYear() - birthDate.getFullYear()
-        const monthDiff = today.getMonth() - birthDate.getMonth()
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            return age - 1
-        }
-        return age
-    }
 
     const handleFormSubmit = e => {
-
-
 
         e.preventDefault()
 

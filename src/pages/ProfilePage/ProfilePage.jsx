@@ -5,14 +5,12 @@ import UserProfile from '../../components/UserProfile/UserProfile'
 
 const ProfilePage = () => {
 
+    // TODO: INTEGRAR COMPONENTE
 
     const { loggedUser } = useContext(AuthContext)
 
     return (
-        !loggedUser ?
-            <Loader />
-            :
-            <UserProfile loggedUser={loggedUser} />
+        <UserProfile loggedUser={loggedUser} />
     )
 }
 

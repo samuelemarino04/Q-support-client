@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react"
-import { Container, Button } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Card from 'react-bootstrap/Card'
-import userService from '../../services/user.services';
 import { useParams, Link } from "react-router-dom"
 
 

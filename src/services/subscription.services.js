@@ -7,11 +7,11 @@ class SubscriptionService {
         })
     }
 
-    getSubscription() {
+    getSubscriptions() {
         return this.api.get(`/getAllSubscriptions`)
     }
 
-    getSubscriptionsDetails(subscription_id) {
+    getSubscriptionDetails(subscription_id) {
         return this.api.get(`/getOneSubscription/${subscription_id}`)
     }
 

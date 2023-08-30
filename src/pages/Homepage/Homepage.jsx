@@ -1,26 +1,32 @@
-import { Button, Container, Modal } from 'react-bootstrap'
-import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../contexts/auth.context'
+// TODO: LIMPIAR IMPORTACIONES EN DESUSO
+
+// TODO: PLURALIZAR TODO LO RELATIVO A LOTES
+
+import { Container } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
 import userService from '../../services/user.services'
-import CreativeList from '../../components/CreativeList/CreativeList'
+import CreativesList from '../../components/CreativesList/CreativesList_'
 
 const Homepage = () => {
-    const [creative, setCreative] = useState()
+
+    const [creatives, setCreatives] = useState()
 
     useEffect(() => {
-        loadCoasters()
+        loadCreatives()
     }, [])
 
-    const loadCoasters = () => {
+    const loadCreatives = () => {
         userService
-            .getUser()
-            .then(({ data }) => setCreative(data))
+            .getUsers()
+            .then(({ data }) => setCreatives(data))
             .catch(err => console.log(err))
     }
+
     return (
         <Container>
             <h1>hey</h1>
-            <CreativeList creative={creative} />
+            {/* TODO: DESACOPLAT FILTRO AQUI */}
+            <CreativesList creatives={creatives} />
         </Container>
     )
 }

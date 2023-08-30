@@ -8,6 +8,8 @@ import { AuthContext } from '../../contexts/auth.context'
 
 const Navigation = () => {
 
+    // TODO OPCIONAL: SI ES NECESARIO DESACOPLAR MEN'US SEGUN LOGIN
+
     const { theme, switchTheme, invertedTheme } = useContext(ThemeContext)
     const { loggedUser, logout } = useContext(AuthContext)
 
@@ -17,7 +19,7 @@ const Navigation = () => {
             className='mb-3'
             expand="lg">
             <Container>
-                <Navbar.Brand>Logo</Navbar.Brand>
+                <Navbar.Brand>{import.meta.env.VITE_APP_NAME}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">

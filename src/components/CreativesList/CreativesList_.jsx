@@ -3,10 +3,10 @@ import Loader from '../Loader/Loader'
 import CreativeCard from '../CreativeCard/CreativeCard'
 
 
-const CreativeList = ({ creative }) => {
+const CreativesList = ({ creatives }) => {
 
     return (
-        !creative ?
+        !creatives ?
             <Loader />
             :
             <>
@@ -17,7 +17,7 @@ const CreativeList = ({ creative }) => {
                 </div>
                 <Row>
                     {
-                        creative.map(elm => <CreativeCard {...elm} />)
+                        creatives.map(elm => <CreativeCard {...elm} key={elm._id} />)
                     }
                 </Row>
             </>
@@ -25,4 +25,4 @@ const CreativeList = ({ creative }) => {
 
 }
 
-export default CreativeList
+export default CreativesList

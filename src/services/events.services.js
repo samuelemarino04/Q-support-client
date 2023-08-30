@@ -2,8 +2,6 @@ import axios from 'axios'
 
 class EventService {
     constructor() {
-        // console.log('QUE ES ESTOOOOOOO----------------', `${import.meta.env.VITE_API_URL} /events`)
-
         this.api = axios.create({
             baseURL: `${import.meta.env.VITE_API_URL}/events`
         })
@@ -13,7 +11,7 @@ class EventService {
         return this.api.get(`/getAllEvents`)
     }
 
-    getEventsDetails(event_id) {
+    getEventDetails(event_id) {
         return this.api.get(`/getOneEvent/${event_id}`)
     }
 

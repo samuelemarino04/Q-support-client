@@ -21,12 +21,14 @@ const SubscriptionForm = () => {
 
 
     const navigate = useNavigate()
+
     const handleInputChange = (e) => {
         const { value, name } = e.currentTarget;
         setFormData({ ...formData, [name]: value });
     }
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
 
         subscriptionService
