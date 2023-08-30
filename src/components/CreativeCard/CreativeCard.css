@@ -1,0 +1,93 @@
+.Card {
+    width: 300px;
+    height: 480px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 1px 10px 1px black;
+    overflow: hidden;
+
+}
+
+.appcard {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.upper-container {
+    height: 100px;
+    background-color: #212429;
+}
+
+
+
+.image-container img {
+    background: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 5px;
+    transform: translate(95px, 45px);
+    object-fit: cover;
+}
+
+img {
+    border: 2px solid rgb(0, 77, 0);
+}
+
+.lower-container {
+    margin-top: 60px;
+    height: 300px;
+    background: white;
+    text-align: center;
+}
+
+.lower-container h3,
+h4,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.lower-container h3 {
+    color: #2f2d2e;
+    font-weight: 600;
+    font-size: 1.5rem
+}
+
+.lower-container h4 {
+    color: rgb(0, 77, 0);
+    font-weight: 800;
+    font-size: 1.2rem
+}
+
+.lower-container p {
+    margin: 1rem;
+    color: #2f2d2e;
+    font-size: 0.8rem;
+    text-align: justify;
+}
+
+button {
+    margin: 1rem;
+    color: #2f2d2e;
+    font: bold;
+    background-color: white;
+    border: 2px solid #004a0c;
+    padding: 0.6rem;
+    border-radius: 8px;
+    transition-duration: 0.6s;
+    animation: ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.2);
+    color: #004a0c;
+}
+
+.nodeco {
+    text-decoration: none;
+    color: #004a0c;
+}

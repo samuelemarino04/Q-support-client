@@ -2,25 +2,50 @@ import { useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
+import uploadServices from "../../services/upload.services"
+
 
 const SignupForm = () => {
 
     const [signupData, setSignupData] = useState({
         username: '',
         birth: '',
-        role: '',
+        imageUrl: '',
+        role: 'USER',
         email: '',
         password: '',
         avatar: 'https://i.stack.imgur.com/l60Hf.png',
         pronouns: ''
     })
 
+    const [loadingImage, setLoadingImage] = useState(false)
+
     const navigate = useNavigate()
     const handleInputChange = e => {
         const { value, name } = e.target
         setSignupData({ ...signupData, [name]: value })
     }
+    //para subir imágenes a cloudinary  👇 
+    const handleFileUpload = e => {
 
+        setLoadingImage(true)
+
+        const formData = new FormData()
+        formData.append('imageData', e.target.files[0])
+
+        uploadServices
+            .uploadimage(formData)
+            .then(({ data }) => {
+                setSignupData({ ...signupData, imageurl: data.cloudinary_url })
+                setLoadingImage(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoadingImage(false)
+            })
+
+    }
+    //para subir imágenes a cloudinary 👆
     const calculateAge = (dateOfBirth) => {
         const birthDate = new Date(dateOfBirth)
         const today = new Date()
@@ -33,6 +58,8 @@ const SignupForm = () => {
     }
 
     const handleFormSubmit = e => {
+
+
 
         e.preventDefault()
 
@@ -56,6 +83,12 @@ const SignupForm = () => {
                 and our <a href="#">Cookies policy</a>.</p>
 
             <Form onSubmit={handleFormSubmit}>
+                {/* para subir imágenes a cloudinary  👇 */}
+                <Form.Group className="mb-3" controlId="image">
+                    <Form.Label>Imagen (URL)</Form.Label>
+                    <Form.Control type="file" onChange={handleFileUpload} />
+                </Form.Group>
+                {/* para subir imágenes a cloudinary 👆 */}
 
                 <Form.Group className="mb-3" controlId="username">
                     <Form.Label>User name</Form.Label>
@@ -104,7 +137,7 @@ const SignupForm = () => {
 
 
                 <div className="d-grid">
-                    <Button variant="dark" type="submit">Register</Button>
+                    <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? 'Loading Image' : 'Register'}</Button>
                 </div>
 
             </Form>

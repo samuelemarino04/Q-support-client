@@ -3,12 +3,12 @@ import axios from 'axios'
 class UserService {
     constructor() {
         this.api = axios.create({
-            baseUrl: `${import.meta.env.VITE_API_URL}/user`
+            baseURL: `${import.meta.env.VITE_API_URL}/user`
         })
     }
 
     getUser() {
-        return this.api.get(`/getAllUser`)
+        return this.api.get(`/getAllUsers`)
     }
 
     getUserDetails(user_id) {
