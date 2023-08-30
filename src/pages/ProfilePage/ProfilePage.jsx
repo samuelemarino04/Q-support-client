@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { AuthContext } from './../../contexts/auth.context'
 import Loader from '../../components/Loader/Loader'
+import UserProfile from '../../components/UserProfile/UserProfile'
 
 const ProfilePage = () => {
 
@@ -11,8 +12,9 @@ const ProfilePage = () => {
         !loggedUser ?
             <Loader />
             :
-            <h1>{loggedUser.username} Profile</h1>
+            <UserProfile loggedUser={loggedUser} />
     )
 }
 
 export default ProfilePage
+
