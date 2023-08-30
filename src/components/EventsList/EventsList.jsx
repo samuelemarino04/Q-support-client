@@ -12,7 +12,9 @@ const EventsList = ({ events }) => {
             <>
                 <Row>
                     {
-                        events.map(elm => <EventCard {...elm} key={elm._id} />)
+                        events.map(elm =>
+                            <EventCard {...elm} key={elm._id} />
+                        )
                     }
                 </Row>
             </>
