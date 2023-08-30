@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
 import calculateAge from "../../utils/calculateAge"
 
-
 const SignupForm = () => {
 
     const [signupData, setSignupData] = useState({

@@ -1,7 +1,7 @@
 import { Col, Card, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-const EventCard = (_id, title, icon, description) => {
+const EventCard = ({ _id, title, icon, description }) => {
 
     return (
 

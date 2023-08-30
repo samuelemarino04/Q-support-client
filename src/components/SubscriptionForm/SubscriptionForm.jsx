@@ -8,14 +8,17 @@ import { useNavigate } from "react-router-dom"
 const SubscriptionForm = () => {
 
     const [formData, setFormData] = useState({
+        title: '',
+        description: '',
         creative: '',
         type: '',
-        startDate: '',
-        endDate: '',
-        paymentMethod: '',
-        cardHolder: '',
-        cardNumber: '',
-        cvv: '',
+        amount: '',
+        // startDate: '',
+        // endDate: '',
+        // paymentMethod: '',
+        // cardHolder: '',
+        // cardNumber: '',
+        // cvv: '',
 
     });
 
@@ -65,7 +68,7 @@ const SubscriptionForm = () => {
                     </Form.Select>
                 </FloatingLabel>
 
-                <FloatingLabel controlId="floatingInputGrid" label="Start Date" className="mb-3">
+                {/* <FloatingLabel controlId="floatingInputGrid" label="Start Date" className="mb-3">
                     <Form.Control
                         type="Date"
                         name="startDate"
@@ -83,9 +86,9 @@ const SubscriptionForm = () => {
                         onChange={handleInputChange}
                         placeholder="End Date"
                     />
-                </FloatingLabel>
+                </FloatingLabel> */}
 
-                <Form.Group as={Row} className="mb-3">
+                {/* <Form.Group as={Row} className="mb-3">
                     <Form.Label as="legend" column sm={2}>
                         Payment method
                     </Form.Label>
@@ -150,7 +153,7 @@ const SubscriptionForm = () => {
                 )}
                 <Button variant="dark" type="submit" className='mt-2'>
                     Submit Payment
-                </Button>
+                </Button> */}
             </Container>
         </Form >
     );
