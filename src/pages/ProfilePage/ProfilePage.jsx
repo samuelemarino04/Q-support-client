@@ -8,7 +8,7 @@ const ProfilePage = () => {
     const { loggedUser } = useContext(AuthContext)
 
     return (
-        <UserProfile loggedUser={loggedUser} />
+        <h1>hey</h1>
     )
 }
 

@@ -17,3 +17,8 @@ footer {
   background-color: #212429;
   color: white
 }
+
+.CreativesFilter input {
+  margin: 50px 0;
+  border-radius: 5%;
+}
