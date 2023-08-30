@@ -8,13 +8,11 @@ import { useNavigate } from "react-router-dom"
 const SubscriptionForm = () => {
 
     const [formData, setFormData] = useState({
-        client: '',
         creative: '',
         type: '',
         startDate: '',
         endDate: '',
         paymentMethod: '',
-        paymentStatus: '',
         cardHolder: '',
         cardNumber: '',
         cvv: '',
