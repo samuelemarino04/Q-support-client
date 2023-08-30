@@ -4,8 +4,11 @@ import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
 import calculateAge from "../../utils/calculateAge"
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5f73e204303f1f3c73c0b01b338a5bbd8cc13305
 
 const SignupForm = () => {
 
