@@ -27,6 +27,10 @@ class SubscriptionService {
         return this.api.get(`/getOneSubscription/${subscription_id}`)
     }
 
+    getSubscriptionsByOwner(owner) {
+        return this.api.get(`/getSubscriptionsByOwner/${owner}`)
+    }
+
     saveSubscription(subscriptionData) {
         return this.api.post(`/saveSubscription`, subscriptionData)
     }
