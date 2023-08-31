@@ -1,9 +1,5 @@
 import { Col, Card, Row } from "react-bootstrap"
 
-<<<<<<< HEAD
-const EventCard = ({ _id, title, icon, description }) => {
-=======
->>>>>>> 704301dd81fcb4c889fc361274cc93bb93b6c49b
 
 const EventCard = ({ _id, title, icon, description, address }) => {
     return (

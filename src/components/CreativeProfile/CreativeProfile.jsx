@@ -1,18 +1,15 @@
 import { Container } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import Card from 'react-bootstrap/Card'
 import { useParams, Link } from "react-router-dom"
-
-
+import SubscriptionsPage from '../../pages/SubscriptionsPage/SubscriptionsPage';
 const CreativeProfile = () => {
-    const { user_id } = useParams()
-
+    const { _id } = useParams
 
     return (
         <>
-            <Link className={'btn btn-outline-dark nodeco'} to={'/creative/:_id/subscriptions'}>Become a Patron!</Link>
-            <Container>
+            <Link className={'btn btn-outline-dark nodeco'} to={`/creative/${_id}/subscriptions`}>Become a Patron!</Link>
+            <Container key={_id}>
 
                 <Tabs
                     defaultActiveKey="About"
@@ -24,8 +21,8 @@ const CreativeProfile = () => {
                         Tab content for Profile
                     </Tab>
 
-                    <Tab eventKey="subscription" title="Subscription">
-                        Tab content for Subscriptions
+                    <Tab eventKey="subscriptions" title="Subscriptions">
+                        <SubscriptionsPage />
                     </Tab>
 
                     <Tab eventKey="work" title="Work">

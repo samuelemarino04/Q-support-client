@@ -1,19 +1,35 @@
+import { useContext } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
+import { AuthContext } from './../../contexts/auth.context'
 
-const SubscriptionCard = () => {
+
+const SubscriptionCard = ({ _id, title, description, type, amount, image, owner }) => {
+
+    const { loggedUser } = useContext(AuthContext)
     return (
-        <Card style={{ width: '18rem' }}>
-//             <Card.Img variant="top" src="holder.js/100px180" />
-//             <Card.Body>
-//                 <Card.Title>Card Title</Card.Title>
-//                 <Card.Text>
-//                     Some quick example text to build on the card title and make up the
-//                     bulk of the card's content.
-//                 </Card.Text>
-//                 <Button variant="primary">Go somewhere</Button>
-//             </Card.Body>
-//         </Card>
+        <Card key={_id} style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={image} />
+            <Card.Body>
+                <Card.Title>{title}</Card.Title>
+                <Card.Text>
+                    {amount}
+                </Card.Text>
+                <Card.Text>
+                    {type}
+                </Card.Text>
+                <Card.Text>
+                    {description}
+                </Card.Text>
+                <Link to={'/paymentDetails'} className='nav-link'>Join</Link>
+                <Link to={`subscriptionDetails/${_id}`} />
+                <ButtonGroup style={{ width: '100%' }}>
+                    {loggedUser._id === owner && <Button variant='dark' size='sm'>Edit</Button>}
+                </ButtonGroup>
+            </Card.Body>
+        </Card>
     )
 
 }

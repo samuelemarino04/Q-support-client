@@ -20,7 +20,8 @@ const AppRoutes = () => {
             <Route path={'/login'} element={<LoginPage />} />
             <Route path={'/saveEvent'} element={<NewEventForm />} />
             <Route path={'/creative/:_id'} element={<CreativeProfile />} />
-            <Route path={'/creative/:_id/subscriptions'} element={<SubscriptionsPage />} />
+            <Route path={'/subscriptions'} element={<SubscriptionsPage />} />
+            {/* la ruta /subscriptions esta en work in progress, hay que meterle el id  */}
             <Route path={'/newsubscription'} element={<SubscriptionForm />} />
             <Route path={'/events'} element={<EventPage />} />
 
