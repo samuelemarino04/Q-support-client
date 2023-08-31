@@ -57,7 +57,7 @@ const SignupForm = () => {
         }
 
         authService
-            .signup({ ...signupData, role: roleValue })
+            .signup({ ...signupData })
             .then(() => navigate('/login'))
             .catch(err => console.log(err))
     }

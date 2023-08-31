@@ -9,6 +9,7 @@ import Homepage from '../pages/Homepage/Homepage'
 import EventPage from '../pages/EventPage/EventPage'
 import SubscriptionsPage from '../pages/SubscriptionsPage/SubscriptionsPage'
 import CreativeProfile from '../pages/CreativeProfile/CreativeProfile'
+import EventDetailsPage from '../pages/eventDetailsPage/eventDetailsPage'
 
 const AppRoutes = () => {
 
