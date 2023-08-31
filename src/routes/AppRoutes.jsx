@@ -9,7 +9,11 @@ import Homepage from '../pages/Homepage/Homepage'
 import EventPage from '../pages/EventPage/EventPage'
 import SubscriptionsPage from '../pages/SubscriptionsPage/SubscriptionsPage'
 import CreativeProfile from '../pages/CreativeProfile/CreativeProfile'
+<<<<<<< HEAD
 import EventDetailsPage from '../pages/EventDetailsPage/EventDetailsPage'
+=======
+import EventDetailsPage from '../pages/eventDetailsPage/eventDetailsPage'
+>>>>>>> 50badea8d8d2789a5fc8a82fcdeec5200fcbfa20
 
 const AppRoutes = () => {
 
