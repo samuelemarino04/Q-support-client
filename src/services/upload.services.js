@@ -11,8 +11,11 @@ class UploadServices {
     }
 
     uploadimage(imageForm) {
-        console.log('QUE ES ESTOOOOO-------------', imageForm)
         return this.api.post('/image', imageForm)
+    }
+
+    uploadimages(imageForm) {
+        return this.api.post('/images', imageForm)
     }
 }
 

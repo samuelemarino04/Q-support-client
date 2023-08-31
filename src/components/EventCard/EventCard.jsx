@@ -1,9 +1,9 @@
 import { Col, Card, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 
 const EventCard = ({ _id, title, icon, description, address }) => {
     return (
-
         <Row xs={1} md={2} className="g-4">
             <Col>
                 <Card>
@@ -14,6 +14,9 @@ const EventCard = ({ _id, title, icon, description, address }) => {
                             {description}
                             <hr />
                             {address.city}
+                            <hr />
+                            <Link className={'btn btn-outline-dark nodeco'} to={`/getOneEvent/${_id}`}>See details</Link>
+
                         </Card.Text>
                     </Card.Body>
                 </Card>
