@@ -1,8 +1,8 @@
 import { Container } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
-import userService from '../../services/user.services'
 import CreativesList from '../../components/CreativesList/CreativesList_'
 import CreativesFilter from '../../components/CreativesFilter/CreativesFilter'
+import creativeService from '../../services/creative.services'
 
 
 
@@ -20,8 +20,8 @@ const Homepage = () => {
     }, [])
 
     const loadCreatives = () => {
-        userService
-            .getUsers()
+        creativeService
+            .getCreatives()
             .then(({ data }) => { setCreatives(data), setCreativesBackup(data) })
             .catch(err => console.log(err))
     }
