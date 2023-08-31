@@ -9,6 +9,7 @@ import Homepage from '../pages/Homepage/Homepage'
 import EventPage from '../pages/EventPage/EventPage'
 import CreativeProfile from '../components/CreativeProfile/CreativeProfile'
 import SubscriptionsPage from '../pages/SubscriptionsPage/SubscriptionsPage'
+import EventDetailsPage from '../pages/eventDetailsPage/eventDetailsPage'
 
 
 const AppRoutes = () => {
@@ -23,6 +24,7 @@ const AppRoutes = () => {
             <Route path={'/creative/:_id/subscriptions'} element={<SubscriptionsPage />} />
             <Route path={'/newsubscription'} element={<SubscriptionForm />} />
             <Route path={'/events'} element={<EventPage />} />
+            <Route path={'/getOneEvent/:event_id'} element={<EventDetailsPage />} />
 
             {/* <Route element={<PrivateRoute />}>
                 
