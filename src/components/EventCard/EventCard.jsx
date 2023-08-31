@@ -21,7 +21,7 @@ const EventCard = ({ _id, title, icon, description, address }) => {
                             {address.zipcode}
                             <hr />
                             {address.city}
-
+                            <hr />
                             <Link className={'btn btn-outline-dark nodeco'} to={`/getOneEvent/${_id}`}>See details</Link>
                         </Card.Text>
                     </Card.Body>

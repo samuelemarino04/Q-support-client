@@ -25,6 +25,9 @@ const AppRoutes = () => {
             <Route path={'/events'} element={<EventPage />} />
             <Route path={'/getOneEvent/:event_id'} element={<EventDetailsPage />} />
 
+
+            <Route path={'/getSubscriptionsByOwner/:owner_id'} element={<SubscriptionsPage />} />
+
             {/* <Route element={<PrivateRoute />}>
                 
             </Route> */}

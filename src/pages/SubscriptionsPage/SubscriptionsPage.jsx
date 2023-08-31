@@ -1,19 +1,15 @@
 import { Container } from 'react-bootstrap'
 import SubscriptionsList from '../../components/SubscriptionsList/SubscriptionsList'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import subscriptionService from '../../services/subscription.services'
-import { AuthContext } from '../../contexts/auth.context'
 import { useParams } from 'react-router-dom'
 
 const SubscriptionsPage = () => {
 
-    const { _id: creativeId } = useParams()
+    const { user_id } = useParams()
 
-    //en el params desectruturar en entrada according to the name given 
 
     const [subscriptions, setSubscriptions] = useState()
-
-    const { loggedUser } = useContext(AuthContext)
 
     useEffect(() => {
         loadSubscriptions()
@@ -21,7 +17,7 @@ const SubscriptionsPage = () => {
 
     const loadSubscriptions = () => {
         subscriptionService
-            .getSubscriptions(creativeId)
+            .getSubscriptionsByOwner(user_id)
             .then(({ data }) => setSubscriptions(data))
             .catch(err => console.log(err))
     }
@@ -32,6 +28,7 @@ const SubscriptionsPage = () => {
 
     return (
         <Container>
+            <h1>heeeeeeeeeeeeeeeeeey</h1>
             <SubscriptionsList subscriptions={subscriptions} />
         </Container>
 

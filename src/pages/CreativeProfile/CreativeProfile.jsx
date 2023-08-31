@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
-
+import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage';
 
 const CreativeProfile = () => {
     const { user_id } = useParams()
@@ -30,7 +30,7 @@ const CreativeProfile = () => {
             :
             <>
 
-                <Link className={'btn btn-outline-dark nodeco'} to={'/creative/:_id/subscriptions'}>Become a Patron!</Link>
+                <Link className={'btn btn-outline-dark nodeco'} to={`/getSubscriptionsByOwner/${user_id}`}>Become a Patron!</Link>
                 <Container>
 
                     <Tabs
@@ -43,9 +43,9 @@ const CreativeProfile = () => {
                             {creative.username}
                             <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
                         </Tab>
-
-                        <Tab eventKey="subscription" title="Subscription">
-                            Tab content for Subscriptions
+                        {/* //investigar como meter la info al tab en la docu de bootstrap */}
+                        <Tab eventKey="subscription" title="Subscription" >
+                            < SubscriptionsPage />
                         </Tab>
 
                         <Tab eventKey="work" title="Work">
