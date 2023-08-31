@@ -55,8 +55,6 @@ const NewEventForm = ({ }) => {
         const formData = new FormData()
         formData.append('imageData', e.target.files[0])
 
-        console.log('--------------------FOTITOOOO', formData)
-
         uploadServices
             .uploadimage(formData)
             .then(({ data }) => {

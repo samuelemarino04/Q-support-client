@@ -17,7 +17,7 @@ const CreativeCard = ({ _id, username, avatar }) => {
                         <h4>{username}</h4>
                         <h3>algo</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolor neque accusantium quos ratione quo nemo quod perferendis ut, velit repudiandae quam impedit quis suscipit ducimus sint ad vel maxime.</p>
-                        <Link className={'btn btn-outline-dark nodeco'} to={'/creative/:creative_id'}>Visit Profile</Link>
+                        <Link className={'btn btn-outline-dark nodeco'} to={`/creative/${_id}`}>Visit Profile</Link>
                     </div>
                 </div>
             </div>

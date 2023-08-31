@@ -12,7 +12,14 @@ const EventCard = ({ _id, title, icon, description, address }) => {
                         <Card.Text>
                             {description}
                             <hr />
+                            {address.street}
+                            <hr />
+                            {address.number}
+                            <hr />
+                            {address.zipcode}
+                            <hr />
                             {address.city}
+                            <hr />
                         </Card.Text>
                     </Card.Body>
                 </Card>
