@@ -3,7 +3,6 @@ import './CreativeCard.css'
 import { Link } from "react-router-dom"
 
 const CreativeCard = ({ _id, username, avatar }) => {
-
     return (
         <Col lg={{ span: 4 }} md={{ span: 6 }}>
             <div className="CreativeCard">

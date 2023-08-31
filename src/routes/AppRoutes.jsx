@@ -22,6 +22,7 @@ const AppRoutes = () => {
             <Route path={'/creative/:_id/subscriptions'} element={<SubscriptionsPage />} />
             <Route path={'/newsubscription'} element={<SubscriptionForm />} />
             <Route path={'/events'} element={<EventPage />} />
+            <Route path={'/getOneEvent/:event_id'} element={<EventDetailsPage />} />
 
             {/* <Route element={<PrivateRoute />}>
                 
