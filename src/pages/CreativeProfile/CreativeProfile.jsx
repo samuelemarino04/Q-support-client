@@ -9,6 +9,7 @@ import Loader from "../../components/Loader/Loader"
 import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage';
 
 const CreativeProfile = () => {
+
     const { user_id } = useParams()
     const [creative, setCreative] = useState({})
 
@@ -45,7 +46,7 @@ const CreativeProfile = () => {
                         </Tab>
                         {/* //investigar como meter la info al tab en la docu de bootstrap */}
                         <Tab eventKey="subscription" title="Subscription" >
-                            < SubscriptionsPage />
+                            {/* < SubscriptionsPage /> */}
                         </Tab>
 
                         <Tab eventKey="work" title="Work">
