@@ -28,6 +28,8 @@ const CreativeProfile = () => {
 
     }
 
+    // const RemoveCreativeProfile = ()
+
     const handleFormSubmit = e => {
         e.preventDefault()
 
@@ -68,25 +70,35 @@ const CreativeProfile = () => {
                 <Container>
 
                     <Tabs
-                        defaultActiveKey="About"
+                        defaultActiveKey="Work"
                         id="uncontrolled-tab-example"
                         className="mb-3"
                     >
 
                         <Tab eventKey="Work" title="Work">
-                            {creative.username}
-                            <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
+                            <div className="work-content">
+                                <header>
+                                    {creative.username}
+                                    <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
+                                </header>
 
-                            {
-                                creative.images ?
-                                    creative.images.map(eachImage => {
-                                        return (
-                                            <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
-                                        )
-                                    })
-                                    :
-                                    ''
-                            }
+                                {
+                                    creative.images ?
+                                        creative.images.map(eachImage => {
+                                            return (
+                                                <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+                                            )
+                                        })
+                                        :
+                                        ''
+                                }
+
+                            </div>
+
+
+
+
+
 
 
                             {/* <AddWorkImageForm /> */}
