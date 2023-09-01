@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import subscriptionService from '../../services/subscription.services';
 import { useNavigate } from "react-router-dom"
 import uploadServices from '../../services/upload.services';
+import { SUBSCRIPTION_TYPES } from '../../consts/subscription.consts';
 
 const SubscriptionForm = () => {
 
@@ -102,9 +103,9 @@ const SubscriptionForm = () => {
                         className="mb-3"
                     >
                         <option>Subscription type</option>
-                        <option value="Basic">Basic</option>
-                        <option value="Premium">Premium</option>
-                        <option value="Pro">Pro</option>
+                        {
+                            SUBSCRIPTION_TYPES.map(elm => <option key={elm} value={elm}>{elm}</option>)
+                        }
                     </Form.Select>
                 </FloatingLabel>
 

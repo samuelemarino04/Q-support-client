@@ -3,9 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
 
-
 const SubscriptionCard = ({ _id, title, description, type, amount, image }) => {
-
 
     return (
         <Card key={_id} style={{ width: '18rem' }}>

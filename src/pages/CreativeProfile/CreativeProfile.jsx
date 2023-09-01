@@ -1,13 +1,10 @@
 import { Button, Container, Form } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import Card from 'react-bootstrap/Card'
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
-import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage';
-import AddWorkImageForm from '../../components/AddWorkImageForm/AddWorkImageForm'
 import uploadServices from '../../services/upload.services';
 
 
@@ -25,47 +22,61 @@ const CreativeProfile = () => {
             .getUserDetails(user_id)
             .then(({ data }) => setCreative(data))
             .catch(err => console.log(err))
-
     }
 
-    // const RemoveCreativeProfile = ()
-
     const handleFormSubmit = e => {
+
         e.preventDefault()
 
+        const { imageToUpload: images } = creative
+
         userService
-            .editCreative({ images: creative.imageToUpload }, user_id)
+            .editCreative({ images }, user_id)
             .then(() => {
-                const updatedImages = [...creative.images, ...creative.imageToUpload]
-                setCreative({ ...creative, images: updatedImages })
+                const images = [...creative.images, ...creative.imageToUpload]
+                setCreative({ ...creative, images })
             })
             .catch(err => console.log(err))
 
 
     }
 
+    const handleRemoveSubmit = (eachImage) => e => {
+
+        e.preventDefault()
+
+        userService
+            .removePhotoCreative({ images: eachImage })
+            .then(({ data }) => {
+                console.log(data)
+                const updatedImages = [...creative.images]
+                setCreative({ ...creative, images: updatedImages })
+            })
+            .catch(err => console.log(err))
+    }
+
+
     const handleFileUpload = e => {
 
         const formData = new FormData()
+
         for (let i = 0; i < e.target.files.length; i++) {
             formData.append('imagesData', e.target.files[i])
         }
+
         uploadServices
             .uploadimages(formData)
             .then(({ data }) => {
-
                 setCreative({ ...creative, imageToUpload: data.cloudinary_urls })
             })
-            .catch(err => {
-                console.log(err)
-            })
+            .catch(err => console.log(err))
     }
+
     return (
         !creative ?
             <Loader />
             :
             <>
-
                 <Link className={'btn btn-outline-dark nodeco'} to={`/getSubscriptionsByOwner/${user_id}`}>Become a Patron!</Link>
                 <Container>
 
@@ -86,7 +97,15 @@ const CreativeProfile = () => {
                                     creative.images ?
                                         creative.images.map(eachImage => {
                                             return (
-                                                <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+                                                <>
+                                                    <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+
+                                                    <Form onSubmit={handleRemoveSubmit(eachImage)}>
+                                                        <Button variant='dark' type='submit' >delete image</Button>
+                                                    </Form>
+                                                </>
+
+
                                             )
                                         })
                                         :
@@ -94,12 +113,6 @@ const CreativeProfile = () => {
                                 }
 
                             </div>
-
-
-
-
-
-
 
                             {/* <AddWorkImageForm /> */}
 
@@ -109,10 +122,6 @@ const CreativeProfile = () => {
 
                                 <Button variant='dark' type='submit' >Upload image</Button>
                             </Form>
-
-
-
-
 
                         </Tab>
 

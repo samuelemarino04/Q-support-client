@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import eventsService from "../../services/events.services"
-import { useParams, Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Loader from "../../components/Loader/Loader";

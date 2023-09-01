@@ -4,10 +4,6 @@ import React, { useState } from 'react';
 import subscriptionService from '../../services/subscription.services';
 import { useNavigate, useParams } from "react-router-dom"
 
-// WIP: modificar modelo para incluir CardExpirationDate,
-//  al ser todos estos datos obligatorios, pero no necesitarlos el creative al crear una nueva subscripción,
-//   tendrian que ir en un modelo aparte?
-
 const PaymentForm = () => {
 
     const [formData, setFormData] = useState({

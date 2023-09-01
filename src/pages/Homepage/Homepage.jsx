@@ -15,6 +15,7 @@ const Homepage = () => {
         const filteredCreatives = creativesBackup.filter(elm => elm.username.includes(usernameQuery))
         setCreatives(filteredCreatives)
     }
+
     useEffect(() => {
         loadCreatives()
     }, [])
@@ -29,6 +30,7 @@ const Homepage = () => {
 
     return (
         <Container>
+            {/* TODO: INTEGRAR FILTRO CONTRA API */}
             <CreativesFilter filterCreatives={filterCreatives} />
             <CreativesList creatives={creatives} />
         </Container>
