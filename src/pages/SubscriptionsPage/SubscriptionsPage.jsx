@@ -6,8 +6,7 @@ import { useParams } from 'react-router-dom'
 
 const SubscriptionsPage = () => {
 
-    const { user_id } = useParams()
-
+    const { owner_id } = useParams()
 
     const [subscriptions, setSubscriptions] = useState()
 
@@ -17,7 +16,7 @@ const SubscriptionsPage = () => {
 
     const loadSubscriptions = () => {
         subscriptionService
-            .getSubscriptionsByOwner(user_id)
+            .getSubscriptionsByOwner(owner_id)
             .then(({ data }) => setSubscriptions(data))
             .catch(err => console.log(err))
     }

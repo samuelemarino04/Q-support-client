@@ -12,6 +12,7 @@ import uploadServices from '../../services/upload.services';
 
 
 const CreativeProfile = () => {
+
     const { user_id } = useParams()
     const [creative, setCreative] = useState({})
 
@@ -105,7 +106,7 @@ const CreativeProfile = () => {
 
                         {/* //investigar como meter la info al tab en la docu de bootstrap */}
                         <Tab eventKey="subscription" title="Subscription" >
-                            < SubscriptionsPage />
+                            {/* < SubscriptionsPage /> */}
                         </Tab>
 
                         <Tab eventKey="About" title="About">

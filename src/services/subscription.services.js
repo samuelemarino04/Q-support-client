@@ -27,8 +27,8 @@ class SubscriptionService {
         return this.api.get(`/getOneSubscription/${subscription_id}`)
     }
 
-    getSubscriptionsByOwner(owner) {
-        return this.api.get(`/getSubscriptionsByOwner/${owner}`)
+    getSubscriptionsByOwner(ownerId) {
+        return this.api.get(`/getSubscriptionsByOwner/${ownerId}`)
     }
 
     saveSubscription(subscriptionData) {
