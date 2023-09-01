@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Modal, Button } from 'react-bootstrap'
 import eventsService from '../../services/events.services'
 import EventsList from '../../components/EventsList/EventsList'
 import EventsFilter from '../../components/EventsFilter/EventsFilter'
+import NewEventForm from '../../components/NewEventForm/NewEventForm'
+import { AuthContext } from '../../contexts/auth.context'
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 
 
 const EventPage = () => {
 
     const [events, setEvents] = useState()
     const [eventsBackup, setEventsBackup] = useState()
+    const [showModal, setShowModal] = useState(false)
+    const { loggedUser, logout } = useContext(AuthContext)
 
     const filterEvents = cityQuery => {
         const filteredEvents = eventsBackup.filter(elm => elm.address.city.includes(cityQuery))
@@ -26,12 +32,34 @@ const EventPage = () => {
             .catch(err => console.log(err))
     }
 
-    return (
+    const fireFinalActions = () => {
+        setShowModal(false)
+        loadCoasters()
+    }
 
-        <Container>
-            <EventsFilter filterEvents={filterEvents} />
-            <EventsList events={events}></EventsList>
-        </Container>
+    return (
+        <>
+            <Container>
+                {
+                    loggedUser &&
+                    <>
+                        <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Add new event</Button>
+                    </>
+                }
+                <EventsFilter filterEvents={filterEvents} />
+                <EventsList events={events}></EventsList>
+
+            </Container>
+
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add an event</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <NewEventForm fireFinalActions={fireFinalActions} />
+                </Modal.Body>
+            </Modal>
+        </>
     )
 }
 

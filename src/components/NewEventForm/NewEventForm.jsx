@@ -5,7 +5,7 @@ import eventsService from "../../services/events.services";
 import uploadServices from "../../services/upload.services"
 
 
-const NewEventForm = ({ }) => {
+const NewEventForm = ({ fireFinalActions }) => {
     const [eventData, setEventData] = useState({
         title: '',
         icon: '',
@@ -18,10 +18,6 @@ const NewEventForm = ({ }) => {
             city: '',
             country: ''
         },
-        // location: {
-        //     type: 'Point',
-        //     coordinates: [0, 0]
-        // },
         date: '',
         organizer: ''
     })
@@ -75,7 +71,7 @@ const NewEventForm = ({ }) => {
         eventsService
             .saveEvent(eventData)
             .then(() => {
-                // fireFinalActions()
+                fireFinalActions()
             })
             .catch(err => console.log(err))
     }
@@ -93,9 +89,8 @@ const NewEventForm = ({ }) => {
                 <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Icon</Form.Label>
                     <Form.Control type="file"
-                        // value={eventData.icon}
-                        name="icon"
-                        onChange={handleFileUpload} />
+                        onChange={handleFileUpload}
+                    />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="description">
                     <Form.Label>Description</Form.Label>
