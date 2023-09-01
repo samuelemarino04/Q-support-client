@@ -34,7 +34,7 @@ const EventPage = () => {
 
     const fireFinalActions = () => {
         setShowModal(false)
-        loadCoasters()
+        loadEvents()
     }
 
     return (

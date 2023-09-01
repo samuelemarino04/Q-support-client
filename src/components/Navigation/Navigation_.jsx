@@ -12,6 +12,7 @@ const Navigation = () => {
 
     const { theme, switchTheme, invertedTheme } = useContext(ThemeContext)
     const { loggedUser, logout } = useContext(AuthContext)
+    console.log(loggedUser)
 
     return (
         <Navbar bg={invertedTheme}
@@ -28,9 +29,16 @@ const Navigation = () => {
                     </Nav>
                     <Nav>
                         {
-                            loggedUser &&
+                            loggedUser?.role === "CREATIVE" &&
                             <>
-                                <Link to={'/userProfile'} className='nav-link'>My profile</Link>
+                                <Link to={`/creative/${loggedUser._id}`} className='nav-link'>My profile</Link>
+                                <span className='nav-link' onClick={logout}>Logout</span>
+                            </>
+                        }
+                        {
+                            loggedUser?.role === "USER" &&
+                            <>
+                                <Link to={`/user/${loggedUser._id}`} className='nav-link'>My profile</Link>
                                 <span className='nav-link' onClick={logout}>Logout</span>
                             </>
                         }
