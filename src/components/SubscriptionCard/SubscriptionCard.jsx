@@ -1,14 +1,12 @@
-import { useContext } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
-import { AuthContext } from './../../contexts/auth.context'
 
 
-const SubscriptionCard = ({ _id, title, description, type, amount, image, owner }) => {
 
-    const { loggedUser } = useContext(AuthContext)
+const SubscriptionCard = ({ _id, title, description, type, amount, image }) => {
+
+
     return (
         <Card key={_id} style={{ width: '18rem' }}>
             <Card.Img variant="top" src={image} />
@@ -23,15 +21,10 @@ const SubscriptionCard = ({ _id, title, description, type, amount, image, owner 
                 <Card.Text>
                     {description}
                 </Card.Text>
-                <Link to={'/paymentDetails'} className='nav-link'>Join</Link>
-                <Link to={`subscriptionDetails/${_id}`} />
-                <ButtonGroup style={{ width: '100%' }}>
-                    {loggedUser._id === owner && <Button variant='dark' size='sm'>Edit</Button>}
-                </ButtonGroup>
+                <Link className={'btn btn-outline-dark nodeco'} to={'/paymentPage'}>Join</Link>
             </Card.Body>
         </Card>
     )
-
 }
 
 export default SubscriptionCard

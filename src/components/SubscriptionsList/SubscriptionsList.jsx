@@ -11,7 +11,7 @@ const SubscriptionsList = ({ subscriptions }) => {
             <>
                 <Row>
                     {
-                        subscriptions.map(elm => <SubscriptionCard {...elm} />)
+                        subscriptions.map(elm => <SubscriptionCard key={elm._id} {...elm} />)
                     }
                 </Row>
             </>
