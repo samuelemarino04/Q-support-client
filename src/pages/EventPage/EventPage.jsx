@@ -40,7 +40,7 @@ const EventPage = () => {
         <>
             <Container>
                 {
-                    loggedUser &&
+                    loggedUser?.role === "CREATIVE" &&
                     <>
                         <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Add new event</Button>
                     </>
