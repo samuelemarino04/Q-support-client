@@ -1,20 +1,21 @@
-import { Button, Container, Form } from 'react-bootstrap'
+import { Button, Modal, Container, Form } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import Card from 'react-bootstrap/Card'
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
-import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage';
-import AddWorkImageForm from '../../components/AddWorkImageForm/AddWorkImageForm'
 import uploadServices from '../../services/upload.services';
+import SubscriptionForm from '../../components/SubscriptionForm/SubscriptionForm'
+import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage'
 
 
 const CreativeProfile = () => {
 
     const { user_id } = useParams()
     const [creative, setCreative] = useState({})
+
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         loadCreativeDetails()
@@ -27,8 +28,6 @@ const CreativeProfile = () => {
             .catch(err => console.log(err))
 
     }
-
-    // const RemoveCreativeProfile = ()
 
     const handleFormSubmit = e => {
         e.preventDefault()
@@ -67,6 +66,7 @@ const CreativeProfile = () => {
             <>
 
                 <Link className={'btn btn-outline-dark nodeco'} to={`/getSubscriptionsByOwner/${user_id}`}>Become a Patron!</Link>
+                <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>new subscription</Button>
                 <Container>
 
                     <Tabs
@@ -86,7 +86,9 @@ const CreativeProfile = () => {
                                     creative.images ?
                                         creative.images.map(eachImage => {
                                             return (
-                                                <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+                                                <Container>
+                                                    <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+                                                </Container>
                                             )
                                         })
                                         :
@@ -95,30 +97,17 @@ const CreativeProfile = () => {
 
                             </div>
 
-
-
-
-
-
-
-                            {/* <AddWorkImageForm /> */}
-
                             <Form onSubmit={handleFormSubmit}>
                                 <Form.Control type="file" multiple onChange={handleFileUpload}>
                                 </Form.Control>
 
                                 <Button variant='dark' type='submit' >Upload image</Button>
                             </Form>
-
-
-
-
-
                         </Tab>
 
                         {/* //investigar como meter la info al tab en la docu de bootstrap */}
                         <Tab eventKey="subscription" title="Subscription" >
-                            {/* < SubscriptionsPage /> */}
+                            < SubscriptionsPage />
                         </Tab>
 
                         <Tab eventKey="About" title="About">
@@ -134,6 +123,13 @@ const CreativeProfile = () => {
                     </Tabs>
 
                 </Container >
+
+                <Modal show={showModal} onHide={() => { setShowModal(false) }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Create a new Subscription</Modal.Title>
+                    </Modal.Header>
+                    <SubscriptionForm setShowModal={setShowModal} />
+                </Modal>
             </>
     )
 }

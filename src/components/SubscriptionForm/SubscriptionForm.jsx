@@ -5,7 +5,7 @@ import subscriptionService from '../../services/subscription.services';
 import { useNavigate } from "react-router-dom"
 import uploadServices from '../../services/upload.services';
 
-const SubscriptionForm = () => {
+const SubscriptionForm = ({ setShowModal }) => {
 
     const [formData, setFormData] = useState({
         title: '',
@@ -31,7 +31,8 @@ const SubscriptionForm = () => {
 
         subscriptionService
             .saveSubscription(formData)
-            .then(() => navigate(`/getSubscriptionsByOwner/${owner_id}`))
+            .then(() => setShowModal(false))
+            // .then(() => navigate(`/getSubscriptionsByOwner/${owner_id}`))
             .catch(err => console.log(err))
     }
 
