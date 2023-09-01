@@ -10,8 +10,12 @@ import EventPage from '../pages/EventPage/EventPage'
 import SubscriptionsPage from '../pages/SubscriptionsPage/SubscriptionsPage'
 import CreativeProfile from '../pages/CreativeProfile/CreativeProfile'
 import EventDetailsPage from '../pages/eventDetailsPage/eventDetailsPage'
+<<<<<<< HEAD
 import { AuthContext } from '../contexts/auth.context'
 import { useContext } from 'react'
+=======
+import UserProfile from '../pages/UserProfile/UserProfile'
+>>>>>>> b8e2813ba85389df6658ca5e61e23e618aa0227a
 
 
 const AppRoutes = () => {
@@ -24,7 +28,8 @@ const AppRoutes = () => {
             <Route path={'/signup'} element={<SignupPage />} />
             <Route path={'/login'} element={<LoginPage />} />
             <Route path={'/creative/:user_id'} element={<CreativeProfile />} />
-
+            <Route path={'/user/:user_id'} element={<UserProfile />} />
+            <Route path={'/newsubscription'} element={<SubscriptionForm />} />
             <Route path={'/events'} element={<EventPage />} />
             <Route path={'/getOneEvent/:event_id'} element={<EventDetailsPage />} />
             <Route path={'/newEvent'} element={<NewEventPage />} />
