@@ -26,7 +26,7 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
-                navigate('/userProfile')
+                navigate('/')
             })
             .catch(err => console.log(err))
 
