@@ -1,4 +1,4 @@
-import { Container } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Card from 'react-bootstrap/Card'
@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
 import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage';
+import AddWorkImageForm from '../../components/AddWorkImageForm/AddWorkImageForm'
+import uploadServices from '../../services/upload.services';
+
 
 const CreativeProfile = () => {
     const { user_id } = useParams()
@@ -24,6 +27,36 @@ const CreativeProfile = () => {
 
     }
 
+    const handleFormSubmit = e => {
+        e.preventDefault()
+
+        userService
+            .editCreative({ images: creative.imageToUpload }, user_id)
+            .then(() => {
+                const updatedImages = [...creative.images, ...creative.imageToUpload]
+                setCreative({ ...creative, images: updatedImages })
+            })
+            .catch(err => console.log(err))
+
+
+    }
+
+    const handleFileUpload = e => {
+
+        const formData = new FormData()
+        for (let i = 0; i < e.target.files.length; i++) {
+            formData.append('imagesData', e.target.files[i])
+        }
+        uploadServices
+            .uploadimages(formData)
+            .then(({ data }) => {
+
+                setCreative({ ...creative, imageToUpload: data.cloudinary_urls })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return (
         !creative ?
             <Loader />
@@ -39,16 +72,43 @@ const CreativeProfile = () => {
                         className="mb-3"
                     >
 
-                        <Tab eventKey="About" title="About">
+                        <Tab eventKey="Work" title="Work">
                             {creative.username}
                             <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
+
+                            {
+                                creative.images ?
+                                    creative.images.map(eachImage => {
+                                        return (
+                                            <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+                                        )
+                                    })
+                                    :
+                                    ''
+                            }
+
+
+                            {/* <AddWorkImageForm /> */}
+
+                            <Form onSubmit={handleFormSubmit}>
+                                <Form.Control type="file" multiple onChange={handleFileUpload}>
+                                </Form.Control>
+
+                                <Button variant='dark' type='submit' >Upload image</Button>
+                            </Form>
+
+
+
+
+
                         </Tab>
+
                         {/* //investigar como meter la info al tab en la docu de bootstrap */}
                         <Tab eventKey="subscription" title="Subscription" >
                             < SubscriptionsPage />
                         </Tab>
 
-                        <Tab eventKey="work" title="Work">
+                        <Tab eventKey="About" title="About">
                             Tab content for work, gallery of images, music etc.
                         </Tab>
 

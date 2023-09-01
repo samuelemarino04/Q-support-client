@@ -18,6 +18,10 @@ class UserService {
     saveUser(userData) {
         return this.api.post(`/saveUser`, userData)
     }
+
+    editCreative(userData, id) {
+        return this.api.post(`/editCreative/${id}`, userData)
+    }
 }
 const userService = new UserService()
 export default userService
