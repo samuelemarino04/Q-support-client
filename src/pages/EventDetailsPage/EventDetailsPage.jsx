@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import eventsService from "../../services/events.services"
-import { useParams } from "react-router-dom"
 import Card from 'react-bootstrap/Card';
 import { useParams, Link } from "react-router-dom"
 import { Container, Row, Button, Form } from "react-bootstrap";

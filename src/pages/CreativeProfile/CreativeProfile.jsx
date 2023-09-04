@@ -2,7 +2,7 @@ import { Button, Container, Form } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useParams, Link } from "react-router-dom"
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext, AuthContext } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
 import uploadServices from '../../services/upload.services';
@@ -14,6 +14,9 @@ const CreativeProfile = () => {
     const { user_id } = useParams()
 
     const [creative, setCreative] = useState({})
+
+    // const { loggedUser, logout } = useContext(AuthContext)
+
 
 
     useEffect(() => {
@@ -75,6 +78,17 @@ const CreativeProfile = () => {
             .catch(err => console.log(err))
     }
 
+
+    // const handleDeleteUser = () => {
+
+    //     userService
+    //         .deleteUser(user_id)
+    //         .then(() => logout)
+    //         .catch(err => {
+    //             console.log(err);
+    //             setIsLoading(false);
+    //         })
+    // }
     return (
         !creative ?
             <Loader />
@@ -86,7 +100,7 @@ const CreativeProfile = () => {
 
                     <Tabs
                         defaultActiveKey="Work"
-                        id="uncontrolled-tab-example"
+                        id="fill-tab-example"
                         className="mb-3"
                     >
 
