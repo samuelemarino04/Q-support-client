@@ -35,7 +35,7 @@ const CreativeProfile = () => {
         const { imageToUpload: images } = creative
 
         userService
-            .editCreative({ images }, user_id)
+            .editCreative({ images: creative.imageToUpload }, user_id)
             .then(() => {
                 const images = [...creative.images, ...creative.imageToUpload]
                 setCreative({ ...creative, images })
@@ -96,6 +96,7 @@ const CreativeProfile = () => {
                                 <header>
                                     {creative.username}
                                     <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
+
                                 </header>
 
                                 {
@@ -103,17 +104,15 @@ const CreativeProfile = () => {
                                         creative.images.map(eachImage => {
                                             return (
                                                 <>
-                                                    <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
-
-                                                    <Form onSubmit={handleRemoveSubmit(eachImage)}>
-                                                        <Button variant='dark' type='submit' >delete image</Button>
-                                                    </Form>
-
-
-
                                                     <Container>
+
                                                         <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+                                                        <Form onSubmit={handleRemoveSubmit(eachImage)}>
+                                                            <Button variant='dark' type='submit' >delete image</Button>
+                                                        </Form>
                                                     </Container>
+
+
                                                 </>
                                             )
                                         })
@@ -137,7 +136,7 @@ const CreativeProfile = () => {
 
                         {/* //investigar como meter la info al tab en la docu de bootstrap */}
                         < Tab eventKey="subscription" title="Subscription" >
-                            < SubscriptionsPage />
+                            {/* < SubscriptionsPage /> */}
                         </Tab >
 
                         <Tab eventKey="About" title="About">
