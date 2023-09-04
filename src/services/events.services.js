@@ -22,6 +22,12 @@ class EventService {
         return this.api.get(`/getAllEvents`)
     }
 
+    getFilteredEvents(searchQuery) {
+        return this.api.get(`/getFilteredEvents/`, {
+            params: { searchQuery }
+        })
+    }
+
     getEventDetails(event_id) {
         return this.api.get(`/getOneEvent/${event_id}`)
     }

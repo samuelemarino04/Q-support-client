@@ -8,8 +8,6 @@ import { ThemeContext } from './contexts/theme.context'
 
 function App() {
 
-  // TODO: REVISAR NOMENCLATURA DE DIRECTORIOS Y COMPONENTES
-
   const { theme } = useContext(ThemeContext)
 
   return (

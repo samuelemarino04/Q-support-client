@@ -1,4 +1,4 @@
-import { Button, Modal, Container, Form } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useParams, Link } from "react-router-dom"
@@ -6,16 +6,15 @@ import { useEffect, useState } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
 import uploadServices from '../../services/upload.services';
-import SubscriptionForm from '../../components/SubscriptionForm/SubscriptionForm'
 import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage'
 
 
 const CreativeProfile = () => {
 
     const { user_id } = useParams()
+
     const [creative, setCreative] = useState({})
 
-    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         loadCreativeDetails()
@@ -66,7 +65,7 @@ const CreativeProfile = () => {
             <>
 
                 <Link className={'btn btn-outline-dark nodeco'} to={`/getSubscriptionsByOwner/${user_id}`}>Become a Patron!</Link>
-                <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>new subscription</Button>
+
                 <Container>
 
                     <Tabs
@@ -76,7 +75,7 @@ const CreativeProfile = () => {
                     >
 
                         <Tab eventKey="Work" title="Work">
-                            <div className="work-content">
+                            <div className="work-content" key={creative.username}>
                                 <header>
                                     {creative.username}
                                     <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
@@ -105,9 +104,8 @@ const CreativeProfile = () => {
                             </Form>
                         </Tab>
 
-                        {/* //investigar como meter la info al tab en la docu de bootstrap */}
-                        <Tab eventKey="subscription" title="Subscription" >
-                            < SubscriptionsPage />
+                        <Tab eventKey="subscriptions" title="Subscriptions" >
+                            < SubscriptionsPage creative={creative} owner_id={user_id} />
                         </Tab>
 
                         <Tab eventKey="About" title="About">
@@ -123,13 +121,6 @@ const CreativeProfile = () => {
                     </Tabs>
 
                 </Container >
-
-                <Modal show={showModal} onHide={() => { setShowModal(false) }}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Create a new Subscription</Modal.Title>
-                    </Modal.Header>
-                    <SubscriptionForm setShowModal={setShowModal} />
-                </Modal>
             </>
     )
 }
