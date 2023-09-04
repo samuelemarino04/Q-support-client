@@ -17,7 +17,6 @@ const EventsList = () => {
     }, [searchQuery])
 
     const loadEvents = () => {
-        console.log("1.con cada cambio en el buscador le pasamos el searchQuery al loadEvents()", searchQuery)
 
         eventsService
             .getFilteredEvents(searchQuery)

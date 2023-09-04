@@ -1,25 +1,28 @@
 import { useEffect, useState } from "react"
 import eventsService from "../../services/events.services"
-import { useParams } from "react-router-dom"
-import Card from 'react-bootstrap/Card';
 import { useParams, Link } from "react-router-dom"
-import { Container, Row, Button, Form } from "react-bootstrap";
+import { Container, Row, Button, Modal } from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import Loader from "../../components/Loader/Loader";
 import formatCustomDateTime from "../../utils/date-util";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/auth.context";
+import EditEventForm from "../../components/EditEventForm/EditEventForm";
+import { useContext } from "react";
 
 
-const EventDetailsPage = () => {
+const EventDetailsPage = ({ }) => {
 
     const navigate = useNavigate()
     const { event_id } = useParams()
     const [event, setEvent] = useState({})
     const [userJoined, setUserJoined] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const { loggedUser } = useContext(AuthContext)
 
     useEffect(() => {
         loadEventDetails()
-    }, [event])
+    }, [userJoined])
 
     const loadEventDetails = () => {
         eventsService
@@ -28,13 +31,17 @@ const EventDetailsPage = () => {
             .catch(err => console.log(err))
     }
 
+    const fireFinalActions = () => {
+        navigate(`/creative/${loggedUser._id}`)
+    }
+
 
     const handleJoinEvent = () => {
         eventsService
             .joinEvent(event_id)
             .then(({ data }) => {
                 setEvent(data);
-                setUserJoined(true); // Imposta lo stato per indicare che l'utente ha aderito all'evento
+                setUserJoined(true);
             })
             .catch(err => console.log(err))
     }
@@ -87,7 +94,13 @@ const EventDetailsPage = () => {
 
 
                             <hr />
-                            <Link to={`/events/${event_id}/edit`} className="btn btn-dark">Edit Event</Link>
+                            <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Edit event</Button>
+                            <Modal show={showModal} onHide={() => { setShowModal(false) }}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Edit event</Modal.Title>
+                                </Modal.Header>
+                                <EditEventForm event={event} fireFinalActions={fireFinalActions} />
+                            </Modal>
                             <Link to='/events' className="btn btn-dark">Volver a la galería</Link>
                         </Col>
 

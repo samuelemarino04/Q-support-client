@@ -52,6 +52,11 @@ class EventService {
         return this.api.post(`/${event_id}/remove-event`)
     }
 
+    getEventsByOwner(owner_id) {
+        return this.api.get(`/getEventsByOwner/${owner_id}`)
+    }
+
+
 }
 const eventsService = new EventService()
 export default eventsService
