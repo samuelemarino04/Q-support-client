@@ -1,16 +1,17 @@
-import { Container } from 'react-bootstrap'
+import { Button, Card, Container, Modal } from 'react-bootstrap'
 import SubscriptionsList from '../../components/SubscriptionsList/SubscriptionsList'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import subscriptionService from '../../services/subscription.services'
-import { Link, useParams } from 'react-router-dom'
+import SubscriptionForm from '../../components/SubscriptionForm/SubscriptionForm'
+import { AuthContext } from '../../contexts/auth.context'
 
-// TODO: cambiar el link CREATE NEW SUBSCRIPTION (linea 30) a modal, dentro del bottomgroup comentado
+const SubscriptionsPage = ({ creative, owner_id }) => {
 
-const SubscriptionsPage = () => {
-
-    const { owner_id } = useParams()
+    const { loggedUser } = useContext(AuthContext)
 
     const [subscriptions, setSubscriptions] = useState()
+
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         loadSubscriptions()
@@ -23,22 +24,19 @@ const SubscriptionsPage = () => {
             .catch(err => console.log(err))
     }
 
-    const fireFinalActions = () => {
-        loadSubscriptions()
-    }
-
     return (
-        <Container>
-            <Link className={'btn btn-outline-dark nodeco'} to={"/newsubscription"}>Create new subscription</Link>
-            {/* <ButtonGroup style={{ width: '100%' }}>
-                    {loggedUser?._id === owner && <Button variant='dark' size='sm'>Create new subscription</Button>}
-                </ButtonGroup> */}
-            <SubscriptionsList subscriptions={subscriptions} />
-        </Container>
-
-
-
-
+        <>
+            <Container>
+                {loggedUser?._id === owner_id && <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>new subscription</Button>}
+                <SubscriptionsList subscriptions={subscriptions} creative={creative} />
+            </Container>
+            <Modal show={showModal} onHide={() => { setShowModal(false) }}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create a new Subscription</Modal.Title>
+                </Modal.Header>
+                <SubscriptionForm setShowModal={setShowModal} />
+            </Modal>
+        </>
     )
 }
 

@@ -1,23 +1,22 @@
 
-import { Button, Container, FloatingLabel, Form } from 'react-bootstrap';
+import { Button, Card, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import React, { useState } from 'react';
 import subscriptionService from '../../services/subscription.services';
-import { useNavigate } from "react-router-dom"
 import uploadServices from '../../services/upload.services';
-import { SUBSCRIPTION_TYPES } from '../../consts/subscription.consts';
+import * as Constants from '../../consts/consts'
 
-const SubscriptionForm = ({ setShowModal }) => {
+
+const SubscriptionForm = ({ setShowModal, subscription }) => {
 
     const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        creative: '',
-        type: '',
-        amount: '',
-        image: '',
+        title: subscription ? subscription.title : '',
+        description: subscription ? subscription.description : '',
+        type: subscription ? subscription.type : '',
+        price: subscription ? subscription.price : '',
+        currency: subscription ? subscription.currency : '',
+        paymentFrequency: subscription ? subscription.paymentFrequency : '',
+        image: subscription ? subscription.image : '',
     });
-
-    const navigate = useNavigate()
 
     const [loadingImage, setLoadingImage] = useState(false)
 
@@ -30,11 +29,19 @@ const SubscriptionForm = ({ setShowModal }) => {
 
         e.preventDefault();
 
-        subscriptionService
-            .saveSubscription(formData)
-            .then(() => setShowModal(false))
-            // .then(() => navigate(`/getSubscriptionsByOwner/${owner_id}`))
-            .catch(err => console.log(err))
+        if (subscription) {
+            console.log("esta es la subscription original  que le paso al editSubscription", subscription)
+            console.log("esta es la subscripcion editada que le paso al editSubscription", formData)
+            subscriptionService
+                .editSubscription(subscription._id, formData)
+                .then(() => setShowModal(false))
+                .catch(err => console.log(err))
+        } else {
+            subscriptionService
+                .saveSubscription(formData)
+                .then(() => setShowModal(false))
+                .catch(err => console.log(err))
+        }
     }
 
     const handleFileUpload = e => {
@@ -73,41 +80,73 @@ const SubscriptionForm = ({ setShowModal }) => {
                     <Form.Control
                         type="text"
                         name="description"
+                        value={formData.description}
                         onChange={handleInputChange}
                         placeholder="Description"
                     />
                 </FloatingLabel>
 
-                <FloatingLabel controlId="floatingInputGrid" label="amount" className="mb-3">
-                    <Form.Control
-                        type="number"
-                        name="amount"
-                        onChange={handleInputChange}
-                        placeholder="Amount"
-                    />
-                </FloatingLabel>
+                <Row className="mb-3">
+                    <Col md>
+                        <FloatingLabel controlId="floatingInputGrid" label="Price">
+                            <Form.Control
+                                type="number"
+                                name="price"
+                                value={formData.price}
+                                onChange={handleInputChange}
+                                placeholder="Price"
+                            />
+                        </FloatingLabel>
+                    </Col>
+                    <Col md>
+                        <FloatingLabel controlId="floatingSelectGrid" label="Select a currency">
+                            <Form.Control as="select" onChange={handleInputChange} name="currency">
+                                {Constants.CURRENCIES.map((currency, index) => (
+                                    <option key={index} value={formData.currency}>{currency}</option>
+                                ))}
+                            </Form.Control>
+                        </FloatingLabel>
+                    </Col>
+                    <Col md>
+                        <FloatingLabel controlId="floatingSelectGrid" label="Payment frequency">
+                            <Form.Control as="select" onChange={handleInputChange} name="paymentFrequency">
+                                {Constants.PAYMENT_FREQUENCIES.map((paymentFrequency, index) => (
+                                    <option key={index} value={formData.paymentFrequency}>{paymentFrequency}</option>
+                                ))}
+                            </Form.Control>
+                        </FloatingLabel>
+                    </Col>
+                </Row>
 
-                <FloatingLabel controlId="floatingInputGrid" label="image" className="mb-3">
-                    <Form.Control
-                        type="file"
-                        name="image"
-                        onChange={handleFileUpload}
-                        placeholder="image" />
-                </FloatingLabel>
+                {formData.image ?
+                    <div>
+                        <Card.Img variant="top" src={formData.image} />
+                        <FloatingLabel controlId="floatingInputGrid" label="image" className="mb-3">
+                            <Form.Control
+                                type="file"
+                                name="image"
+                                onChange={handleFileUpload}
+                                placeholder="image" />
+                        </FloatingLabel>
+                    </div>
+                    :
+                    <FloatingLabel controlId="floatingInputGrid" label="image" className="mb-3">
+                        <Form.Control
+                            type="file"
+                            name="image"
+                            onChange={handleFileUpload}
+                            placeholder="image" />
+                    </FloatingLabel>
 
-                <FloatingLabel controlId="floatingSelectGrid" label="Select a package">
-                    <Form.Select
-                        name="type"
-                        value={formData.type}
-                        onChange={handleInputChange}
-                        aria-label="Floating label select example"
-                        className="mb-3"
-                    >
-                        <option>Subscription type</option>
-                        {
-                            SUBSCRIPTION_TYPES.map(elm => <option key={elm} value={elm}>{elm}</option>)
-                        }
-                    </Form.Select>
+                }
+
+
+                <FloatingLabel controlId="floatingSelectGrid" label="Subscription type">
+                    <Form.Control as="select" onChange={handleInputChange} name="type">
+                        {Constants.SUBSCRIPTION_TYPES.map((type, index) => (
+                            <option key={index} value={formData.type}>{type}</option>
+                        ))}
+                    </Form.Control>
                 </FloatingLabel>
 
                 <div className="d-grid">

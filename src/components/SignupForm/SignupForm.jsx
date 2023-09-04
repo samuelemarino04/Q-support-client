@@ -4,6 +4,8 @@ import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
 import calculateAge from "../../utils/calculateAge"
+import * as Constants from '../../consts/consts'
+
 
 const SignupForm = () => {
 
@@ -12,6 +14,7 @@ const SignupForm = () => {
         birth: '',
         avatar: '',
         role: '',
+        category: '',
         email: '',
         password: '',
         pronouns: ''
@@ -85,12 +88,23 @@ const SignupForm = () => {
                     <Form.Control type="text" value={signupData.pronouns} onChange={handleInputChange} name="pronouns" />
                 </Form.Group>
 
+
+
                 <Form.Group className="mb-3" controlId="role">
                     <Form.Label>Creative or patron?</Form.Label>
                     <Form.Control as="select" value={signupData.role} onChange={handleInputChange} name="role">
                         <option value="">.......</option>
                         <option value="USER">Patron</option>
                         <option value="CREATIVE">Creative</option>
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="category">
+                    <Form.Label>Select your category</Form.Label>
+                    <Form.Control as="select" value={signupData.category} onChange={handleInputChange} name="category">
+                        {Constants.CREATIVE_CATEGORIES.map((category, index) => (
+                            <option key={index} value={category}>{category}</option>
+                        ))}
                     </Form.Control>
                 </Form.Group>
 

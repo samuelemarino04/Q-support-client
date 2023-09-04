@@ -1,10 +1,9 @@
-import { useState } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import eventsService from "../../services/events.services";
-import uploadServices from "../../services/upload.services"
+import { useState, useEffect } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import { useParams } from 'react-router';
 
-const NewEventForm = ({ fireFinalActions }) => {
+function EditEventForm({ event }) {
+
     const [eventData, setEventData] = useState({
         title: '',
         icon: '',
@@ -19,9 +18,17 @@ const NewEventForm = ({ fireFinalActions }) => {
         },
         date: '',
         organizer: ''
-    })
+    });
+
 
     const [loadingImage, setLoadingImage] = useState(false)
+
+
+    useEffect(() => {
+        // Popola il formData con i dati dell'evento passato come prop
+        setEventData(event);
+    }, [event]);
+
 
     const handleInputChange = e => {
 
@@ -63,21 +70,15 @@ const NewEventForm = ({ fireFinalActions }) => {
 
     }
 
-    const handleEventSubmit = e => {
 
-        e.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
 
-        eventsService
-            .saveEvent(eventData)
-            .then(() => {
-                fireFinalActions()
-            })
-            .catch(err => console.log(err))
-    }
 
     return (
-        <div className="NewEventForm">
-            <Form onSubmit={handleEventSubmit}>
+        <div className="EditEventForm">
+            <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Event Name</Form.Label>
                     <Form.Control type="text"
@@ -135,23 +136,6 @@ const NewEventForm = ({ fireFinalActions }) => {
                         onChange={handleInputChange}
                     />
                 </Form.Group>
-                {/* <Form.Group className="mb-3" controlId="location">
-                    <Form.Label>Location</Form.Label>
-                    <Form.Control
-                        type="number"
-                        value={eventData.location.coordinates[0]}
-                        name="location.coordinates[0]"
-                        placeholder="Latitude"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="number"
-                        value={eventData.location.coordinates[1]}
-                        name="location.coordinates[1]"
-                        placeholder="Longitude"
-                        onChange={handleInputChange}
-                    />
-                </Form.Group> */}
                 <Form.Group className="mb-3" controlId="date">
                     <Form.Label>Date</Form.Label>
                     <Form.Control type="datetime-local"
@@ -160,13 +144,11 @@ const NewEventForm = ({ fireFinalActions }) => {
                         onChange={handleInputChange} />
                 </Form.Group>
                 <Button variant="dark" type="submit" className='mt-2'>
-                    Submit Event
+                    Edit Event
                 </Button>
             </Form>
         </div >
-
-    )
+    );
 }
 
-export default NewEventForm
-
+export default EditEventForm;

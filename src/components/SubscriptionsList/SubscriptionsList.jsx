@@ -16,7 +16,6 @@ const SubscriptionsList = ({ subscriptions }) => {
                 </Row>
             </>
     )
-
 }
 
 export default SubscriptionsList

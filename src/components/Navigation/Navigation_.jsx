@@ -8,8 +8,6 @@ import { AuthContext } from '../../contexts/auth.context'
 
 const Navigation = () => {
 
-    // TODO OPCIONAL: SI ES NECESARIO DESACOPLAR MENUS SEGUN LOGIN
-
     const { theme, switchTheme, invertedTheme } = useContext(ThemeContext)
     const { loggedUser, logout } = useContext(AuthContext)
 

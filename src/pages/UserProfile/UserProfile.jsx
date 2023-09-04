@@ -1,5 +1,4 @@
-import { Button } from 'react-bootstrap'
-import Card from 'react-bootstrap/Card'
+import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import userService from '../../services/user.services';
@@ -28,17 +27,20 @@ const UserProfile = () => {
             <Loader />
             :
             <>
-                <Card>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>
+                <Container>
+
+                    <h1 className="mb-4">Welcome to your profile, {user.username}</h1>
+                    <p>Pronouns: {user.pronouns}</p>
+
+                    <Row>
+
+                        <Col md={{ span: 4 }}>
+                            <img src={user.avatar} style={{ width: '100%' }} />
+                        </Col>
+
+                    </Row>
+
+                </Container >
             </>
     )
 }
