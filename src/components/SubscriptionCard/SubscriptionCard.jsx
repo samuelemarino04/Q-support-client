@@ -1,16 +1,49 @@
 
 import { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth.context';
 import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
 import { Button, Modal } from 'react-bootstrap';
+import subscriptionService from '../../services/subscription.services';
 
-const SubscriptionCard = ({ _id, title, description, type, price, currency, paymentFrequency, image, owner }) => {
-    console.log("este es el id de la subscripción----------------", _id)
+
+const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner }) => {
     const { loggedUser } = useContext(AuthContext)
 
+    const [hasJoined, setHasJoined] = useState(false)
+
     const [showModal, setShowModal] = useState(false)
+
+
+    const handleDeleteSubscription = () => {
+
+        subscriptionService
+            .deleteSubscription(_id)
+            .then(() => Navigate(`/creative/${owner}`))
+            .catch(err => console.log(err))
+    }
+
+    const handleSubscribe = () => {
+
+        subscriptionService
+            .subscribe(_id)
+            .then(() => {
+
+                setHasJoined(true)
+            })
+    }
+
+    const handleUnsubscribe = () => {
+
+        subscriptionService
+            .unSubscribe(_id)
+            .then(() => {
+                setHasJoined(false)
+            })
+    }
+
+
 
     return (
         <>
@@ -34,12 +67,14 @@ const SubscriptionCard = ({ _id, title, description, type, price, currency, paym
                         Info: {description}
                     </Card.Text>
 
-                    {loggedUser?._id !== owner && <Link className={'btn btn-outline-dark nodeco'} to={'/paymentPage'}>Join</Link>}
+                    {loggedUser?._id !== owner && !hasJoined ? <Button variant="dark" size='sm' onClick={handleSubscribe}>Join</Button>
+                        :
+                        <Button variant="dark" size='sm' onClick={handleUnsubscribe}>Leave</Button>}
 
                     {loggedUser?._id === owner &&
                         <div>
-                            <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>edit</Button>
-                            <Link className={'btn btn-outline-dark nodeco'} to={'/paymentPage'}>Delete</Link>
+                            <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Edit</Button>
+                            <Button variant="dark" size='sm' onClick={handleDeleteSubscription}>Delete</Button>
                         </div>}
 
                 </Card.Body>

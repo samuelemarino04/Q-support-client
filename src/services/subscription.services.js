@@ -37,16 +37,23 @@ class SubscriptionService {
 
     editSubscription(subscription_id, subscriptionData) {
         console.log("este es el id de la subscripción-----------", subscription_id)
-        // console.log("esto es lo que le estoy mandando ala api la subscriptionData:", subscriptionData)
-
-        // me esta llegando udefined a la subscriptionData y a la subscriptionId me llega el objeto entero de la subscirpcion editada
 
         return this.api.put(`/editSubscription/${subscription_id}`, subscriptionData)
     }
 
     deleteSubscription(subscription_id) {
+        console.log("este es el id de la subscripción-----------", subscription_id)
         return this.api.delete(`/deleteSubscription/${subscription_id}`)
     }
+
+    subscribe(subscription_id, loggeduser_id) {
+        return this.api.put(`/subscribe/${subscription_id}`, loggeduser_id)
+    }
+
+    unsubscribe(subscription_id, loggeduser_id) {
+        return this.api.put(`/unsubscribe/${subscription_id}`, loggeduser_id)
+    }
+
 }
 const subscriptionService = new SubscriptionService()
 export default subscriptionService

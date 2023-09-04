@@ -91,7 +91,7 @@ const CreativeProfile = () => {
                     >
 
                         <Tab eventKey="Work" title="Work">
-                            <div className="work-content" key={creative.username}>
+                            <div className="work-content" key={creative._id}>
                                 <header>
                                     {creative.username}
                                     <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />

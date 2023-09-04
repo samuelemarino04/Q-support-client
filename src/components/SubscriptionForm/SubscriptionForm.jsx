@@ -102,7 +102,7 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
                         <FloatingLabel controlId="floatingSelectGrid" label="Select a currency">
                             <Form.Control as="select" onChange={handleInputChange} name="currency">
                                 {Constants.CURRENCIES.map((currency, index) => (
-                                    <option key={index} value={formData.currency}>{currency}</option>
+                                    <option key={index} value={subscription ? formData.currency : currency}>{currency}</option>
                                 ))}
                             </Form.Control>
                         </FloatingLabel>
@@ -111,7 +111,7 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
                         <FloatingLabel controlId="floatingSelectGrid" label="Payment frequency">
                             <Form.Control as="select" onChange={handleInputChange} name="paymentFrequency">
                                 {Constants.PAYMENT_FREQUENCIES.map((paymentFrequency, index) => (
-                                    <option key={index} value={formData.paymentFrequency}>{paymentFrequency}</option>
+                                    <option key={index} value={subscription ? formData.paymentFrequency : paymentFrequency}>{paymentFrequency}</option>
                                 ))}
                             </Form.Control>
                         </FloatingLabel>
@@ -144,7 +144,7 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
                 <FloatingLabel controlId="floatingSelectGrid" label="Subscription type">
                     <Form.Control as="select" onChange={handleInputChange} name="type">
                         {Constants.SUBSCRIPTION_TYPES.map((type, index) => (
-                            <option key={index} value={formData.type}>{type}</option>
+                            <option key={index} value={subscription ? formData.type : type}>{type}</option>
                         ))}
                     </Form.Control>
                 </FloatingLabel>

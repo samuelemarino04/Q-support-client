@@ -10,6 +10,7 @@ const SubscriptionsPage = ({ creative, owner_id }) => {
     const { loggedUser } = useContext(AuthContext)
 
     const [subscriptions, setSubscriptions] = useState()
+    console.log("estado desde page", subscriptions)
 
     const [showModal, setShowModal] = useState(false)
 

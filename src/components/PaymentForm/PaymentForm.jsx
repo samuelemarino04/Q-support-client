@@ -7,13 +7,12 @@ import { useNavigate, useParams } from "react-router-dom"
 const PaymentForm = () => {
 
     const [formData, setFormData] = useState({
-
-        startDate: '',
-        endDate: '',
-        paymentMethod: '',
         cardHolder: '',
+        paymentMethod: '',
         cardNumber: '',
         cvv: '',
+        expiringDate: '',
+        startDate: '',
 
     });
 

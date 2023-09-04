@@ -18,10 +18,8 @@ const CreativesList = () => {
         loadCreatives()
     }, [searchQuery])
 
-    //the moment I give the useEffect another dependency in the second argument (selectedCategories), 
-    //the first filter input bar stops filtering everytime the user press a key
     const loadCreatives = () => {
-        console.log("1.con cada cambio en el buscador le pasamos el searchQuery al loadCreatives()", searchQuery)
+
 
         Promise.all([
             creativeService.getFilteredCreatives(searchQuery),
