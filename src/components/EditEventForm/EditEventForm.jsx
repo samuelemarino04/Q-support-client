@@ -1,34 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useParams } from 'react-router';
+import eventsService from '../../services/events.services';
+import uploadServices from '../../services/upload.services';
 
-function EditEventForm({ event }) {
+function EditEventForm({ fireFinalActions, event }) {
 
     const [eventData, setEventData] = useState({
-        title: '',
-        icon: '',
-        description: '',
-        attendees: '',
+        title: event ? event.title : '',
+        icon: event ? event.icon : '',
+        description: event ? event.description : '',
+        attendees: event ? event.attendees : '',
         address: {
-            street: '',
-            number: '',
-            zipcode: '',
-            city: '',
-            country: ''
+            street: event ? event.address.street : '',
+            number: event ? event.address.number : '',
+            zipcode: event ? event.address.zipcode : '',
+            city: event ? event.address.city : '',
+            country: event ? event.address.country : ''
         },
-        date: '',
-        organizer: ''
+        date: event ? event.date : '',
+        organizer: event ? event.organizer : ''
     });
 
 
     const [loadingImage, setLoadingImage] = useState(false)
-
-
-    useEffect(() => {
-        // Popola il formData con i dati dell'evento passato come prop
-        setEventData(event);
-    }, [event]);
-
 
     const handleInputChange = e => {
 
@@ -73,6 +67,14 @@ function EditEventForm({ event }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (event) {
+
+            eventsService
+                .editEvent(event._id, eventData)
+                .then(() => fireFinalActions())
+                .catch(err => console.log(err))
+        }
     };
 
 

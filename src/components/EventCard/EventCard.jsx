@@ -10,17 +10,15 @@ const EventCard = ({ _id, title, icon, description, address }) => {
                     <Card.Body>
                         <img variant="top" src={icon} height='50px' width='50px' />
                         <Card.Title>{title}</Card.Title>
+                        <hr />
                         <Card.Text>
-                            {description}
-                            <hr />
-                            {address.street}
-                            <hr />
-                            {address.number}
-                            <hr />
-                            {address.zipcode}
-                            <hr />
-                            {address.city}
-
+                            <ul>
+                                <li>{description}</li>
+                                <li>{address.street}</li>
+                                <li>{address.number}</li>
+                                <li>{address.zipcode}</li>
+                                <li>{address.city}</li>
+                            </ul>
                             <Link className={'btn btn-outline-dark nodeco'} to={`/getOneEvent/${_id}`}>See details</Link>
                         </Card.Text>
                     </Card.Body>

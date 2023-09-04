@@ -4,12 +4,19 @@ import EventsList from '../../components/EventsList/EventsList'
 import NewEventForm from '../../components/NewEventForm/NewEventForm'
 import { AuthContext } from '../../contexts/auth.context'
 import { useContext } from 'react'
+import { useNavigate } from 'react-router'
 
 
 const EventPage = () => {
 
     const [showModal, setShowModal] = useState(false)
     const { loggedUser, logout } = useContext(AuthContext)
+
+    const navigate = useNavigate()
+
+    const fireFinalActions = () => {
+        navigate(`/creative/${loggedUser._id}`)
+    }
 
     return (
         <>
@@ -27,9 +34,9 @@ const EventPage = () => {
                 <Modal.Header closeButton>
                     <Modal.Title>Add an event</Modal.Title>
                 </Modal.Header>
-                {/* <Modal.Body>
+                <Modal.Body>
                     <NewEventForm fireFinalActions={fireFinalActions} />
-                </Modal.Body> */}
+                </Modal.Body>
             </Modal>
         </>
     )
