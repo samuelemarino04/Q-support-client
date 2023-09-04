@@ -75,6 +75,7 @@ const NewEventForm = ({ fireFinalActions }) => {
             .catch(err => console.log(err))
     }
 
+
     return (
         <div className="NewEventForm">
             <Form onSubmit={handleEventSubmit}>

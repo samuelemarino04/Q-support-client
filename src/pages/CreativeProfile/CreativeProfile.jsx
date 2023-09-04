@@ -6,16 +6,20 @@ import { useEffect, useState, useContext, AuthContext } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
 import uploadServices from '../../services/upload.services';
+import eventsService from '../../services/events.services';
 import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage'
+import CreativeEvents from '../../components/CreativeEvents/CreativeEvents';
+import CreativeEventsPage from '../CreativeEventsPage/CreativeEventsPage';
 
 
-const CreativeProfile = () => {
+const CreativeProfile = ({ owner_id }) => {
 
     const { user_id } = useParams()
 
     const [creative, setCreative] = useState({})
 
     // const { loggedUser, logout } = useContext(AuthContext)
+
 
 
 
@@ -29,6 +33,7 @@ const CreativeProfile = () => {
             .then(({ data }) => setCreative(data))
             .catch(err => console.log(err))
     }
+
 
     const handleFormSubmit = e => {
 
@@ -105,7 +110,7 @@ const CreativeProfile = () => {
                     >
 
                         <Tab eventKey="Work" title="Work">
-                            <div className="work-content" key={creative.username}>
+                            <div className="work-content" key={creative._id}>
                                 <header>
                                     {creative.username}
                                     <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
@@ -155,12 +160,15 @@ const CreativeProfile = () => {
                             Tab content for work, gallery of images, music etc.
                         </Tab>
 
-                        {/* <Tab eventKey="contact" title="Open Projects" disabled>
-                    Tab content for Contact
-                </Tab>
-                <Tab eventKey="contact" title="Collaborative projects" disabled>
+                        <Tab eventKey="Events" title="Events">
+                            Tab content for your programmed events
+                            <CreativeEventsPage creative={creative} owner_id={owner_id} />
+
+                        </Tab>
+                        {/* {/* <Tab eventKey="contact" title="Open Projects" disabled>
                     Tab content for Contact
                 </Tab> */}
+
                     </Tabs >
 
                 </Container >
