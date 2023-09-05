@@ -2,7 +2,7 @@ import { Button, Container, Form } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useParams, Link } from "react-router-dom"
-import { useEffect, useState, useContext, AuthContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
 import uploadServices from '../../services/upload.services';
@@ -10,6 +10,8 @@ import eventsService from '../../services/events.services';
 import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage'
 import CreativeEvents from '../../components/CreativeEvents/CreativeEvents';
 import CreativeEventsPage from '../CreativeEventsPage/CreativeEventsPage';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/auth.context'
 
 
 const CreativeProfile = ({ owner_id }) => {
@@ -18,8 +20,9 @@ const CreativeProfile = ({ owner_id }) => {
 
     const [creative, setCreative] = useState({})
 
-    // const { loggedUser, logout } = useContext(AuthContext)
+    const navigate = useNavigate()
 
+    const { loggedUser, logout } = useContext(AuthContext)
 
 
 
@@ -83,17 +86,17 @@ const CreativeProfile = ({ owner_id }) => {
             .catch(err => console.log(err))
     }
 
+    const handleDeleteUser = () => {
 
-    // const handleDeleteUser = () => {
+        userService
+            .deleteUser(user_id)
+            .then(() => {
+                logout()
+                navigate('/')
+            })
+            .catch(err => console.log(err))
+    }
 
-    //     userService
-    //         .deleteUser(user_id)
-    //         .then(() => logout)
-    //         .catch(err => {
-    //             console.log(err);
-    //             setIsLoading(false);
-    //         })
-    // }
     return (
         !creative ?
             <Loader />
@@ -101,6 +104,7 @@ const CreativeProfile = ({ owner_id }) => {
             <>
                 <Link className={'btn btn-outline-dark nodeco'} to={`/getSubscriptionsByOwner/${user_id}`}>Become a Patron!</Link>
 
+                <Button variant="dark" onClick={handleDeleteUser}>Delete Profile</Button>
                 <Container>
 
                     <Tabs

@@ -30,10 +30,10 @@ class UserService {
         return this.api.post(`/saveUser`, userData)
     }
 
-    // deleteUser(user_id) {
-    //     console.log("este es el user id", user_id)
-    //     return this.api.delete(`/deleteUser/${user_id}`)
-    // }
+    deleteUser(user_id) {
+        //     console.log("este es el user id", user_id)
+        return this.api.delete(`/deleteUser/${user_id}`)
+    }
 
     // editProfile(user_id, user) {
     //     return this.api.put(`/${user_id}/editProfile`, user)
