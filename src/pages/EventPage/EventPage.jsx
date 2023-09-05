@@ -5,6 +5,7 @@ import NewEventForm from '../../components/NewEventForm/NewEventForm'
 import { AuthContext } from '../../contexts/auth.context'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router'
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 
 const EventPage = () => {
@@ -19,6 +20,7 @@ const EventPage = () => {
     }
 
     return (
+
         <>
             <Container>
                 {

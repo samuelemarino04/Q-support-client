@@ -1,4 +1,4 @@
-import { Button, Container, Form } from 'react-bootstrap'
+import { Button, Container, Form, Modal, } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useParams, Link } from "react-router-dom"
@@ -6,25 +6,20 @@ import { useEffect, useState, useContext } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
 import uploadServices from '../../services/upload.services';
-import eventsService from '../../services/events.services';
 import SubscriptionsPage from '../SubscriptionsPage/SubscriptionsPage'
-import CreativeEvents from '../../components/CreativeEvents/CreativeEvents';
 import CreativeEventsPage from '../CreativeEventsPage/CreativeEventsPage';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth.context'
+import SignupForm from '../../components/SignupForm/SignupForm';
 
 
-const CreativeProfile = ({ owner_id }) => {
+const CreativeProfile = () => {
 
     const { user_id } = useParams()
-
     const [creative, setCreative] = useState({})
-
     const navigate = useNavigate()
-
     const { loggedUser, logout } = useContext(AuthContext)
-
-
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         loadCreativeDetails()
@@ -36,7 +31,6 @@ const CreativeProfile = ({ owner_id }) => {
             .then(({ data }) => setCreative(data))
             .catch(err => console.log(err))
     }
-
 
     const handleFormSubmit = e => {
 
@@ -51,8 +45,6 @@ const CreativeProfile = ({ owner_id }) => {
                 setCreative({ ...creative, images })
             })
             .catch(err => console.log(err))
-
-
     }
 
     const handleRemoveSubmit = (eachImage) => e => {
@@ -62,13 +54,11 @@ const CreativeProfile = ({ owner_id }) => {
         userService
             .removePhotoCreative({ images: eachImage })
             .then(({ data }) => {
-                console.log(data)
                 const updatedImages = [...creative.images]
                 setCreative({ ...creative, images: updatedImages })
             })
             .catch(err => console.log(err))
     }
-
 
     const handleFileUpload = e => {
 
@@ -102,7 +92,7 @@ const CreativeProfile = ({ owner_id }) => {
             <Loader />
             :
             <>
-                <Link className={'btn btn-outline-dark nodeco'} to={`/getSubscriptionsByOwner/${user_id}`}>Become a Patron!</Link>
+                <Button variant="dark" onClick={() => setShowModal(true)}>Edit profile</Button>
 
                 <Button variant="dark" onClick={handleDeleteUser}>Delete Profile</Button>
                 <Container>
@@ -128,9 +118,11 @@ const CreativeProfile = ({ owner_id }) => {
                                                 <>
                                                     <Container>
 
-                                                        <img key={eachImage} src={eachImage} alt="image" style={{ height: '200px', width: '150px' }} />
+                                                        <img key={eachImage} src={eachImage} alt="image"
+                                                            style={{ height: '200px', width: '150px' }} />
                                                         <Form onSubmit={handleRemoveSubmit(eachImage)}>
-                                                            <Button variant='dark' type='submit' >delete image</Button>
+                                                            <Button variant='dark' type='submit' >
+                                                                delete image</Button>
                                                         </Form>
                                                     </Container>
 
@@ -142,10 +134,6 @@ const CreativeProfile = ({ owner_id }) => {
                                         ''
                                 }
                             </div>
-
-
-
-                            {/* <AddWorkImageForm /> */}
 
                             <Form onSubmit={handleFormSubmit}>
                                 <Form.Control type="file" multiple onChange={handleFileUpload}>
@@ -166,16 +154,21 @@ const CreativeProfile = ({ owner_id }) => {
 
                         <Tab eventKey="Events" title="Events">
                             Tab content for your programmed events
-                            <CreativeEventsPage creative={creative} owner_id={owner_id} />
+                            <CreativeEventsPage creative={creative} owner_id={user_id} />
 
                         </Tab>
                         {/* {/* <Tab eventKey="contact" title="Open Projects" disabled>
                     Tab content for Contact
                 </Tab> */}
-
                     </Tabs >
-
                 </Container >
+
+                <Modal show={showModal} onHide={() => { setShowModal(false) }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit my profile</Modal.Title>
+                    </Modal.Header>
+                    <SignupForm setShowModal={setShowModal} creative={creative} />
+                </Modal>
             </>
     )
 }

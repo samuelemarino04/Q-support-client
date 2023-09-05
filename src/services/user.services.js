@@ -35,16 +35,20 @@ class UserService {
         return this.api.delete(`/deleteUser/${user_id}`)
     }
 
-    // editProfile(user_id, user) {
-    //     return this.api.put(`/${user_id}/editProfile`, user)
-    // }
+    editProfile(user_id, signupData) {
+        return this.api.put(`/editProfile/${user_id}`, signupData)
+    }
 
-    editCreative(userData, id) {
-        return this.api.post(`/editCreative/${id}`, userData)
+    editCreative(_id, userData) {
+        return this.api.post(`/editCreative/${_id}`, userData)
     }
 
     removePhotoCreative(images) {
         return this.api.post(`/removePhotoCreative`, images)
+    }
+
+    getUserSubscriptions(_id) {
+        return this.api.get(`/userSubscriptions/${_id}`)
     }
 }
 const userService = new UserService()
