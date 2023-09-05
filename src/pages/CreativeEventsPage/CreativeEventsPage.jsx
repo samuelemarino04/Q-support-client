@@ -6,7 +6,7 @@ import eventsService from '../../services/events.services'
 const CreativeEventsPage = ({ creative, owner_id }) => {
 
     const [events, setEvents] = useState()
-    console.log(events)
+
     useEffect(() => {
         loadEvents()
     }, [])
@@ -17,7 +17,6 @@ const CreativeEventsPage = ({ creative, owner_id }) => {
             .getEventsByOwner({ owner_id })
             .then(({ data }) => setEvents(data))
             .catch(err => console.log(err))
-        console.log(events)
     }
 
     return (

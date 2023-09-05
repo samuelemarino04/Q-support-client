@@ -5,7 +5,6 @@ import EventCard from '../EventCard/EventCard'
 
 const CreativeEvents = ({ events }) => {
 
-    console.log('first----------', events)
     return (
         !events ?
 

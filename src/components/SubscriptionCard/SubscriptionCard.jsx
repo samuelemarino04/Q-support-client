@@ -1,7 +1,7 @@
 
 import { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth.context';
 import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
 import { Button, Modal } from 'react-bootstrap';
@@ -9,18 +9,17 @@ import subscriptionService from '../../services/subscription.services';
 
 
 const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner }) => {
+
     const { loggedUser } = useContext(AuthContext)
-
     const [hasJoined, setHasJoined] = useState(false)
-
     const [showModal, setShowModal] = useState(false)
-
+    const navigate = useNavigate()
 
     const handleDeleteSubscription = () => {
 
         subscriptionService
             .deleteSubscription(_id)
-            .then(() => Navigate(`/creative/${owner}`))
+            .then(() => navigate(`/creative/${owner}`))
             .catch(err => console.log(err))
     }
 
@@ -29,7 +28,6 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
         subscriptionService
             .subscribe(_id)
             .then(() => {
-
                 setHasJoined(true)
             })
     }
@@ -67,17 +65,24 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                         Info: {description}
                     </Card.Text>
 
-                    {loggedUser?._id !== owner && !hasJoined ? <Button variant="dark" size='sm' onClick={handleSubscribe}>Join</Button>
+                    {loggedUser?._id !== owner ?
+
+                        clients.includes(loggedUser?._id) ?
+                            <Button variant="dark" size='sm' onClick={handleUnsubscribe}>Leave</Button>
+                            :
+                            < Button variant="dark" size='sm' onClick={handleSubscribe}>Join</Button>
                         :
-                        <Button variant="dark" size='sm' onClick={handleUnsubscribe}>Leave</Button>}
+                        null
+                    }
 
                     {loggedUser?._id === owner &&
                         <div>
                             <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Edit</Button>
                             <Button variant="dark" size='sm' onClick={handleDeleteSubscription}>Delete</Button>
-                        </div>}
+                        </div>
+                    }
 
-                </Card.Body>
+                </Card.Body >
             </Card >
 
             <Modal show={showModal} onHide={() => { setShowModal(false) }}>
