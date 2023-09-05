@@ -2,7 +2,7 @@ import { Col, Card, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 
-const EventCard = ({ _id, title, icon, description, address }) => {
+const EventCard = ({ _id, title, icon, description, address, owner }) => {
     return (
         <Row xs={1} md={2} className="g-4">
             <Col>

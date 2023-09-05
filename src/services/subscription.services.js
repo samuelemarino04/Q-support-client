@@ -36,13 +36,11 @@ class SubscriptionService {
     }
 
     editSubscription(subscription_id, subscriptionData) {
-        console.log("este es el id de la subscripción-----------", subscription_id)
 
         return this.api.put(`/editSubscription/${subscription_id}`, subscriptionData)
     }
 
     deleteSubscription(subscription_id) {
-        console.log("este es el id de la subscripción-----------", subscription_id)
         return this.api.delete(`/deleteSubscription/${subscription_id}`)
     }
 

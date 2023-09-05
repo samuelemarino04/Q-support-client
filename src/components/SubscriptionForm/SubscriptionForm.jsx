@@ -30,8 +30,6 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
         e.preventDefault();
 
         if (subscription) {
-            console.log("esta es la subscription original  que le paso al editSubscription", subscription)
-            console.log("esta es la subscripcion editada que le paso al editSubscription", formData)
             subscriptionService
                 .editSubscription(subscription._id, formData)
                 .then(() => setShowModal(false))

@@ -12,16 +12,13 @@ import CreativeEvents from '../../components/CreativeEvents/CreativeEvents';
 import CreativeEventsPage from '../CreativeEventsPage/CreativeEventsPage';
 
 
-const CreativeProfile = ({ owner_id }) => {
+const CreativeProfile = () => {
 
     const { user_id } = useParams()
 
     const [creative, setCreative] = useState({})
 
     // const { loggedUser, logout } = useContext(AuthContext)
-
-
-
 
     useEffect(() => {
         loadCreativeDetails()
@@ -84,16 +81,6 @@ const CreativeProfile = ({ owner_id }) => {
     }
 
 
-    // const handleDeleteUser = () => {
-
-    //     userService
-    //         .deleteUser(user_id)
-    //         .then(() => logout)
-    //         .catch(err => {
-    //             console.log(err);
-    //             setIsLoading(false);
-    //         })
-    // }
     return (
         !creative ?
             <Loader />
@@ -162,7 +149,7 @@ const CreativeProfile = ({ owner_id }) => {
 
                         <Tab eventKey="Events" title="Events">
                             Tab content for your programmed events
-                            <CreativeEventsPage creative={creative} owner_id={owner_id} />
+                            <CreativeEventsPage creative={creative} owner_id={user_id} />
 
                         </Tab>
                         {/* {/* <Tab eventKey="contact" title="Open Projects" disabled>
