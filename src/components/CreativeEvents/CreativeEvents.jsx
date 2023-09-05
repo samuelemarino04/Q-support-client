@@ -22,7 +22,6 @@ const CreativeEvents = ({ events }) => {
 
 
     )
-    console.log(events)
 }
 
 export default CreativeEvents
