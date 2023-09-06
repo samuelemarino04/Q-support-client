@@ -5,6 +5,7 @@ import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
 import { Button, Modal } from 'react-bootstrap';
 import subscriptionService from '../../services/subscription.services';
 import PaymentForm from '../PaymentForm/PaymentForm';
+import formatCustomDateTime from '../../utils/date-util';
 
 
 const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner, setSubscriptions, loadSubscriptions }) => {
