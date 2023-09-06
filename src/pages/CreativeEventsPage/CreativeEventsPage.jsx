@@ -1,9 +1,9 @@
-import { Button, Card, Container, Modal } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import CreativeEvents from '../../components/CreativeEvents/CreativeEvents'
 import eventsService from '../../services/events.services'
 
-const CreativeEventsPage = ({ creative, owner_id }) => {
+const CreativeEventsPage = ({ owner_id }) => {
 
     const [events, setEvents] = useState()
 

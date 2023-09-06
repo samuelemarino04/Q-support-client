@@ -33,7 +33,7 @@ const Navigation = () => {
                             </>
                         }
                         {
-                            loggedUser?.role === "USER" &&
+                            loggedUser?.role === "PATRON" &&
                             <>
                                 <Link to={`/user/${loggedUser._id}`} className='nav-link'>My profile</Link>
                                 <span className='nav-link' onClick={logout}>Logout</span>
