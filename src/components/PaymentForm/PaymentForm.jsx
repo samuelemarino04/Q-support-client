@@ -2,6 +2,8 @@ import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
 import React, { useContext, useState } from 'react'
 import userService from '../../services/user.services'
 import { AuthContext } from '../../contexts/auth.context'
+import FormError from "../FormError/FormError";
+
 
 const PaymentForm = ({ clients, setShowPaymentModal }) => {
 
@@ -30,6 +32,7 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
         expiringDate: '',
         startDate: '',
     })
+
 
     const handleInputChange = (e) => {
         const { value, name } = e.currentTarget
@@ -101,10 +104,13 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                         placeholder="CVV"
                     />
                 </FloatingLabel>
+
+                {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+
+                <Button variant="dark" type="submit" className='mt-2'>
+                    Submit Payment
+                </Button>
             </Container>
-            <Button variant="dark" type="submit" className='mt-2'>
-                Submit Payment
-            </Button>
         </Form >
     )
 }

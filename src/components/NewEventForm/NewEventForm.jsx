@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import eventsService from "../../services/events.services";
 import uploadServices from "../../services/upload.services"
 import MapsAutocomplete from "../MapsAutocomplete/MapsAutocomplete";
+import FormError from "../FormError/FormError";
 
 const NewEventForm = ({ fireFinalActions }) => {
 
@@ -16,6 +17,8 @@ const NewEventForm = ({ fireFinalActions }) => {
         date: '',
         organizer: ''
     })
+
+    const [errors, setErrors] = useState([])
 
 
     const [loadingImage, setLoadingImage] = useState(false)
@@ -57,7 +60,7 @@ const NewEventForm = ({ fireFinalActions }) => {
             .then(() => {
                 fireFinalActions()
             })
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 
@@ -102,6 +105,9 @@ const NewEventForm = ({ fireFinalActions }) => {
                         name="date"
                         onChange={handleInputChange} />
                 </Form.Group>
+
+                {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+
                 <Button variant="dark" type="submit" className='mt-2'>
                     Submit Event
                 </Button>

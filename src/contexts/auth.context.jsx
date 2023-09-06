@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import authService from './../services/auth.services'
+import { useNavigate } from "react-router"
 
 const AuthContext = createContext()
 
@@ -7,6 +8,7 @@ function AuthProviderWrapper(props) {
 
     const [loggedUser, setLoggedUser] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const navigate = useNavigate()
 
 
     const authenticateUser = () => {
@@ -32,6 +34,7 @@ function AuthProviderWrapper(props) {
         localStorage.removeItem('authToken')
         setLoggedUser(null)
         setIsLoading(false)
+        navigate('/login')
     }
 
 

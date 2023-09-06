@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import subscriptionService from '../../services/subscription.services';
 import uploadServices from '../../services/upload.services';
 import * as Constants from '../../consts/consts'
-
+import FormError from "../FormError/FormError";
 
 
 const emptySubscriptionForm = {
@@ -14,14 +14,17 @@ const emptySubscriptionForm = {
     currency: '',
     paymentFrequency: '',
     image: '',
-
 }
+
 
 const SubscriptionForm = ({ setShowEditModal, subscription }) => {
 
-    const [formData, setFormData] = useState(emptySubscriptionForm)
 
+    const [errors, setErrors] = useState([])
+    const [formData, setFormData] = useState(emptySubscriptionForm)
     const [loadingImage, setLoadingImage] = useState(false)
+
+    console.log(emptySubscriptionForm)
 
     useEffect(() => {
         subscription && SubscriptionEditing()
@@ -46,7 +49,7 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
         subscriptionService
             .saveSubscription(formData)
             .then(() => setShowEditModal(false))
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 
@@ -149,6 +152,9 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
                         ))}
                     </Form.Control>
                 </FloatingLabel>
+
+                {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+
                 <div className="d-grid">
                     <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? 'Loading Image' : 'Submit'}</Button>
                 </div>
