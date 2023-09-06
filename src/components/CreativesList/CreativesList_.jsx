@@ -16,19 +16,21 @@ const CreativesList = () => {
 
     useEffect(() => {
         loadCreatives()
-    }, [searchQuery])
+    }, [searchQuery, selectedCategories])
+
+    console.log("estas son las categorias selecionadas", selectedCategories)
 
     const loadCreatives = () => {
+        const queryParams = {
+            searchQuery,
+            category: selectedCategories,
+        }
 
-
-        Promise.all([
-            creativeService.getFilteredCreatives(searchQuery),
-            creativeService.getCreativesByCategory(selectedCategories)
-        ])
-
-            .then(([{ data }, categoryResponse]) => {
+        creativeService
+            .getFilteredCreatives(queryParams)
+            .then(({ data }) =>
                 setFilteredCreatives(data)
-            })
+            )
     }
 
     const handleInputChange = (e) => {
@@ -53,17 +55,18 @@ const CreativesList = () => {
             <>
                 <Row className="align-items-center">
                     <Col md={6}>
+                        <h3>FILTER CREATIVES</h3>
                         <input
                             type="text"
                             value={searchQuery}
                             onChange={handleInputChange}
-                            placeholder='Type to search'
+                            placeholder='Search...'
                             className="form-control"
                         />
                     </Col>
                     <Col md={6} className="d-flex justify-content-end">
                         <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">Find by Category</Dropdown.Toggle>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">Creatives by Category</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Form>
                                     {Constants.CREATIVE_CATEGORIES.map((category) => (

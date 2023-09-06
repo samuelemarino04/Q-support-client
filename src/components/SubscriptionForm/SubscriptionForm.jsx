@@ -17,7 +17,7 @@ const emptySubscriptionForm = {
     image: '',
 }
 
-const SubscriptionForm = ({ setShowModal, subscription }) => {
+const SubscriptionForm = ({ setShowEditModal, subscription }) => {
 
     const [formData, setFormData] = useState(emptySubscriptionForm)
     const [loadingImage, setLoadingImage] = useState(false)
@@ -32,9 +32,6 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
         setFormData({ ...formData, [name]: value })
     }
 
-    console.log("este es mi formdata", formData)
-    console.log("este es mi subscription", subscription)
-
 
     const SubscriptionEditing = () => {
         subscriptionService
@@ -46,7 +43,7 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
     const handleSubmit = (e) => {
         subscriptionService
             .saveSubscription(formData)
-            .then(() => setShowModal(false))
+            .then(() => setShowEditModal(false))
             .catch(err => console.log(err))
     }
 

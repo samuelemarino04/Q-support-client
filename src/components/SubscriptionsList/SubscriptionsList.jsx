@@ -2,7 +2,7 @@ import SubscriptionCard from '../SubscriptionCard/SubscriptionCard'
 import { Row } from 'react-bootstrap'
 import Loader from '../Loader/Loader'
 
-const SubscriptionsList = ({ subscriptions }) => {
+const SubscriptionsList = ({ subscriptions, setSubscriptions }) => {
 
     return (
         !subscriptions ?
@@ -11,7 +11,7 @@ const SubscriptionsList = ({ subscriptions }) => {
             <>
                 <Row>
                     {
-                        subscriptions.map(elm => <SubscriptionCard key={elm._id} {...elm} />)
+                        subscriptions.map(elm => <SubscriptionCard setSubscriptions={setSubscriptions} key={elm._id} {...elm} />)
                     }
                 </Row>
             </>

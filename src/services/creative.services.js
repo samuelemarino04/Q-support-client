@@ -22,9 +22,10 @@ class CreativeService {
         return this.api.get(`/getAllCreatives`)
     }
 
-    getFilteredCreatives(searchQuery) {
+    getFilteredCreatives(queryParams) {
+        console.log("esto es lo que me llega al servicio", queryParams)
         return this.api.get(`/getFilteredCreatives/`, {
-            params: { searchQuery }
+            params: queryParams
         })
     }
 

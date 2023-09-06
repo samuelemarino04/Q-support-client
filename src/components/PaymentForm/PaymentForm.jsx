@@ -1,140 +1,88 @@
+import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
+import React, { useContext, useState } from 'react'
+import userService from '../../services/user.services'
+import { AuthContext } from '../../contexts/auth.context'
 
-import { Container, FloatingLabel, Form } from 'react-bootstrap';
-import React, { useState } from 'react';
-import subscriptionService from '../../services/subscription.services';
-import { useNavigate, useParams } from "react-router-dom"
+const PaymentForm = ({ clients, setShowPaymentModal }) => {
 
-const PaymentForm = () => {
-
+    const { loggedUser } = useContext(AuthContext)
     const [formData, setFormData] = useState({
         cardHolder: '',
-        paymentMethod: '',
         cardNumber: '',
         cvv: '',
         expiringDate: '',
         startDate: '',
+    })
 
-    });
-
-    const navigate = useNavigate()
 
     const handleInputChange = (e) => {
         const { value, name } = e.currentTarget;
         setFormData({ ...formData, [name]: value });
     }
 
+
     const handleSubmit = (e) => {
 
-        e.preventDefault();
+        e.preventDefault()
 
-        subscriptionService
-            .saveSubscription(formData)
-            .then(() => navigate(`/getSubscriptionsByOwner/${owner_id}`))
+        userService
+            .editCardInfo(loggedUser._id, formData)
+            .then(() => {
+                clients.push(loggedUser._id)
+                return setShowPaymentModal(false)
+            })
             .catch(err => console.log(err))
+
     }
 
     return (
         <Form onSubmit={handleSubmit}>
             <Container>
-                <FloatingLabel controlId="floatingInputGrid" label="@Creative" className="mb-3">
+                <p>aqui me traigo el objeto subscription y pinto todos los detallitos y lo dejo todo bonito jejeXD</p>
+                <FloatingLabel controlId="floatingInputGrid" label="cardHolder" className="mb-3">
                     <Form.Control
                         type="text"
-                        name="creative"
-                        value={formData.creative}
+                        name="cardHolder"
+                        value={formData.cardHolder}
                         onChange={handleInputChange}
-                        placeholder="Creative"
+                        placeholder="CardHolder"
                     />
                 </FloatingLabel>
-
-                <FloatingLabel controlId="floatingInputGrid" label="Start Date" className="mb-3">
+                <FloatingLabel controlId="floatingInputGrid" label="cardNumber" className="mb-3">
                     <Form.Control
-                        type="Date"
-                        name="startDate"
-                        value={formData.startDate}
+                        type="Number"
+                        name="cardNumber"
+                        value={formData.cardNumber}
                         onChange={handleInputChange}
-                        placeholder="Start Date"
+                        placeholder="cardNumber"
                     />
                 </FloatingLabel>
 
-                <FloatingLabel controlId="floatingInputGrid" label="End Date" className="mb-3">
+                <FloatingLabel controlId="floatingInputGrid" label="expiringDate" className="mb-3">
                     <Form.Control
-                        type="Date"
-                        name="endDate"
-                        value={formData.endDate}
+                        type="Number"
+                        name="expiringDate"
+                        value={formData.expiringDate}
                         onChange={handleInputChange}
-                        placeholder="End Date"
+                        placeholder="expiringDate"
                     />
                 </FloatingLabel>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label as="legend" column sm={2}>
-                        Payment method
-                    </Form.Label>
-                    <Form.Check
-                        type="radio"
-                        label="Debit card/Credit Card"
-                        name="paymentMethod"
-                        value="Debit card/Credit Card"
-                        checked={formData.paymentMethod === 'Debit card/Credit Card'}
+                <FloatingLabel controlId="floatingInputGrid" label="CVV" className="m-2 w-25">
+                    <Form.Control
+                        type="text"
+                        name="cvv"
+                        value={formData.cvv}
                         onChange={handleInputChange}
-                        id="formHorizontalRadios1"
+                        placeholder="CVV"
                     />
-                    <Form.Check
-                        type="radio"
-                        label="Paypal"
-                        name="paymentMethod"
-                        value="Paypal"
-                        onChange={handleInputChange}
-                        id="formHorizontalRadios2"
-                    />
-                    <Form.Check
-                        type="radio"
-                        label="Apple Pay"
-                        name="paymentMethod"
-                        value="Apple Pay"
-                        onChange={handleInputChange}
-                        id="formHorizontalRadios3"
-                    />
-                </Form.Group>
-                {formData.paymentMethod === 'Debit card/Credit Card' && (
-                    <>
-                        <Container className='d-flex'>
-                            <FloatingLabel controlId="floatingInputGrid" label="Card Holder" className="m-2 w-25">
-                                <Form.Control
-                                    type="text"
-                                    name="cardHolder"
-                                    value={formData.cardHolder}
-                                    onChange={handleInputChange}
-                                    placeholder="Name"
-                                />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="floatingInputGrid" label="Card Number" className="m-2 w-25">
-                                <Form.Control
-                                    type="text"
-                                    name="cardNumber"
-                                    value={formData.cardNumber}
-                                    onChange={handleInputChange}
-                                    placeholder="Credit Card Number"
-                                />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="floatingInputGrid" label="CVV" className="m-2 w-25">
-                                <Form.Control
-                                    type="text"
-                                    name="cvv"
-                                    value={formData.cvv}
-                                    onChange={handleInputChange}
-                                    placeholder="CVV"
-                                />
-                            </FloatingLabel>
-                        </Container>
-                    </>
-                )}
-                <Button variant="dark" type="submit" className='mt-2'>
-                    Submit Payment
-                </Button>
+                </FloatingLabel>
             </Container>
+            <Button variant="dark" type="submit" className='mt-2'>
+                Submit Payment
+            </Button>
         </Form >
-    );
-};
+    )
+}
 
 export default PaymentForm

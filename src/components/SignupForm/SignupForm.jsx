@@ -17,6 +17,9 @@ const SignupForm = ({ setShowModal }) => {
         loggedUser && editingUser()
     }, [])
 
+    //EXTRA? sacar del signup todo excepto el correo y la contraseña
+    // y llevarlo a otra vista en la que rellenar todos los fields
+
     const emptySignupForm = {
         username: '',
         birth: '',
@@ -25,7 +28,8 @@ const SignupForm = ({ setShowModal }) => {
         category: '',
         email: '',
         password: '',
-        pronouns: ''
+        pronouns: '',
+        aboutInfo: '',
     }
     const [signupData, setSignupData] = useState(emptySignupForm)
 
@@ -91,8 +95,6 @@ const SignupForm = ({ setShowModal }) => {
             .catch(err => console.log(err))
     }
 
-    console.log("este es el avatr del usuario", signupData)
-
     return (
 
         <div>
@@ -136,7 +138,7 @@ const SignupForm = ({ setShowModal }) => {
                 {loggedUser?.role === "CREATIVE" || !loggedUser &&
                     < Form.Group className="mb-3" controlId="category">
                         <Form.Label>Select your category</Form.Label>
-                        <Form.Control disabled={signupData.role === "USER"} as="select"
+                        <Form.Control as="select"
                             value={signupData.category} onChange={handleInputChange} name="category">
                             {Constants.CREATIVE_CATEGORIES.map((category, index) => (
                                 <option key={index} value={category}>{category}</option>
@@ -156,16 +158,22 @@ const SignupForm = ({ setShowModal }) => {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" value={signupData.password}
-                                onChange={handleInputChange} name="password" />
+                        <Form.Group className="mb-3" controlId="aboutInfo">
+                            <Form.Label>About info</Form.Label>
+                            <Form.Control as="textarea" rows={5} value={signupData.aboutInfo}
+                                onChange={handleInputChange} name="aboutInfo" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" value={signupData.email}
                                 onChange={handleInputChange} name="email" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="password">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" value={signupData.password}
+                                onChange={handleInputChange} name="password" />
                         </Form.Group>
                     </>}
 

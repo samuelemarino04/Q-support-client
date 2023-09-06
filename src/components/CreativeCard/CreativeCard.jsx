@@ -2,7 +2,7 @@ import { Col } from "react-bootstrap"
 import './CreativeCard.css'
 import { Link } from "react-router-dom"
 
-const CreativeCard = ({ _id, username, avatar }) => {
+const CreativeCard = ({ _id, username, avatar, category, aboutInfo }) => {
     return (
         <Col lg={{ span: 4 }} md={{ span: 6 }}>
             <div className="CreativeCard">
@@ -14,8 +14,8 @@ const CreativeCard = ({ _id, username, avatar }) => {
                     </div>
                     <div className="lower-container">
                         <h4>{username}</h4>
-                        <h3>algo</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolor neque accusantium quos ratione quo nemo quod perferendis ut, velit repudiandae quam impedit quis suscipit ducimus sint ad vel maxime.</p>
+                        <h3>{category}</h3>
+                        <p>{aboutInfo}</p>
                         <Link className={'btn btn-outline-dark nodeco'} to={`/creative/${_id}`}>Visit Profile</Link>
                     </div>
                 </div>

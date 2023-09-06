@@ -11,6 +11,7 @@ import CreativeEventsPage from '../CreativeEventsPage/CreativeEventsPage';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth.context'
 import SignupForm from '../../components/SignupForm/SignupForm';
+import AboutPage from '../AboutPage/AboutPage';
 
 
 const CreativeProfile = () => {
@@ -149,7 +150,7 @@ const CreativeProfile = () => {
                         </Tab>
 
                         <Tab eventKey="About" title="About">
-                            Tab content for work, gallery of images, music etc.
+                            <AboutPage creative={creative} />
                         </Tab>
 
                         <Tab eventKey="Events" title="Events">

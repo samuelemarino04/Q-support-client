@@ -31,7 +31,6 @@ class UserService {
     }
 
     deleteUser(user_id) {
-        //     console.log("este es el user id", user_id)
         return this.api.delete(`/deleteUser/${user_id}`)
     }
 
@@ -41,6 +40,10 @@ class UserService {
 
     editCreative(_id, userData) {
         return this.api.post(`/editCreative/${_id}`, userData)
+    }
+
+    editCardInfo(user_id, formData) {
+        return this.api.put(`/editCardInfo/${user_id}`, { formData })
     }
 
     removePhotoCreative(images) {
