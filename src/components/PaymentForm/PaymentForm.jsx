@@ -7,7 +7,6 @@ import FormError from "../FormError/FormError";
 
 const PaymentForm = ({ clients, setShowPaymentModal }) => {
 
-    const [errors, setErrors] = useState([])
     const { loggedUser } = useContext(AuthContext)
 
     const formatDate = (inputDate) => {
@@ -58,11 +57,7 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                 clients.push(loggedUser._id)
                 return setShowPaymentModal(false)
             })
-<<<<<<< HEAD
             .catch(err => setErrors(err.response.data.errorMessages))
-=======
-            .catch(err => setErrors(err.response.data.errosMessages))
->>>>>>> 94ed2f936804c727933bdfe83eb1e6020f26e6ce
 
     }
 

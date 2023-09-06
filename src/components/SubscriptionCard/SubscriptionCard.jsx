@@ -8,11 +8,7 @@ import PaymentForm from '../PaymentForm/PaymentForm';
 import formatCustomDateTime from '../../utils/date-util';
 
 
-<<<<<<< HEAD
-const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner, setSubscriptions, startDate, endDate }) => {
-=======
 const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner, setSubscriptions, loadSubscriptions }) => {
->>>>>>> 94ed2f936804c727933bdfe83eb1e6020f26e6ce
 
     const { loggedUser } = useContext(AuthContext)
     const [hasJoined, setHasJoined] = useState(clients.includes(loggedUser?._id))
@@ -71,13 +67,6 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                     <Card.Text>
                         Info: {description}
                     </Card.Text>
-                    <Card.Text>
-                        Start date: {formatCustomDateTime(startDate)}
-                    </Card.Text>
-                    <Card.Text>
-                        End date: {formatCustomDateTime(endDate)}
-                    </Card.Text>
-
 
                     {loggedUser?._id !== owner ?
 

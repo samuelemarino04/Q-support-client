@@ -105,24 +105,6 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
                         placeholder="Description"
                     />
                 </FloatingLabel>
-                <FloatingLabel controlId="floatingInputGrid" label="startDate" className="mb-3">
-                    <Form.Control
-                        type="date"
-                        name="startDate"
-                        value={formData.startDate}
-                        onChange={handleInputChange}
-                        placeholder="Start date"
-                    />
-                </FloatingLabel>
-                <FloatingLabel controlId="floatingInputGrid" label="endDate" className="mb-3">
-                    <Form.Control
-                        type="date"
-                        name="endDate"
-                        value={formData.endDate}
-                        onChange={handleInputChange}
-                        placeholder="End date"
-                    />
-                </FloatingLabel>
                 <Row className="mb-3">
                     <Col md>
                         <FloatingLabel controlId="floatingInputGrid" label="Price">
