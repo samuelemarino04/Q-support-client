@@ -31,10 +31,8 @@ const SubscriptionsPage = ({ creative, owner_id }) => {
     return (
         <>
             <Container>
-                {loggedUser?._id === owner_id &&
-                    <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>new subscription</Button>
-                }
-                <SubscriptionsList subscriptions={subscriptions} creative={creative} />
+                {loggedUser?._id === owner_id && <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>new subscription</Button>}
+                <SubscriptionsList subscriptions={subscriptions} setSubscriptions={setSubscriptions} creative={creative} />
             </Container>
             <Modal show={showModal} onHide={() => { setShowModal(false) }}>
                 <Modal.Header closeButton>

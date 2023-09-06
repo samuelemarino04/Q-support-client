@@ -11,6 +11,13 @@ import userService from "../../services/user.services"
 
 const SignupForm = ({ setShowModal }) => {
 
+    useEffect(() => {
+        loggedUser && editingUser()
+    }, [])
+
+    //EXTRA? sacar del signup todo excepto el correo y la contraseña
+    // y llevarlo a otra vista en la que rellenar todos los fields
+
     const emptySignupForm = {
         username: '',
         birth: '',
@@ -19,7 +26,8 @@ const SignupForm = ({ setShowModal }) => {
         category: '',
         email: '',
         password: '',
-        pronouns: ''
+        pronouns: '',
+        aboutInfo: '',
     }
 
     const { loggedUser } = useContext(AuthContext)
@@ -92,7 +100,6 @@ const SignupForm = ({ setShowModal }) => {
             .catch(err => console.log(err))
     }
 
-
     return (
 
         <div>
@@ -156,16 +163,22 @@ const SignupForm = ({ setShowModal }) => {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" value={signupData.password}
-                                onChange={handleInputChange} name="password" />
+                        <Form.Group className="mb-3" controlId="aboutInfo">
+                            <Form.Label>About info</Form.Label>
+                            <Form.Control as="textarea" rows={5} value={signupData.aboutInfo}
+                                onChange={handleInputChange} name="aboutInfo" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" value={signupData.email}
                                 onChange={handleInputChange} name="email" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="password">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" value={signupData.password}
+                                onChange={handleInputChange} name="password" />
                         </Form.Group>
                     </>}
 

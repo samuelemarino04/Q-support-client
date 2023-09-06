@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth.context";
 import EditEventForm from "../../components/EditEventForm/EditEventForm";
 import { useContext } from "react";
+import Maps from "../../components/Maps/Maps";
 
 
 const EventDetailsPage = ({ }) => {
@@ -88,7 +89,7 @@ const EventDetailsPage = ({ }) => {
                             <ul>
                                 <li>Attenders: {event.attendees.length}</li>
                                 <li>Date: {formatCustomDateTime(event.date)}</li>
-                                <li>{event.address.street}, {event.address.number}, {event.address.zipcode}, {event.address.city}, {event.address.country},  </li>
+                                <li>{event.address}</li>
                             </ul>
                             {userJoined ? (
                                 <Button variant="dark" onClick={handleUnjoinEvent}>Unjoin Event</Button>
@@ -109,6 +110,9 @@ const EventDetailsPage = ({ }) => {
                         </Col>
                         <Col md={{ span: 4 }}>
                             <img src={event.icon} style={{ width: '100%' }} />
+                        </Col>
+                        <Col>
+                            <Maps event={event} />
                         </Col>
                     </Row>
                 </Container >

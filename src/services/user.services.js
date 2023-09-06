@@ -44,6 +44,10 @@ class UserService {
         return this.api.post(`/editCreative/${_id}`, userData)
     }
 
+    editCardInfo(user_id, formData) {
+        return this.api.put(`/editCardInfo/${user_id}`, { formData })
+    }
+
     removePhotoCreative(images) {
         return this.api.post(`/removePhotoCreative`, images)
     }

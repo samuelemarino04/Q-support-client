@@ -10,13 +10,7 @@ const EditEventPage = () => {
         icon: '',
         description: '',
         attendees: '',
-        address: {
-            street: '',
-            number: '',
-            zipcode: '',
-            city: '',
-            country: ''
-        },
+        address: '',
         date: '',
         organizer: ''
     })

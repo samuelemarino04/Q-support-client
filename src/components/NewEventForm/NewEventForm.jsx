@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import eventsService from "../../services/events.services";
 import uploadServices from "../../services/upload.services"
+import MapsAutocomplete from "../MapsAutocomplete/MapsAutocomplete";
 
 const NewEventForm = ({ fireFinalActions }) => {
 
@@ -11,13 +12,7 @@ const NewEventForm = ({ fireFinalActions }) => {
         icon: '',
         description: '',
         attendees: '',
-        address: {
-            street: '',
-            number: '',
-            zipcode: '',
-            city: '',
-            country: ''
-        },
+        address: '',
         date: '',
         organizer: ''
     })
@@ -29,20 +24,7 @@ const NewEventForm = ({ fireFinalActions }) => {
 
         const { value, name } = e.currentTarget
 
-        if (name.includes(".")) {
-
-            const [parentField, nestedField] = name.split(".")
-
-            setEventData({
-                ...eventData,
-                [parentField]: {
-                    ...eventData[parentField],
-                    [nestedField]: value
-                }
-            })
-        } else {
-            setEventData({ ...eventData, [name]: value });
-        }
+        setEventData({ ...eventData, [name]: value });
     }
 
 
@@ -104,40 +86,14 @@ const NewEventForm = ({ fireFinalActions }) => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="address">
                     <Form.Label>Address</Form.Label>
-                    <Form.Control type="text"
-                        value={eventData.address.street}
-                        name="address.street"
-                        placeholder="Street"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="number"
-                        value={eventData.address.number}
-                        name="address.number"
-                        placeholder="Number"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="text"
-                        value={eventData.address.zipcode}
-                        name="address.zipcode"
-                        placeholder="Zip Code"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="text"
-                        value={eventData.address.city}
-                        name="address.city"
-                        placeholder="City"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="text"
-                        value={eventData.address.country}
-                        name="address.country"
-                        placeholder="Country"
-                        onChange={handleInputChange}
-                    />
+                    <MapsAutocomplete eventData={eventData} setEventData={setEventData}>
+                        <Form.Control type="text"
+                            value={eventData.address}
+                            name="address"
+                            placeholder="Address"
+                            onChange={handleInputChange}
+                        />
+                    </MapsAutocomplete>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="date">
                     <Form.Label>Date</Form.Label>

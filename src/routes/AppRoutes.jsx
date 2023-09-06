@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import SignupPage from '../pages/SignupPage/SignupPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
 import NotFoundPage from '../pages/NotFoundPage'
-import NewEventPage from '../pages/Neweventpage/newEventPage'
+import PrivateRoute from './PrivateRoute'
 import SubscriptionForm from '../components/SubscriptionForm/SubscriptionForm'
 import Homepage from '../pages/Homepage/Homepage'
 import EventPage from '../pages/EventPage/EventPage'
@@ -31,7 +31,6 @@ const AppRoutes = () => {
             <Route path={'/events'} element={<EventPage />} />
             <Route path={'/events/:event_id/edit'} element={<EditEventPage />} />
             <Route path={'/getOneEvent/:event_id'} element={<EventDetailsPage />} />
-            <Route path={'/newEvent'} element={<NewEventPage />} />
             <Route path={'/getSubscriptionsByOwner/:owner_id'} element={<SubscriptionsPage />} />
             <Route path={'/getAllUsers'} element={<AllUsersPage />} />
 

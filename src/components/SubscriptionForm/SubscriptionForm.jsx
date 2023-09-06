@@ -5,22 +5,25 @@ import uploadServices from '../../services/upload.services';
 import * as Constants from '../../consts/consts'
 
 
-const SubscriptionForm = ({ setShowModal, subscription }) => {
 
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        type: '',
-        price: '',
-        currency: '',
-        paymentFrequency: '',
-        image: '',
-    })
+const emptySubscriptionForm = {
+    title: '',
+    description: '',
+    type: '',
+    price: '',
+    currency: '',
+    paymentFrequency: '',
+    image: '',
+}
+
+const SubscriptionForm = ({ setShowEditModal, subscription }) => {
+
+    const [formData, setFormData] = useState(emptySubscriptionForm)
 
     const [loadingImage, setLoadingImage] = useState(false)
 
     useEffect(() => {
-        subscription && subscriptionEditing()
+        subscription && SubscriptionEditing()
     }, [])
 
 
@@ -30,7 +33,7 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
     }
 
 
-    const subscriptionEditing = () => {
+    const SubscriptionEditing = () => {
         subscriptionService
             .getSubscriptionDetails(subscription._id)
             .then(({ data }) => setFormData(data))
@@ -41,7 +44,7 @@ const SubscriptionForm = ({ setShowModal, subscription }) => {
     const handleSubmit = (e) => {
         subscriptionService
             .saveSubscription(formData)
-            .then(() => setShowModal(false))
+            .then(() => setShowEditModal(false))
             .catch(err => console.log(err))
     }
 
