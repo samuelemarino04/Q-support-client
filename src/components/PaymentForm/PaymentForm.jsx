@@ -54,7 +54,7 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                 clients.push(loggedUser._id)
                 return setShowPaymentModal(false)
             })
-            .catch(err => setErrors(err.response.data.errosMessages))
+            .catch(err => setErrors(err.response.data.errorMessages))
 
     }
 
