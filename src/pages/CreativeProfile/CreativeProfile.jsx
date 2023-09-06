@@ -35,7 +35,7 @@ const CreativeProfile = () => {
             .catch(err => console.log(err))
     }
 
-    console.log("esto es el id del usuqario cono joder", user_id)
+
     const handleFormSubmit = e => {
 
         e.preventDefault()

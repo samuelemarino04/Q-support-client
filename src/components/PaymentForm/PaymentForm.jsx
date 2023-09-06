@@ -6,6 +6,15 @@ import { AuthContext } from '../../contexts/auth.context'
 const PaymentForm = ({ clients, setShowPaymentModal }) => {
 
     const { loggedUser } = useContext(AuthContext)
+
+    const formatDate = (inputDate) => {
+        if (inputDate.length === 4) {
+            const month = inputDate.slice(0, 2);
+            const year = inputDate.slice(2, 4);
+            return `${month}/${year}`;
+        }
+        return inputDate;
+    }
     const [formData, setFormData] = useState({
         cardHolder: '',
         cardNumber: '',
@@ -14,11 +23,25 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
         startDate: '',
     })
 
+    const [errors, setErrors] = useState({
+        cardHolder: '',
+        cardNumber: '',
+        cvv: '',
+        expiringDate: '',
+        startDate: '',
+    })
 
     const handleInputChange = (e) => {
-        const { value, name } = e.currentTarget;
-        setFormData({ ...formData, [name]: value });
+        const { value, name } = e.currentTarget
+        let formattedValue = value
+
+        if (name === 'expiringDate') {
+            formattedValue = formatDate(value.replace(/[^0-9]/g, ''));
+        }
+
+        setFormData({ ...formData, [name]: formattedValue })
     }
+
 
 
     const handleSubmit = (e) => {
@@ -31,7 +54,7 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                 clients.push(loggedUser._id)
                 return setShowPaymentModal(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errosMessages))
 
     }
 
@@ -61,11 +84,11 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
 
                 <FloatingLabel controlId="floatingInputGrid" label="expiringDate" className="mb-3">
                     <Form.Control
-                        type="Number"
+                        type="text"
                         name="expiringDate"
                         value={formData.expiringDate}
                         onChange={handleInputChange}
-                        placeholder="expiringDate"
+                        placeholder="MM/YY"
                     />
                 </FloatingLabel>
 
