@@ -2,12 +2,14 @@ import { Col } from "react-bootstrap"
 import './CreativeCard.css'
 import { Link } from "react-router-dom"
 
-const CreativeCard = ({ _id, username, avatar, category, aboutInfo }) => {
+const CreativeCard = ({ _id, username, avatar, category, aboutInfo, backgroundImage }) => {
     return (
         <Col lg={{ span: 4 }} md={{ span: 6 }}>
             <div className="CreativeCard">
                 <div className="Card">
-                    <div className="upper-container">
+                    <div className="background-image">
+                        <img src={backgroundImage} alt="background foto" />
+
                         <div className="image-container">
                             <img src={avatar} alt="#" height='100px' width='100px' />
                         </div>

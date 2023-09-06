@@ -1,4 +1,6 @@
-import { Col, Button } from "react-bootstrap"
+import { Col } from "react-bootstrap"
+import { Link } from "react-router-dom"
+
 
 const UserCard = ({ username, rol, avatar, category, email }) => {
 
@@ -16,9 +18,6 @@ const UserCard = ({ username, rol, avatar, category, email }) => {
                         <h4>{rol}</h4>
                         <h4>{category}</h4>
                         <h4>{email}</h4>
-                        <Button variant='dark' type='submit' >
-                            Delete User</Button>
-
                     </div>
                 </div>
             </div>

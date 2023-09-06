@@ -28,6 +28,7 @@ const SignupForm = ({ setShowModal }) => {
         password: '',
         pronouns: '',
         aboutInfo: '',
+        backgroundImage: ''
     }
 
     const { loggedUser } = useContext(AuthContext)
@@ -66,6 +67,26 @@ const SignupForm = ({ setShowModal }) => {
             .uploadimage(formData)
             .then(({ data }) => {
                 setSignupData({ ...signupData, avatar: data.cloudinary_url })
+                setLoadingImage(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoadingImage(false)
+            })
+    }
+
+    //subir background photo
+    const handleBackgroundUpload = e => {
+
+        setLoadingImage(true)
+
+        const formData = new FormData()
+        formData.append('imageData', e.target.files[0])
+
+        uploadServices
+            .uploadimage(formData)
+            .then(({ data }) => {
+                setSignupData({ ...signupData, backgroundImage: data.cloudinary_url })
                 setLoadingImage(false)
             })
             .catch(err => {
@@ -121,6 +142,11 @@ const SignupForm = ({ setShowModal }) => {
                 <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Avatar</Form.Label>
                     <Form.Control type="file" onChange={handleFileUpload} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="backgroundImage">
+                    <Form.Label>Background Photo</Form.Label>
+                    <Form.Control type="file" onChange={handleBackgroundUpload} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="pronouns" >

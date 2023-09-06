@@ -1,33 +1,23 @@
 import { Container, Row, Col } from 'react-bootstrap';
+import './Footer.css'
 
 const Footer = () => {
     return (
         <footer className="mt-5">
             <Container>
-                <Row>
-                    <Col>
-                        <h5>About us</h5>
-                        <ul className="list-unstyled">
-                            <li>Opción 1</li>
-                            <li>Opción 2</li>
-                            <li>Opción 3</li>
-                        </ul>
+                <Row className="justify-content-end">
+                    <Col md={4}>
+                        <section>
+                            <h5>ABOUT US</h5>
+                            <h6>Purpose</h6>
+                            <h6>Expected Behavior</h6>
+                            <h6>Privacy</h6>
+                        </section>
                     </Col>
-                    <Col>
-                        <h5>Profiles</h5>
-                        <ul className="list-unstyled">
-                            <li>Opción A</li>
-                            <li>Opción B</li>
-                            <li>Opción C</li>
-                        </ul>
-                    </Col>
-                    <Col>
-                        <h5>Columna 3</h5>
-                        <ul className="list-unstyled">
-                            <li>Opción X</li>
-                            <li>Opción Y</li>
-                            <li>Opción Z</li>
-                        </ul>
+                    <Col md={4}>
+                        <section>
+                            <h5>CONTACT</h5>
+                        </section>
                     </Col>
                 </Row>
             </Container>
@@ -36,5 +26,3 @@ const Footer = () => {
 }
 
 export default Footer;
-
-

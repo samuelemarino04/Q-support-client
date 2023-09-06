@@ -55,7 +55,7 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                     {loggedUser?._id !== owner ?
 
                         clients.includes(loggedUser?._id) ?
-                            <Button variant="dark" size='sm' onClick={handleUnsubscribe}>Cancel subscription</Button>
+                            <Button variant="dark" size='sm' >Cancel subscription</Button>
                             :
                             <Button variant="dark" size='sm' onClick={() => setShowPaymentModal(true)}>Join</Button>
                         :

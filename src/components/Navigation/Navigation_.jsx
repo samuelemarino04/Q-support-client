@@ -3,6 +3,9 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ThemeContext } from '../../contexts/theme.context'
 import { AuthContext } from '../../contexts/auth.context'
+import './Navigation.css'
+
+
 
 
 const Navigation = () => {
@@ -20,6 +23,7 @@ const Navigation = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
+                        <img src="/images/avance-rapido.png" alt="foto icono" className="icon-img" />
                         <Link to={'/'} className='nav-link'>Home</Link>
                         <Link to={'/events'} className='nav-link'>Events</Link>
                         <Link to={'/getAllUsers'} className='nav-link'>Creatives Q+ Users</Link>
@@ -33,7 +37,7 @@ const Navigation = () => {
                             </>
                         }
                         {
-                            loggedUser?.role === "PATRON" &&
+                            loggedUser?.role === "USER" &&
                             <>
                                 <Link to={`/user/${loggedUser._id}`} className='nav-link'>My profile</Link>
                                 <span className='nav-link' onClick={logout}>Logout</span>
