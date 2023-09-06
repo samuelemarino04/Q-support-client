@@ -7,10 +7,10 @@ import subscriptionService from '../../services/subscription.services';
 import PaymentForm from '../PaymentForm/PaymentForm';
 
 
-const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner, setSubscriptions }) => {
+const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner, setSubscriptions, loadSubscriptions }) => {
 
     const { loggedUser } = useContext(AuthContext)
-    const [hasJoined, setHasJoined] = useState(false)
+    const [hasJoined, setHasJoined] = useState(clients.includes(loggedUser?._id))
     const [showPaymentModal, setShowPaymentModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
 
@@ -26,14 +26,29 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
 
     const handleSubscriptionChange = value => {
 
-        subscriptionService
-            .subscribe(_id)
-            .then(() => {
-                setHasJoined(value)
-            })
-            .catch(err => console.log(err))
+        hasJoined ?
+            (
+                subscriptionService
+                    .unsubscribe(_id)
+                    .then(() => {
+                        setHasJoined(false)
+                        loadSubscriptions()
+                    }
+                    )
+                    .catch(err => console.log(err))
+            )
+            :
+            (
+                subscriptionService
+                    .subscribe(_id)
+                    .then(() => {
+                        setHasJoined(value)
+                        loadSubscriptions()
+                    }
+                    )
+                    .catch(err => console.log(err))
+            )
     }
-
 
 
     return (
@@ -55,12 +70,14 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                     {loggedUser?._id !== owner ?
 
                         clients.includes(loggedUser?._id) ?
-                            <Button variant="dark" size='sm' >Cancel subscription</Button>
+                            <Button variant="dark" size='sm' onClick={() => { handleSubscriptionChange(false) }}>Cancel subscription</Button>
                             :
-                            <Button variant="dark" size='sm' onClick={() => setShowPaymentModal(true)}>Join</Button>
+                            <Button variant="dark" size='sm' onClick={() => { handleSubscriptionChange(true); setShowPaymentModal(true) }}>Join</Button>
                         :
                         null
                     }
+
+
                     {loggedUser?._id === owner &&
                         <div>
                             <Button variant='dark' size='sm' onClick={() => setShowEditModal(true)}>Edit</Button>
