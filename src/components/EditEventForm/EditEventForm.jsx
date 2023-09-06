@@ -10,13 +10,7 @@ function EditEventForm({ fireFinalActions, event }) {
         icon: event ? event.icon : '',
         description: event ? event.description : '',
         attendees: event ? event.attendees : '',
-        address: {
-            street: event ? event.address.street : '',
-            number: event ? event.address.number : '',
-            zipcode: event ? event.address.zipcode : '',
-            city: event ? event.address.city : '',
-            country: event ? event.address.country : ''
-        },
+        address: event ? event.address : '',
         date: event ? event.date : '',
         organizer: event ? event.organizer : ''
     });
@@ -104,37 +98,9 @@ function EditEventForm({ fireFinalActions, event }) {
                 <Form.Group className="mb-3" controlId="address">
                     <Form.Label>Address</Form.Label>
                     <Form.Control type="text"
-                        value={eventData.address.street}
-                        name="address.street"
-                        placeholder="Street"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="number"
-                        value={eventData.address.number}
-                        name="address.number"
-                        placeholder="Number"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="text"
-                        value={eventData.address.zipcode}
-                        name="address.zipcode"
-                        placeholder="Zip Code"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="text"
-                        value={eventData.address.city}
-                        name="address.city"
-                        placeholder="City"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="text"
-                        value={eventData.address.country}
-                        name="address.country"
-                        placeholder="Country"
+                        value={eventData.address}
+                        name="address"
+                        placeholder="Address"
                         onChange={handleInputChange}
                     />
                 </Form.Group>
