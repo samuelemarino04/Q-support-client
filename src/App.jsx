@@ -12,7 +12,11 @@ function App() {
 
   return (
     <>
+
       <div className={`App ${theme}`}>
+        {theme == "dark" && <style>
+          {`html {background-color: black;}`}
+        </style>}
         <Navigation />
         <AppRoutes />
         <Footer />

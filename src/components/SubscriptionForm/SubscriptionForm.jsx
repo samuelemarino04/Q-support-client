@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import subscriptionService from '../../services/subscription.services';
 import uploadServices from '../../services/upload.services';
 import * as Constants from '../../consts/consts'
-
+import FormError from "../FormError/FormError";
 
 
 const emptySubscriptionForm = {
@@ -14,13 +14,19 @@ const emptySubscriptionForm = {
     currency: '',
     paymentFrequency: '',
     image: '',
+    startDate: '',
+    endDate: ''
 }
+
 
 const SubscriptionForm = ({ setShowEditModal, subscription }) => {
 
-    const [formData, setFormData] = useState(emptySubscriptionForm)
 
+    const [errors, setErrors] = useState([])
+    const [formData, setFormData] = useState(emptySubscriptionForm)
     const [loadingImage, setLoadingImage] = useState(false)
+
+    console.log(emptySubscriptionForm)
 
     useEffect(() => {
         subscription && SubscriptionEditing()
@@ -45,7 +51,7 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
         subscriptionService
             .saveSubscription(formData)
             .then(() => setShowEditModal(false))
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 
@@ -101,6 +107,24 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
                         placeholder="Description"
                     />
                 </FloatingLabel>
+                <FloatingLabel controlId="floatingInputGrid" label="startDate" className="mb-3">
+                    <Form.Control
+                        type="date"
+                        name="startDate"
+                        value={formData.startDate}
+                        onChange={handleInputChange}
+                        placeholder="Start date"
+                    />
+                </FloatingLabel>
+                <FloatingLabel controlId="floatingInputGrid" label="endDate" className="mb-3">
+                    <Form.Control
+                        type="date"
+                        name="endDate"
+                        value={formData.endDate}
+                        onChange={handleInputChange}
+                        placeholder="End date"
+                    />
+                </FloatingLabel>
                 <Row className="mb-3">
                     <Col md>
                         <FloatingLabel controlId="floatingInputGrid" label="Price">
@@ -148,6 +172,9 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
                         ))}
                     </Form.Control>
                 </FloatingLabel>
+
+                {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+
                 <div className="d-grid">
                     <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? 'Loading Image' : 'Submit'}</Button>
                 </div>

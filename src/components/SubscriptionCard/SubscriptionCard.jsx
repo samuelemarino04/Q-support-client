@@ -5,9 +5,10 @@ import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
 import { Button, Modal } from 'react-bootstrap';
 import subscriptionService from '../../services/subscription.services';
 import PaymentForm from '../PaymentForm/PaymentForm';
+import formatCustomDateTime from '../../utils/date-util';
 
 
-const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner, setSubscriptions }) => {
+const SubscriptionCard = ({ _id, title, description, clients, type, price, currency, paymentFrequency, image, owner, setSubscriptions, startDate, endDate }) => {
 
     const { loggedUser } = useContext(AuthContext)
     const [hasJoined, setHasJoined] = useState(false)
@@ -51,6 +52,13 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                     <Card.Text>
                         Info: {description}
                     </Card.Text>
+                    <Card.Text>
+                        Start date: {formatCustomDateTime(startDate)}
+                    </Card.Text>
+                    <Card.Text>
+                        End date: {formatCustomDateTime(endDate)}
+                    </Card.Text>
+
 
                     {loggedUser?._id !== owner ?
 

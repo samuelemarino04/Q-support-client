@@ -7,6 +7,8 @@ import { isValidForSignup } from "../../utils/calculateAge"
 import * as Constants from '../../consts/consts'
 import { AuthContext } from "../../contexts/auth.context"
 import userService from "../../services/user.services"
+import FormError from "../FormError/FormError";
+
 
 
 const SignupForm = ({ setShowModal }) => {
@@ -30,6 +32,7 @@ const SignupForm = ({ setShowModal }) => {
         aboutInfo: '',
     }
 
+    const [errors, setErrors] = useState([])
     const { loggedUser } = useContext(AuthContext)
     const [signupData, setSignupData] = useState(emptySignupForm)
     const [loadingImage, setLoadingImage] = useState(false)
@@ -87,7 +90,7 @@ const SignupForm = ({ setShowModal }) => {
         authService
             .signup(signupData)
             .then(() => navigate('/login'))
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 
@@ -189,6 +192,7 @@ const SignupForm = ({ setShowModal }) => {
                     </div>
                     :
                     <div className="d-grid">
+                        {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
                         <Button variant="dark" type="submit" disabled={loadingImage}>
                             {loadingImage ? 'Loading Image' : 'Register'}</Button>
                     </div>}
