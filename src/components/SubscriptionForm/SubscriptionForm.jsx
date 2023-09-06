@@ -14,8 +14,6 @@ const emptySubscriptionForm = {
     currency: '',
     paymentFrequency: '',
     image: '',
-    startDate: '',
-    endDate: ''
 }
 
 
@@ -80,7 +78,7 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
 
         subscriptionService
             .editSubscription(subscription._id, formData)
-            .then(() => setShowModal(false))
+            .then(() => setShowEditModal(false)) //comprobar con mis compis <3
             .catch(err => console.log(err))
     }
 
