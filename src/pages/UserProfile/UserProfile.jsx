@@ -24,20 +24,24 @@ const UserProfile = () => {
         loadUserSubscriptions()
     }, [])
 
+
     const loadUserDetails = () => {
+
         userService
             .getUserDetails(user_id)
             .then(({ data }) => setUser(data))
             .catch(err => console.log(err))
-
-
     }
+
+
     const loadUserSubscriptions = () => {
+
         userService
             .getUserSubscriptions(user_id)
             .then(({ data }) => setSubscriptions(data))
             .catch(err => console.log(err))
     }
+
 
     const handleDeleteUser = () => {
 
@@ -62,15 +66,12 @@ const UserProfile = () => {
                     <p>Pronouns: {user.pronouns}</p>
                     <Button variant="dark" onClick={handleDeleteUser}>Delete profile</Button>
                     <Button variant="dark" onClick={() => setShowModal(true)}>Edit profile</Button>
-
                     <Row>
                         <Col md={{ span: 4 }}>
                             <img src={user.avatar} style={{ width: '100%' }} />
                         </Col>
                     </Row>
-
                     <h2>My subscriptions</h2>
-
                     <Row>
                         {subscriptions.map(sub => (
                             <Col key={sub._id} md={4}>
@@ -89,6 +90,5 @@ const UserProfile = () => {
             </>
     )
 }
-
 
 export default UserProfile

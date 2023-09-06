@@ -8,9 +8,7 @@ import * as Constants from '../../consts/consts'
 const CreativesList = () => {
 
     const [searchQuery, setSearchQuery] = useState('')
-
     const [filteredCreatives, setFilteredCreatives] = useState([])
-
     const [selectedCategories, setSelectedCategories] = useState([])
 
 
@@ -18,8 +16,10 @@ const CreativesList = () => {
         loadCreatives()
     }, [searchQuery])
 
+
     const loadCreatives = () => {
 
+        // TODO: CONSULTAR CATEGORIAS DE LA API Y FILTRARLAS EN CLIENTE
 
         Promise.all([
             creativeService.getFilteredCreatives(searchQuery),
@@ -29,13 +29,15 @@ const CreativesList = () => {
             .then(([{ data }, categoryResponse]) => {
                 setFilteredCreatives(data)
             })
+            .catch(err => console.log(err))
     }
+
 
     const handleInputChange = (e) => {
         const searchWord = e.target.value
         setSearchQuery(searchWord)
-
     }
+
 
     const handleCategoryToggle = (category) => {
         if (selectedCategories.includes(category)) {
@@ -91,9 +93,7 @@ const CreativesList = () => {
 
                 </Row>
             </>
-
     )
-
 }
 
 export default CreativesList

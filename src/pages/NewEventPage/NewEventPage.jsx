@@ -8,11 +8,9 @@ const NewEventPage = () => {
         <Container>
             <Row>
                 <Col md={{ offset: 3, span: 6 }}>
-
                     <h1>Add Event</h1>
-
                     <hr />
-
+                    {/* TODO: FAKTA PORP FIREFINALACTIONS */}
                     <NewEventForm />
                 </Col>
             </Row>

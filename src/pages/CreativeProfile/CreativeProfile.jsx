@@ -1,7 +1,7 @@
 import { Button, Container, Form, Modal, } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { useParams, Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useEffect, useState, useContext } from 'react';
 import userService from '../../services/user.services';
 import Loader from "../../components/Loader/Loader"
@@ -21,9 +21,11 @@ const CreativeProfile = () => {
     const { loggedUser, logout } = useContext(AuthContext)
     const [showModal, setShowModal] = useState(false)
 
+
     useEffect(() => {
         loadCreativeDetails()
     }, [])
+
 
     const loadCreativeDetails = () => {
         userService
@@ -32,6 +34,7 @@ const CreativeProfile = () => {
             .catch(err => console.log(err))
     }
 
+    console.log("esto es el id del usuqario cono joder", user_id)
     const handleFormSubmit = e => {
 
         e.preventDefault()
@@ -47,18 +50,20 @@ const CreativeProfile = () => {
             .catch(err => console.log(err))
     }
 
+
     const handleRemoveSubmit = (eachImage) => e => {
 
         e.preventDefault()
 
         userService
             .removePhotoCreative({ images: eachImage })
-            .then(({ data }) => {
-                const updatedImages = [...creative.images]
-                setCreative({ ...creative, images: updatedImages })
+            .then(() => {
+                const images = [...creative.images]
+                setCreative({ ...creative, images })
             })
             .catch(err => console.log(err))
     }
+
 
     const handleFileUpload = e => {
 
@@ -76,6 +81,7 @@ const CreativeProfile = () => {
             .catch(err => console.log(err))
     }
 
+
     const handleDeleteUser = () => {
 
         userService
@@ -87,63 +93,60 @@ const CreativeProfile = () => {
             .catch(err => console.log(err))
     }
 
+
     return (
         !creative ?
             <Loader />
             :
             <>
-                <Button variant="dark" onClick={() => setShowModal(true)}>Edit profile</Button>
 
-                <Button variant="dark" onClick={handleDeleteUser}>Delete Profile</Button>
+                {loggedUser?._id === user_id &&
+                    <div>
+                        <Button variant="dark" onClick={() => setShowModal(true)}>Edit profile</Button>
+                        <Button variant="dark" onClick={handleDeleteUser}>Delete Profile</Button>
+                    </div>
+                }
                 <Container>
-
                     <Tabs
                         defaultActiveKey="Work"
                         id="fill-tab-example"
                         className="mb-3"
                     >
-
                         <Tab eventKey="Work" title="Work">
                             <div className="work-content" key={creative._id}>
                                 <header>
                                     {creative.username}
                                     <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
-
                                 </header>
-
+                                {/* TODO: DESACOPLAR EN CREATIEVGALLERY O COMO MINIMO EN GALLERYCARD */}
                                 {
-                                    creative.images ?
-                                        creative.images.map(eachImage => {
-                                            return (
-                                                <>
-                                                    <Container>
-
-                                                        <img key={eachImage} src={eachImage} alt="image"
-                                                            style={{ height: '200px', width: '150px' }} />
+                                    creative?.images?.map(eachImage => {
+                                        return (
+                                            <>
+                                                <Container>
+                                                    <img key={eachImage} src={eachImage} alt="image"
+                                                        style={{ height: '200px', width: '150px' }} />
+                                                    {loggedUser?._id === user_id &&
                                                         <Form onSubmit={handleRemoveSubmit(eachImage)}>
                                                             <Button variant='dark' type='submit' >
                                                                 delete image</Button>
                                                         </Form>
-                                                    </Container>
+                                                    }
+                                                </Container>
+                                            </>
+                                        )
+                                    })
 
-
-                                                </>
-                                            )
-                                        })
-                                        :
-                                        ''
                                 }
                             </div>
-
-                            <Form onSubmit={handleFormSubmit}>
-                                <Form.Control type="file" multiple onChange={handleFileUpload}>
-                                </Form.Control>
-
-                                <Button variant='dark' type='submit' >Upload image</Button>
-                            </Form>
-
+                            {loggedUser?._id === user_id &&
+                                <Form onSubmit={handleFormSubmit}>
+                                    <Form.Control type="file" multiple onChange={handleFileUpload}>
+                                    </Form.Control>
+                                    <Button variant='dark' type='submit' >Upload image</Button>
+                                </Form>
+                            }
                         </Tab >
-
                         <Tab eventKey="subscriptions" title="Subscriptions" >
                             < SubscriptionsPage creative={creative} owner_id={user_id} />
                         </Tab>
@@ -161,6 +164,7 @@ const CreativeProfile = () => {
                     Tab content for Contact
                 </Tab> */}
                     </Tabs >
+
                 </Container >
 
                 <Modal show={showModal} onHide={() => { setShowModal(false) }}>

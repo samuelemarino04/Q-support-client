@@ -5,19 +5,21 @@ import { AuthContext } from "../../contexts/auth.context"
 import { Form, Button } from "react-bootstrap"
 
 const LoginForm = () => {
+
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     })
 
-    const navigate = useNavigate()
 
+    const navigate = useNavigate()
     const { authenticateUser, storeToken } = useContext(AuthContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
         setLoginData({ ...loginData, [name]: value })
     }
+
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -30,6 +32,7 @@ const LoginForm = () => {
             })
             .catch(err => console.log(err))
     }
+
 
     return (
 

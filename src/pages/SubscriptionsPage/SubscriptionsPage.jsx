@@ -5,29 +5,35 @@ import subscriptionService from '../../services/subscription.services'
 import SubscriptionForm from '../../components/SubscriptionForm/SubscriptionForm'
 import { AuthContext } from '../../contexts/auth.context'
 
+// TODO: NOMINAR COMO COMPONENTE PLANO Y DESENRUTAR
+
 const SubscriptionsPage = ({ creative, owner_id }) => {
 
     const { loggedUser } = useContext(AuthContext)
-
     const [subscriptions, setSubscriptions] = useState()
-
     const [showModal, setShowModal] = useState(false)
+
 
     useEffect(() => {
         loadSubscriptions()
     }, [])
 
+
     const loadSubscriptions = () => {
+
         subscriptionService
             .getSubscriptionsByOwner(owner_id)
             .then(({ data }) => setSubscriptions(data))
             .catch(err => console.log(err))
     }
 
+
     return (
         <>
             <Container>
-                {loggedUser?._id === owner_id && <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>new subscription</Button>}
+                {loggedUser?._id === owner_id &&
+                    <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>new subscription</Button>
+                }
                 <SubscriptionsList subscriptions={subscriptions} creative={creative} />
             </Container>
             <Modal show={showModal} onHide={() => { setShowModal(false) }}>

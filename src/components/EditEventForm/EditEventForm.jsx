@@ -3,6 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import eventsService from '../../services/events.services';
 import uploadServices from '../../services/upload.services';
 
+
+// TODO: EDIT ISSUE - ADAPTAR PROPS FINALKES
 function EditEventForm({ fireFinalActions, event }) {
 
     const [eventData, setEventData] = useState({
@@ -44,6 +46,7 @@ function EditEventForm({ fireFinalActions, event }) {
         }
     }
 
+
     const handleFileUpload = e => {
 
         setLoadingImage(true)
@@ -61,7 +64,6 @@ function EditEventForm({ fireFinalActions, event }) {
                 console.log(err)
                 setLoadingImage(false)
             })
-
     }
 
 
@@ -75,7 +77,7 @@ function EditEventForm({ fireFinalActions, event }) {
                 .then(() => fireFinalActions())
                 .catch(err => console.log(err))
         }
-    };
+    }
 
 
     return (
@@ -150,7 +152,7 @@ function EditEventForm({ fireFinalActions, event }) {
                 </Button>
             </Form>
         </div >
-    );
+    )
 }
 
 export default EditEventForm;

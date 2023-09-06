@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 class SubscriptionService {
+
     constructor() {
 
         this.api = axios.create({
@@ -50,7 +51,8 @@ class SubscriptionService {
     unsubscribe(subscription_id, loggeduser_id) {
         return this.api.put(`/unsubscribe/${subscription_id}`, loggeduser_id)
     }
-
 }
+
 const subscriptionService = new SubscriptionService()
+
 export default subscriptionService

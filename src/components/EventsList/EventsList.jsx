@@ -8,13 +8,13 @@ import { useEffect, useState } from 'react'
 const EventsList = () => {
 
     const [searchQuery, setSearchQuery] = useState('')
-
     const [filteredEvents, setFilteredEvents] = useState([])
 
 
     useEffect(() => {
         loadEvents()
     }, [searchQuery])
+
 
     const loadEvents = () => {
 
@@ -26,11 +26,12 @@ const EventsList = () => {
             .catch(err => console.log(err))
     }
 
+
     const handleInputChange = (e) => {
         const searchWord = e.target.value
         setSearchQuery(searchWord)
-
     }
+
 
     return (
         !filteredEvents ?
@@ -55,7 +56,6 @@ const EventsList = () => {
                 </Row>
             </>
     )
-
 }
 
 export default EventsList

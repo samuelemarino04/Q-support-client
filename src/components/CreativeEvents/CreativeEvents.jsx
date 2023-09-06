@@ -19,8 +19,6 @@ const CreativeEvents = ({ events }) => {
                     }
                 </Row>
             </>
-
-
     )
 }
 

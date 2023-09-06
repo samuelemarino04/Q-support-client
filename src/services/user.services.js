@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 class UserService {
+
     constructor() {
         this.api = axios.create({
             baseURL: `${import.meta.env.VITE_API_URL}/user`
@@ -18,6 +19,7 @@ class UserService {
         })
     }
 
+
     getUsers() {
         return this.api.get(`/getAllUsers`)
     }
@@ -31,7 +33,6 @@ class UserService {
     }
 
     deleteUser(user_id) {
-        //     console.log("este es el user id", user_id)
         return this.api.delete(`/deleteUser/${user_id}`)
     }
 
@@ -51,6 +52,8 @@ class UserService {
         return this.api.get(`/userSubscriptions/${_id}`)
     }
 }
+
 const userService = new UserService()
+
 export default userService
 

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 class EventService {
+
     constructor() {
         this.api = axios.create({
             baseURL: `${import.meta.env.VITE_API_URL}/events`
@@ -55,10 +56,10 @@ class EventService {
     getEventsByOwner(owner_id) {
         return this.api.get(`/getEventsByOwner/${owner_id}`)
     }
-
-
 }
+
 const eventsService = new EventService()
+
 export default eventsService
 
 

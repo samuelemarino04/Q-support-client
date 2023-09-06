@@ -1,14 +1,10 @@
-import NewEventForm from '../../components/NewEventForm/NewEventForm'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useNavigate } from 'react-router'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import EditEventForm from '../../components/EditEventForm/EditEventForm'
 import eventsService from '../../services/events.services'
 
 const EditEventPage = () => {
 
-
-    const navigate = useNavigate()
     const [event, setEvent] = useState({
         title: '',
         icon: '',
@@ -23,15 +19,17 @@ const EditEventPage = () => {
         },
         date: '',
         organizer: ''
-    });
+    })
 
-    const handleSave = (event) => {
+
+    const handleSave = () => {
 
         eventsService
             .editEvent()
-            .then((event) => setEventData(event))
+            .then((event) => setEvent(event))
             .catch(err => console.log(err))
-    };
+    }
+
 
     return (
 
@@ -42,7 +40,7 @@ const EditEventPage = () => {
                     <h1>Edit Event</h1>
 
                     <hr />
-
+                    {/* // TODO: EDIT ISSUE - ADAPTAR PROPS FINALES */}
                     <EditEventForm event={event} onSave={handleSave} />
                 </Col>
             </Row>

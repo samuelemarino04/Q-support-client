@@ -1,8 +1,7 @@
-
 import { Container, FloatingLabel, Form } from 'react-bootstrap';
 import React, { useState } from 'react';
 import subscriptionService from '../../services/subscription.services';
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const PaymentForm = () => {
 
@@ -13,8 +12,7 @@ const PaymentForm = () => {
         cvv: '',
         expiringDate: '',
         startDate: '',
-
-    });
+    })
 
     const navigate = useNavigate()
 
@@ -32,6 +30,7 @@ const PaymentForm = () => {
             .then(() => navigate(`/getSubscriptionsByOwner/${owner_id}`))
             .catch(err => console.log(err))
     }
+
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -134,7 +133,7 @@ const PaymentForm = () => {
                 </Button>
             </Container>
         </Form >
-    );
-};
+    )
+}
 
 export default PaymentForm

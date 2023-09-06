@@ -20,16 +20,20 @@ const EventDetailsPage = ({ }) => {
     const [showModal, setShowModal] = useState(false)
     const { loggedUser } = useContext(AuthContext)
 
+
     useEffect(() => {
         loadEventDetails()
     }, [userJoined])
 
+
     const loadEventDetails = () => {
+
         eventsService
             .getEventDetails(event_id)
             .then(({ data }) => setEvent(data))
             .catch(err => console.log(err))
     }
+
 
     const fireFinalActions = () => {
         navigate(`/creative/${loggedUser._id}`)
@@ -37,6 +41,7 @@ const EventDetailsPage = ({ }) => {
 
 
     const handleJoinEvent = () => {
+
         eventsService
             .joinEvent(event_id)
             .then(({ data }) => {
@@ -46,7 +51,9 @@ const EventDetailsPage = ({ }) => {
             .catch(err => console.log(err))
     }
 
+
     const handleUnjoinEvent = () => {
+
         eventsService
             .unjoinEvent(event_id)
             .then(({ data }) => {
@@ -56,8 +63,8 @@ const EventDetailsPage = ({ }) => {
             .catch(err => console.log(err))
     }
 
-    const handleRemoveEvent = () => {
 
+    const handleRemoveEvent = () => {
 
         eventsService
             .removeEvent(event_id)
@@ -65,18 +72,16 @@ const EventDetailsPage = ({ }) => {
             .catch(err => console.log(err))
     }
 
+
     return (
         !event.address ?
             <Loader />
             :
             <>
                 <Container>
-
                     <h1 className="mb-4">{event.title} details</h1>
                     <hr />
-
                     <Row>
-
                         <Col md={{ span: 6, offset: 1 }}>
                             <h3>Infos</h3>
                             <p>{event.description}</p>
@@ -91,28 +96,24 @@ const EventDetailsPage = ({ }) => {
                                 <Button variant="dark" onClick={handleJoinEvent}>Join Event</Button>
                             )}
                             <Button variant="dark" onClick={handleRemoveEvent}>Remove Event</Button>
-
-
                             <hr />
                             <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Edit event</Button>
                             <Modal show={showModal} onHide={() => { setShowModal(false) }}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Edit event</Modal.Title>
                                 </Modal.Header>
+                                {/* // TODO: EDIT ISSUE - ADAPTAR PROPS FINALKESs */}
                                 <EditEventForm event={event} fireFinalActions={fireFinalActions} />
                             </Modal>
                             <Link to='/events' className="btn btn-dark">Volver a la galería</Link>
                         </Col>
-
                         <Col md={{ span: 4 }}>
                             <img src={event.icon} style={{ width: '100%' }} />
                         </Col>
-
                     </Row>
-
                 </Container >
             </>
-    );
+    )
 }
 
 export default EventDetailsPage

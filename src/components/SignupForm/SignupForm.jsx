@@ -3,19 +3,13 @@ import { Form, Button, Card } from "react-bootstrap"
 import authService from "../../services/auth.services"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
-import calculateAge from "../../utils/calculateAge"
+import { isValidForSignup } from "../../utils/calculateAge"
 import * as Constants from '../../consts/consts'
 import { AuthContext } from "../../contexts/auth.context"
 import userService from "../../services/user.services"
 
 
 const SignupForm = ({ setShowModal }) => {
-
-    const { loggedUser } = useContext(AuthContext)
-
-    useEffect(() => {
-        loggedUser && editingUser()
-    }, [])
 
     const emptySignupForm = {
         username: '',
@@ -27,7 +21,16 @@ const SignupForm = ({ setShowModal }) => {
         password: '',
         pronouns: ''
     }
+
+    const { loggedUser } = useContext(AuthContext)
     const [signupData, setSignupData] = useState(emptySignupForm)
+    const [loadingImage, setLoadingImage] = useState(false)
+    const navigate = useNavigate()
+
+
+    useEffect(() => {
+        loggedUser && editingUser()
+    }, [])
 
 
     const editingUser = () => {
@@ -37,14 +40,12 @@ const SignupForm = ({ setShowModal }) => {
             .catch(err => console.log(err))
     }
 
-    const [loadingImage, setLoadingImage] = useState(false)
-
-    const navigate = useNavigate()
 
     const handleInputChange = e => {
         const { value, name } = e.target
         setSignupData({ ...signupData, [name]: value })
     }
+
 
     const handleFileUpload = e => {
 
@@ -65,22 +66,22 @@ const SignupForm = ({ setShowModal }) => {
             })
     }
 
+
     const handleFormSubmit = e => {
 
         e.preventDefault()
 
-        const age = calculateAge(signupData.birth)
-
-        if (age < 18) {
+        if (!isValidForSignup(signupData.birth)) {
             console.log("You must be 18 or older to sign up.")
             return
         }
 
         authService
-            .signup({ ...signupData })
+            .signup(signupData)
             .then(() => navigate('/login'))
             .catch(err => console.log(err))
     }
+
 
     const handleEditUser = e => {
         e.preventDefault()
@@ -91,7 +92,6 @@ const SignupForm = ({ setShowModal }) => {
             .catch(err => console.log(err))
     }
 
-    console.log("este es el avatr del usuario", signupData)
 
     return (
 
@@ -136,7 +136,7 @@ const SignupForm = ({ setShowModal }) => {
                 {loggedUser?.role === "CREATIVE" || !loggedUser &&
                     < Form.Group className="mb-3" controlId="category">
                         <Form.Label>Select your category</Form.Label>
-                        <Form.Control disabled={signupData.role === "USER"} as="select"
+                        <Form.Control as="select"
                             value={signupData.category} onChange={handleInputChange} name="category">
                             {Constants.CREATIVE_CATEGORIES.map((category, index) => (
                                 <option key={index} value={category}>{category}</option>
@@ -179,7 +179,6 @@ const SignupForm = ({ setShowModal }) => {
                         <Button variant="dark" type="submit" disabled={loadingImage}>
                             {loadingImage ? 'Loading Image' : 'Register'}</Button>
                     </div>}
-
             </Form>
         </div >
     )

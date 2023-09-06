@@ -3,7 +3,6 @@ import SignupPage from '../pages/SignupPage/SignupPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import NewEventPage from '../pages/Neweventpage/newEventPage'
-import PrivateRoute from './PrivateRoute'
 import SubscriptionForm from '../components/SubscriptionForm/SubscriptionForm'
 import Homepage from '../pages/Homepage/Homepage'
 import EventPage from '../pages/EventPage/EventPage'
@@ -14,6 +13,7 @@ import { AuthContext } from '../contexts/auth.context'
 import { useContext } from 'react'
 import UserProfile from '../pages/UserProfile/UserProfile'
 import EditEventPage from '../pages/EditEventPage/EditEventPage'
+import AllUsersPage from '../pages/AllUsersPage/AllUsersPage'
 
 
 const AppRoutes = () => {
@@ -33,11 +33,10 @@ const AppRoutes = () => {
             <Route path={'/getOneEvent/:event_id'} element={<EventDetailsPage />} />
             <Route path={'/newEvent'} element={<NewEventPage />} />
             <Route path={'/getSubscriptionsByOwner/:owner_id'} element={<SubscriptionsPage />} />
+            <Route path={'/getAllUsers'} element={<AllUsersPage />} />
+
+            {/* TODO: PROTEGER COMPOPNENTE POR ROL DESDE DENTRO POR DIOS */}
             {loggedUser?.role === "CREATIVE" && <Route path={'/newsubscription'} element={<SubscriptionForm />} />}
-
-            <Route element={<PrivateRoute />}>
-
-            </Route>
 
             <Route path={'*'} element={<NotFoundPage />} />
 

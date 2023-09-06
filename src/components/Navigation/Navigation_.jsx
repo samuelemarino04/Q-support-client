@@ -5,7 +5,6 @@ import { ThemeContext } from '../../contexts/theme.context'
 import { AuthContext } from '../../contexts/auth.context'
 
 
-
 const Navigation = () => {
 
     const { theme, switchTheme, invertedTheme } = useContext(ThemeContext)
@@ -23,6 +22,7 @@ const Navigation = () => {
                     <Nav className="me-auto">
                         <Link to={'/'} className='nav-link'>Home</Link>
                         <Link to={'/events'} className='nav-link'>Events</Link>
+                        <Link to={'/getAllUsers'} className='nav-link'>Creatives Q+ Users</Link>
                     </Nav>
                     <Nav>
                         {
@@ -54,7 +54,6 @@ const Navigation = () => {
                 </div>
             </Container>
         </Navbar>
-
     )
 }
 

@@ -5,7 +5,7 @@ import NewEventForm from '../../components/NewEventForm/NewEventForm'
 import { AuthContext } from '../../contexts/auth.context'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router'
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+// import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 
 const EventPage = () => {
@@ -19,16 +19,18 @@ const EventPage = () => {
         navigate(`/creative/${loggedUser._id}`)
     }
 
-    return (
 
+    return (
         <>
             <Container>
+
                 {
                     loggedUser?.role === "CREATIVE" &&
                     <>
                         <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Add new event</Button>
                     </>
                 }
+
                 <EventsList />
             </Container>
 

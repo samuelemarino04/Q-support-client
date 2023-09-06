@@ -1,4 +1,4 @@
-function calculateAge(dateOfBirth) {
+export const calculateAge = dateOfBirth => {
     const birthDate = new Date(dateOfBirth)
     const today = new Date()
     const age = today.getFullYear() - birthDate.getFullYear()
@@ -8,4 +8,8 @@ function calculateAge(dateOfBirth) {
     }
     return age
 }
-export default calculateAge
+
+export const isValidForSignup = dateOfBirth => {
+    const age = calculateAge(dateOfBirth)
+    return age >= 18
+}

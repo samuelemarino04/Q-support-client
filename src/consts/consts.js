@@ -8,7 +8,8 @@ export const CREATIVE_CATEGORIES = ["Web Developer",
     "Podcast Creator",
     "Non-profit",
     "Local Business",
-    "Tutorials Creator"]
+    "Tutorials Creator"
+]
 
 export const CURRENCIES = ['$', '€', '£', '¥', 'CHF', 'CAD', 'AUD', 'NOK', 'SEK', 'NZD']
 

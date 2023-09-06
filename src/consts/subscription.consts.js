@@ -1,1 +1,0 @@
-export const SUBSCRIPTION_TYPES = ['Basic', 'Pro', 'Premium']

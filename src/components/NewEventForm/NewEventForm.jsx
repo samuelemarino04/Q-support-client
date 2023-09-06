@@ -5,6 +5,7 @@ import eventsService from "../../services/events.services";
 import uploadServices from "../../services/upload.services"
 
 const NewEventForm = ({ fireFinalActions }) => {
+
     const [eventData, setEventData] = useState({
         title: '',
         icon: '',
@@ -20,6 +21,7 @@ const NewEventForm = ({ fireFinalActions }) => {
         date: '',
         organizer: ''
     })
+
 
     const [loadingImage, setLoadingImage] = useState(false)
 
@@ -43,6 +45,7 @@ const NewEventForm = ({ fireFinalActions }) => {
         }
     }
 
+
     const handleFileUpload = e => {
 
         setLoadingImage(true)
@@ -60,8 +63,8 @@ const NewEventForm = ({ fireFinalActions }) => {
                 console.log(err)
                 setLoadingImage(false)
             })
-
     }
+
 
     const handleEventSubmit = e => {
 
@@ -136,23 +139,6 @@ const NewEventForm = ({ fireFinalActions }) => {
                         onChange={handleInputChange}
                     />
                 </Form.Group>
-                {/* <Form.Group className="mb-3" controlId="location">
-                    <Form.Label>Location</Form.Label>
-                    <Form.Control
-                        type="number"
-                        value={eventData.location.coordinates[0]}
-                        name="location.coordinates[0]"
-                        placeholder="Latitude"
-                        onChange={handleInputChange}
-                    />
-                    <Form.Control
-                        type="number"
-                        value={eventData.location.coordinates[1]}
-                        name="location.coordinates[1]"
-                        placeholder="Longitude"
-                        onChange={handleInputChange}
-                    />
-                </Form.Group> */}
                 <Form.Group className="mb-3" controlId="date">
                     <Form.Label>Date</Form.Label>
                     <Form.Control type="datetime-local"
@@ -165,7 +151,6 @@ const NewEventForm = ({ fireFinalActions }) => {
                 </Button>
             </Form>
         </div >
-
     )
 }
 
