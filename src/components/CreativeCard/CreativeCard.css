@@ -36,9 +36,8 @@
     object-fit: cover;
 }
 
-img {
+.CreativeCard img {
     border: 2px solid rgb(0, 77, 0);
-
 }
 
 .lower-container {

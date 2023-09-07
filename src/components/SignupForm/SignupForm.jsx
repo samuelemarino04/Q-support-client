@@ -197,6 +197,7 @@ const SignupForm = ({ setShowModal }) => {
                         <div className="flag-images">
                             {Constants.FLAGS.map((flagUrl, index) => (
                                 <img
+                                    className="flags"
                                     key={index}
                                     src={flagUrl}
                                     alt={`Flag ${index}`}
