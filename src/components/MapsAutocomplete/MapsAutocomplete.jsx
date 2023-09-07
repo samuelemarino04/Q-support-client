@@ -8,7 +8,7 @@ const MapsAutocomplete = ({ eventData, setEventData }) => {
     const [value, setValue] = useState()
 
 
-    Geocode.setApiKey("AIzaSyBsRneeSd2He0UERMXg95M7mefD9lDZNJM")
+    Geocode.setApiKey(import.meta.env.VITE_MAPS_API_KEY)
     value && Geocode
         .fromAddress(value.label)
         .then((response) => {
@@ -25,7 +25,7 @@ const MapsAutocomplete = ({ eventData, setEventData }) => {
     return (
         <div>
             <GooglePlacesAutocomplete
-                apiKey="AIzaSyBsRneeSd2He0UERMXg95M7mefD9lDZNJM"
+                apiKey={import.meta.env.VITE_MAPS_API_KEY}
                 selectProps={{
                     value,
                     onChange: setValue,
