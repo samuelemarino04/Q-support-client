@@ -45,7 +45,7 @@ const CreativeProfile = () => {
         const { imageToUpload: images } = creative
 
         userService
-            .editCreative({ images: creative.imageToUpload }, user_id)
+            .editCreative(user_id, { images: images })
             .then(() => {
                 const images = [...creative.images, ...creative.imageToUpload]
                 setCreative({ ...creative, images })
@@ -63,6 +63,7 @@ const CreativeProfile = () => {
             .then(() => {
                 const images = [...creative.images]
                 setCreative({ ...creative, images })
+                loadCreativeDetails()
             })
             .catch(err => console.log(err))
     }
@@ -151,16 +152,20 @@ const CreativeProfile = () => {
                                     creative?.images?.map(eachImage => {
                                         return (
                                             <>
-                                                <Container>
-                                                    <img key={eachImage} src={eachImage} alt="image"
-                                                        style={{ height: '200px', width: '150px' }} />
-                                                    {loggedUser?._id === user_id &&
-                                                        <Form onSubmit={handleRemoveSubmit(eachImage)}>
-                                                            <Button variant='dark' type='submit' >
-                                                                delete image</Button>
-                                                        </Form>
-                                                    }
-                                                </Container>
+
+                                                <Row>
+                                                    <Col >
+
+                                                        <img key={eachImage} src={eachImage} alt="image" className='workPhotos'
+                                                            style={{ height: '200px', width: '250px' }} />
+                                                        {loggedUser?._id === user_id &&
+                                                            <Form onSubmit={handleRemoveSubmit(eachImage)}>
+                                                                <Button variant='outline-dark' className='mt-1 mb-3' type='submit' size='sm'>
+                                                                    delete image</Button>
+                                                            </Form>
+                                                        }
+                                                    </Col>
+                                                </Row>
                                             </>
                                         )
                                     })
@@ -184,8 +189,10 @@ const CreativeProfile = () => {
                         </Tab>
 
                         <Tab eventKey="Events" title="Events">
-                            Tab content for your programmed events
-                            <CreativeEventsPage creative={creative} owner_id={user_id} />
+
+
+                            <CreativeEventsPage creative={creative} owner_id={user_id} className='creativeEvents' />
+
 
                         </Tab>
                     </Tabs >
