@@ -1,8 +1,8 @@
 .avatarfoto {
     display: block;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 170px;
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -52,4 +52,8 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+}
+
+.custom-margin-left {
+    margin-left: 60px;
 }
