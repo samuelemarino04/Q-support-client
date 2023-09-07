@@ -1,8 +1,8 @@
 .avatarfoto {
     display: block;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 170px;
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -66,4 +66,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 15px;
+}
+
+.custom-margin-left {
+    margin-left: 60px;
 }

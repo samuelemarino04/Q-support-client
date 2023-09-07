@@ -44,7 +44,7 @@ const EventsList = () => {
                             type="text"
                             value={searchQuery}
                             onChange={handleInputChange}
-                            placeholder='Type to search'
+                            placeholder='Look for an event in your city...'
                             className="form-control"
                         />
                     </Col>

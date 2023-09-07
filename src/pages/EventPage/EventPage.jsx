@@ -28,7 +28,7 @@ const EventPage = () => {
                 {
                     loggedUser?.role === "CREATIVE" &&
                     <>
-                        <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Add new event</Button>
+                        <Button variant='info' size='sm' className='mt-3 mb-3' onClick={() => setShowModal(true)}>Add new event</Button>
                     </>
                 }
 
