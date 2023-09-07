@@ -21,7 +21,7 @@ const Navigation = () => {
                 <Navbar.Brand>{import.meta.env.VITE_APP_NAME}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <img src="/images/avance-rapido.png" alt="foto icono" className="icon-img" />
+                    <img src="/images/lgbtiq+flag.png" alt="foto icono" className="icon-img" />
 
                     <Nav className="me-auto">
 

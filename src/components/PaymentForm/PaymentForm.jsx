@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/auth.context'
 import FormError from '../FormError/FormError'
 
 
-const PaymentForm = ({ subscriptionDetails, clients, setShowPaymentModal }) => {
+const PaymentForm = ({ handleSubscriptionChange, subscriptionDetails, clients, setShowPaymentModal }) => {
 
     const { loggedUser } = useContext(AuthContext)
     const [errors, setErrors] = useState([])
@@ -37,6 +37,7 @@ const PaymentForm = ({ subscriptionDetails, clients, setShowPaymentModal }) => {
         }
 
         setFormData({ ...formData, [name]: formattedValue })
+        console.log("esto es el formdata", formData)
     }
 
 
@@ -49,12 +50,12 @@ const PaymentForm = ({ subscriptionDetails, clients, setShowPaymentModal }) => {
             .editCardInfo(loggedUser._id, formData)
             .then(() => {
                 clients.push(loggedUser._id)
-                return setShowPaymentModal(false)
+                setShowPaymentModal(false)
+                handleSubscriptionChange()
             })
             .catch(err => setErrors(err.response.data.messages))
 
     }
-    console.log(errors)
 
     return (
         <Form onSubmit={handleSubmit}>

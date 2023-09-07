@@ -120,9 +120,9 @@ const CreativeProfile = () => {
                                 <Row>
                                     <p>{creative.category}</p>
                                 </Row>
-                                <img src="/public/images/instagram.png" alt="instagram" style={{ width: '20px', height: '20px' }} className="icons" />
-                                <img src="/public/images/linkedin.png" alt="linkedin" style={{ width: '20px', height: '20px' }} className="icons" />
-                                <img src="/public/images/youtube.png" alt="youtube" style={{ width: '30px', height: '30px' }} className="icons" />
+                                <img src="/public/images/instagram.png" alt="instagram" style={{ width: '20px', height: '20px', margin: "20px" }} className="icons" />
+                                <img src="/public/images/linkedin.png" alt="linkedin" style={{ width: '20px', height: '20px', margin: "20px" }} className="icons" />
+                                <img src="/public/images/youtube.png" alt="youtube" style={{ width: '30px', height: '30px', margin: "20px" }} className="icons" />
 
                             </Col>
                         </div>
@@ -146,7 +146,7 @@ const CreativeProfile = () => {
                         <Tab eventKey="Work" title="Work">
                             <div className="work-content" key={creative._id}>
 
-                                {/* TODO: DESACOPLAR EN CREATIEVGALLERY O COMO MINIMO EN GALLERYCARD */}
+
                                 {
                                     creative?.images?.map(eachImage => {
                                         return (

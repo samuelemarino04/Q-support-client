@@ -3,3 +3,9 @@
     height: 80px;
     border: none;
 }
+
+.icon-img {
+    height: 40px;
+    width: 60px;
+    border-radius: 3px;
+}

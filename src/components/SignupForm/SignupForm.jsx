@@ -38,7 +38,7 @@ const SignupForm = ({ setShowModal }) => {
     const [loadingImage, setLoadingImage] = useState(false)
     const navigate = useNavigate()
 
-    console.log("este es el id del user", loggedUser._id)
+
     const editingUser = () => {
         userService
             .getUserDetails(loggedUser._id)

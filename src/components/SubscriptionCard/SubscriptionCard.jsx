@@ -80,7 +80,7 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                         clients.includes(loggedUser?._id) ?
                             <Button variant="dark" size='sm' onClick={() => { handleSubscriptionChange(false) }}>Cancel subscription</Button>
                             :
-                            <Button variant="dark" size='sm' onClick={() => { handleSubscriptionChange(true); setShowPaymentModal(true) }}>Join</Button>
+                            <Button variant="dark" size='sm' onClick={() => { setShowPaymentModal(true) }}>Join</Button>
                         :
                         null
                     }
@@ -100,7 +100,7 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                 <Modal.Header closeButton>
                     <Modal.Title>You've chosen:</Modal.Title>
                 </Modal.Header>
-                <PaymentForm subscriptionDetails={subscriptionDetails} clients={clients} setShowPaymentModal={setShowPaymentModal} />
+                <PaymentForm handleSubscriptionChange={handleSubscriptionChange} subscriptionDetails={subscriptionDetails} clients={clients} setShowPaymentModal={setShowPaymentModal} />
             </Modal>
 
             <Modal show={showEditModal} onHide={() => { setShowEditModal(false) }}>
