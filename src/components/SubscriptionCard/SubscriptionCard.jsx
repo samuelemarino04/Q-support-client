@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { AuthContext } from '../../contexts/auth.context';
 import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, ButtonGroup } from 'react-bootstrap';
 import subscriptionService from '../../services/subscription.services';
 import PaymentForm from '../PaymentForm/PaymentForm';
 import formatCustomDateTime from '../../utils/date-util';
@@ -88,8 +88,10 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
 
                     {loggedUser?._id === owner &&
                         <div>
-                            <Button variant='dark' size='sm' onClick={() => setShowEditModal(true)}>Edit</Button>
-                            <Button variant="dark" size='sm' onClick={handleDeleteSubscription}>Delete</Button>
+                            <ButtonGroup aria-label="Basic example">
+                                <Button variant='info' size='sm' onClick={() => setShowEditModal(true)}>Edit</Button>
+                                <Button variant="dark" size='sm' onClick={handleDeleteSubscription}>Delete</Button>
+                            </ButtonGroup>
                         </div>
                     }
                 </Card.Body >

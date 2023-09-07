@@ -13,12 +13,13 @@ const AboutPage = ({ creative }) => {
         !creative ? <Loader /> :
             <>
                 <Container className="AboutCard">
+                    <p>{creative.aboutInfo}</p>
                     {loggedUser?._id === creative._id && (
-                        <Button variant="dark" onClick={() => setShowModal(true)}>
+                        <Button variant="info" className="mt-3" size="sm" onClick={() => setShowModal(true)}>
                             Edit About
                         </Button>
                     )}
-                    <p>{creative.aboutInfo}</p>
+
                 </Container>
                 {/* ... aqui meter la modal para el edit ... */}
             </>

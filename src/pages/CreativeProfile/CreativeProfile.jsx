@@ -106,7 +106,7 @@ const CreativeProfile = () => {
                     <div className="CreativeHeader">
                         <div className="up-container" style={{ backgroundImage: `url(${creative.backgroundImage})` }} >
                             <div className="imageProfile-container">
-                                <img src={creative.avatar} alt="avatar" className='avatarfoto' style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 2 }} />
+                                <img src={creative.avatar} alt="avatar" className='avatarfoto' style={{ position: 'absolute', top: '450px', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 2 }} />
                             </div>
 
                         </div>
@@ -123,14 +123,13 @@ const CreativeProfile = () => {
                                 <img src="/public/images/instagram.png" alt="instagram" style={{ width: '20px', height: '20px' }} className="icons" />
                                 <img src="/public/images/linkedin.png" alt="linkedin" style={{ width: '20px', height: '20px' }} className="icons" />
                                 <img src="/public/images/youtube.png" alt="youtube" style={{ width: '30px', height: '30px' }} className="icons" />
-
                             </Col>
                         </div>
                     </div> {loggedUser?._id === user_id &&
                         <div className='buttonGroup'>
-                            <ButtonGroup aria-label="Basic example" size='sm' className='mb-3'>
-                                <Button variant="secondary" onClick={() => setShowModal(true)}>Edit profile</Button>
-                                <Button variant="secondary" onClick={handleDeleteUser}>Delete Profile</Button>
+                            <ButtonGroup aria-label="Basic example" size='sm' className='mb-3 custom-margin-left'>
+                                <Button variant="outline-info" onClick={() => setShowModal(true)}>Edit profile</Button>
+                                <Button variant="outline-dark" onClick={handleDeleteUser}>Delete Profile</Button>
                             </ButtonGroup>
                         </div>
                     }
@@ -171,7 +170,7 @@ const CreativeProfile = () => {
                                 <Form onSubmit={handleFormSubmit}>
                                     <Form.Control type="file" multiple onChange={handleFileUpload}>
                                     </Form.Control>
-                                    <Button variant='dark' type='submit' >Upload image</Button>
+                                    <Button variant='outline-info' type='submit' className='mt-3'>Upload image</Button>
                                 </Form>
                             }
                         </Tab >
