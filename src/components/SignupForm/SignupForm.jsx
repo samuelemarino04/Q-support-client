@@ -8,7 +8,7 @@ import * as Constants from '../../consts/consts'
 import { AuthContext } from "../../contexts/auth.context"
 import userService from "../../services/user.services"
 import FormError from "../FormError/FormError";
-import './SignupForm.css'
+
 
 
 const SignupForm = ({ setShowModal }) => {
@@ -29,7 +29,7 @@ const SignupForm = ({ setShowModal }) => {
         pronouns: '',
         aboutInfo: '',
         backgroundImage: '',
-        flag: '',
+
     }
 
     const [errors, setErrors] = useState([])
@@ -37,11 +37,6 @@ const SignupForm = ({ setShowModal }) => {
     const [signupData, setSignupData] = useState(emptySignupForm)
     const [loadingImage, setLoadingImage] = useState(false)
     const navigate = useNavigate()
-
-
-    useEffect(() => {
-        loggedUser && editingUser()
-    }, [])
 
 
     const editingUser = () => {
@@ -82,7 +77,7 @@ const SignupForm = ({ setShowModal }) => {
 
         setLoadingImage(true)
 
-        const formData = new FormData()
+        const signupData = new FormData()
         formData.append('imageData', e.target.files[0])
 
         uploadServices
@@ -122,6 +117,7 @@ const SignupForm = ({ setShowModal }) => {
             .then(() => setShowModal(false))
             .catch(err => console.log(err))
     }
+
 
     return (
 
@@ -170,7 +166,7 @@ const SignupForm = ({ setShowModal }) => {
 
                 {loggedUser?.role === "CREATIVE" || !loggedUser &&
                     < Form.Group className="mb-3" controlId="category">
-                        <Form.Label>Select your category</Form.Label>
+                        <Form.Label>Choose your field of interest</Form.Label>
                         <Form.Control as="select"
                             value={signupData.category} onChange={handleInputChange} name="category">
                             {Constants.CREATIVE_CATEGORIES.map((category, index) => (
@@ -178,34 +174,6 @@ const SignupForm = ({ setShowModal }) => {
                             ))}
                         </Form.Control>
                     </Form.Group>}
-
-                <Form.Group className="mb-3" controlId="flag">
-                    <Form.Label>Select your flag</Form.Label>
-                    <div className="custom-dropdown">
-                        <select
-                            value={signupData.flag}
-                            onChange={handleInputChange}
-                            name="flag"
-                            className="custom-select"
-                        >
-                            {Constants.FLAGS.map((flagUrl, index) => (
-                                <option key={index} value={flagUrl}>
-                                    {index === 0 ? 'Select a flag' : ''}
-                                </option>
-                            ))}
-                        </select>
-                        <div className="flag-images">
-                            {Constants.FLAGS.map((flagUrl, index) => (
-                                <img
-                                    key={index}
-                                    src={flagUrl}
-                                    alt={`Flag ${index}`}
-                                    onClick={() => handleImageClick(flagUrl)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </Form.Group>
 
                 {!loggedUser &&
                     <>
@@ -255,3 +223,4 @@ const SignupForm = ({ setShowModal }) => {
 }
 
 export default SignupForm
+

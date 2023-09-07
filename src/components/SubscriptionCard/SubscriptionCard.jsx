@@ -15,7 +15,14 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
     const [showPaymentModal, setShowPaymentModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
 
-
+    const subscriptionDetails = {
+        title: title,
+        description: description,
+        type: type,
+        price: price,
+        currency: currency,
+        paymentFrequency: paymentFrequency
+    }
     const handleDeleteSubscription = () => {
 
         subscriptionService
@@ -91,9 +98,9 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
 
             <Modal show={showPaymentModal} onHide={() => setShowPaymentModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Payment Details</Modal.Title>
+                    <Modal.Title>You've chosen:</Modal.Title>
                 </Modal.Header>
-                <PaymentForm clients={clients} setShowPaymentModal={setShowPaymentModal} />
+                <PaymentForm subscriptionDetails={subscriptionDetails} clients={clients} setShowPaymentModal={setShowPaymentModal} />
             </Modal>
 
             <Modal show={showEditModal} onHide={() => { setShowEditModal(false) }}>

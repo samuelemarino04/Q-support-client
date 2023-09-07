@@ -11,8 +11,6 @@ const AboutPage = ({ creative }) => {
     const [showModal, setShowModal] = useState(false)
     const { loggedUser } = useContext(AuthContext)
 
-    console.log("esto es lo que me llega al creative", creative)
-
     return (
         !creative ? <Loader /> :
             <>

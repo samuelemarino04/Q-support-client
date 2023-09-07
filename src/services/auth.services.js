@@ -21,7 +21,6 @@ class AuthService {
     }
 
     signup(userData) {
-        console.log('userData desde servicio de auth', userData)
         return this.api.post('/signup', userData)
     }
 
