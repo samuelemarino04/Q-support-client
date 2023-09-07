@@ -48,14 +48,8 @@ const AllUsersPage = () => {
                 <Row>
                     {users.map(eachUser => (
                         <div key={eachUser._id} className="d-flex align-items-center">
-                            <UserCard {...eachUser} />
-                            <Button
-                                variant="dark"
-                                type="button"
-                                onClick={(e) => handleDeleteUser(eachUser._id, e)}
-                            >
-                                Delete User
-                            </Button>
+                            <UserCard handleDeleteUser={handleDeleteUser}{...eachUser} />
+
                         </div>
                     ))}
                 </Row>
