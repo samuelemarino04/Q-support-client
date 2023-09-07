@@ -55,7 +55,7 @@ const CreativesList = () => {
             <>
                 <Row className="align-items-center">
                     <Col md={6}>
-                        <h3>FILTER CREATIVES</h3>
+                        <h3>Filter creative</h3>
                         <input
                             type="text"
                             value={searchQuery}

@@ -21,8 +21,10 @@ const Navigation = () => {
                 <Navbar.Brand>{import.meta.env.VITE_APP_NAME}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
+                    <img src="/images/avance-rapido.png" alt="foto icono" className="icon-img" />
+
                     <Nav className="me-auto">
-                        <img src="/images/avance-rapido.png" alt="foto icono" className="icon-img" />
+
                         <Link to={'/'} className='nav-link'>Home</Link>
                         <Link to={'/events'} className='nav-link'>Events</Link>
                         {loggedUser?.role === "ADMIN" &&
