@@ -183,7 +183,7 @@ const SignupForm = ({ setShowModal }) => {
                 {!loggedUser &&
                     <>
                         <Form.Group className="mb-3" controlId="birth">
-                            <Form.Label>Birth Date</Form.Label>
+                            <Form.Label>Birth Date <small>(You must be 18 or older to sign up.)</small></Form.Label>
                             <Form.Control
                                 type="date"
                                 value={signupData.birth}

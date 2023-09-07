@@ -2,10 +2,9 @@
     width: 300px;
     height: 480px;
     background: white;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0px 1px 10px 1px black;
     overflow: hidden;
-
 }
 
 .CreativeCard {
@@ -16,18 +15,18 @@
     align-items: center;
 }
 
-.background-image {
-    height: 250px;
+.upper-container {
+    height: 100px;
     background-color: #212429;
 }
 
 .image-container img {
     background: white;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     padding: 5px;
-    transform: translate(75px, 70px);
+    transform: translate(95px, 45px);
     object-fit: cover;
 }
 
@@ -36,7 +35,7 @@ img {
 }
 
 .lower-container {
-    margin-top: 30px;
+    margin-top: 60px;
     height: 300px;
     background: white;
     text-align: center;
@@ -50,7 +49,7 @@ p {
 }
 
 .lower-container h3 {
-    color: #2f2d2e;
+    color: #2F2D2E;
     font-weight: 600;
     font-size: 1.5rem
 }
@@ -63,12 +62,12 @@ p {
 
 .lower-container p {
     margin: 1rem;
-    color: #2f2d2e;
+    color: #2F2D2E;
     font-size: 0.8rem;
     text-align: justify;
 }
 
 .nodeco {
     text-decoration: none;
-    color: #004a0c;
+    color: #004A0C;
 }
