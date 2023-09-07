@@ -2,12 +2,13 @@ import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
 import React, { useContext, useState } from 'react'
 import userService from '../../services/user.services'
 import { AuthContext } from '../../contexts/auth.context'
-import FormError from "../FormError/FormError";
+import FormError from '../FormError/FormError'
 
 
 const PaymentForm = ({ clients, setShowPaymentModal }) => {
 
     const { loggedUser } = useContext(AuthContext)
+    const [errors, setErrors] = useState([])
 
     const formatDate = (inputDate) => {
         if (inputDate.length === 4) {
@@ -22,16 +23,9 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
         cardNumber: '',
         cvv: '',
         expiringDate: '',
-        startDate: '',
     })
 
-    const [errors, setErrors] = useState({
-        cardHolder: '',
-        cardNumber: '',
-        cvv: '',
-        expiringDate: '',
-        startDate: '',
-    })
+
 
 
     const handleInputChange = (e) => {
@@ -57,10 +51,10 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                 clients.push(loggedUser._id)
                 return setShowPaymentModal(false)
             })
-            .catch(err => setErrors(err.response.data.errorMessages))
+            .catch(err => setErrors(err.response.data.messages))
 
     }
-
+    console.log(errors)
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -105,8 +99,7 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                     />
                 </FloatingLabel>
 
-                {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
-
+                {errors?.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
                 <Button variant="dark" type="submit" className='mt-2'>
                     Submit Payment
                 </Button>

@@ -6,10 +6,12 @@ import { AuthContext } from "../../contexts/auth.context";
 //WIP: (esta hecho en el signup pero molaria sacarlo de ahí)
 //  crear el modal para que el user meta su about( un formulario con un unico textArea de texto???)
 
-const AboutPage = (creative) => {
+const AboutPage = ({ creative }) => {
 
     const [showModal, setShowModal] = useState(false)
     const { loggedUser } = useContext(AuthContext)
+
+    console.log("esto es lo que me llega al creative", creative)
 
     return (
         !creative ? <Loader /> :
@@ -20,8 +22,8 @@ const AboutPage = (creative) => {
                             Edit About
                         </Button>
                     )}
-
-                    <p>heeeey estoy en construssssión{creative.aboutInfo}</p>
+                    <p>aqui tenemos que meter mas cositas beibes, una fotito, un tikitkitiki miaumiau</p>
+                    <p>{creative.aboutInfo}</p>
                 </Container>
                 {/* ... aqui meter la modal para el edit ... */}
             </>

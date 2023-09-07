@@ -1,8 +1,7 @@
-import { Col } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Button, Col } from "react-bootstrap"
 
 
-const UserCard = ({ username, rol, avatar, category, email }) => {
+const UserCard = ({ username, _id, rol, avatar, category, email, handleDeleteUser }) => {
 
     return (
         <Col lg={{ span: 4 }} md={{ span: 6 }}>
@@ -18,9 +17,18 @@ const UserCard = ({ username, rol, avatar, category, email }) => {
                         <h4>{rol}</h4>
                         <h4>{category}</h4>
                         <h4>{email}</h4>
+                        <Button
+                            variant="dark"
+                            type="button"
+                            onClick={(e) => handleDeleteUser(_id, e)}
+                        >
+                            Delete User
+                        </Button>
                     </div>
                 </div>
+
             </div>
+
         </Col>
 
     )

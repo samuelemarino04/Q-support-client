@@ -8,7 +8,7 @@ import * as Constants from '../../consts/consts'
 import { AuthContext } from "../../contexts/auth.context"
 import userService from "../../services/user.services"
 import FormError from "../FormError/FormError";
-
+import './SignupForm.css'
 
 
 const SignupForm = ({ setShowModal }) => {
@@ -17,8 +17,6 @@ const SignupForm = ({ setShowModal }) => {
         loggedUser && editingUser()
     }, [])
 
-    //EXTRA? sacar del signup todo excepto el correo y la contraseña
-    // y llevarlo a otra vista en la que rellenar todos los fields
 
     const emptySignupForm = {
         username: '',
@@ -30,7 +28,8 @@ const SignupForm = ({ setShowModal }) => {
         password: '',
         pronouns: '',
         aboutInfo: '',
-        backgroundImage: ''
+        backgroundImage: '',
+        flag: '',
     }
 
     const [errors, setErrors] = useState([])
@@ -180,10 +179,38 @@ const SignupForm = ({ setShowModal }) => {
                         </Form.Control>
                     </Form.Group>}
 
+                <Form.Group className="mb-3" controlId="flag">
+                    <Form.Label>Select your flag</Form.Label>
+                    <div className="custom-dropdown">
+                        <select
+                            value={signupData.flag}
+                            onChange={handleInputChange}
+                            name="flag"
+                            className="custom-select"
+                        >
+                            {Constants.FLAGS.map((flagUrl, index) => (
+                                <option key={index} value={flagUrl}>
+                                    {index === 0 ? 'Select a flag' : ''}
+                                </option>
+                            ))}
+                        </select>
+                        <div className="flag-images">
+                            {Constants.FLAGS.map((flagUrl, index) => (
+                                <img
+                                    key={index}
+                                    src={flagUrl}
+                                    alt={`Flag ${index}`}
+                                    onClick={() => handleImageClick(flagUrl)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </Form.Group>
+
                 {!loggedUser &&
                     <>
                         <Form.Group className="mb-3" controlId="birth">
-                            <Form.Label>Birth Date</Form.Label>
+                            <Form.Label>Birth Date <small>(You must be 18 or older to sign up.)</small></Form.Label>
                             <Form.Control
                                 type="date"
                                 value={signupData.birth}

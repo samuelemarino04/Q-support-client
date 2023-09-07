@@ -26,7 +26,9 @@ const Navigation = () => {
                         <img src="/images/avance-rapido.png" alt="foto icono" className="icon-img" />
                         <Link to={'/'} className='nav-link'>Home</Link>
                         <Link to={'/events'} className='nav-link'>Events</Link>
-                        <Link to={'/getAllUsers'} className='nav-link'>Creatives Q+ Users</Link>
+                        {loggedUser?.role === "ADMIN" &&
+                            <Link to={'/getAllUsers'} className='nav-link'>Creatives Q+ Users</Link>
+                        }
                     </Nav>
                     <Nav>
                         {
@@ -37,9 +39,9 @@ const Navigation = () => {
                             </>
                         }
                         {
-                            loggedUser?.role === "USER" &&
+                            loggedUser?.role === "USER" || "ADMIN" &&
                             <>
-                                <Link to={`/user/${loggedUser._id}`} className='nav-link'>My profile</Link>
+                                <Link to={`/user/${loggedUser?._id}`} className='nav-link'>My profile</Link>
                                 <span className='nav-link' onClick={logout}>Logout</span>
                             </>
                         }

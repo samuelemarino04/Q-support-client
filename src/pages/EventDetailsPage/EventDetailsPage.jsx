@@ -21,6 +21,8 @@ const EventDetailsPage = ({ }) => {
     const [showModal, setShowModal] = useState(false)
     const { loggedUser } = useContext(AuthContext)
 
+    console.log("esto es lo que me llega dentro del evento", event)
+    console.log("esto es lo que me llega del loggedUser", loggedUser)
 
     useEffect(() => {
         loadEventDetails()
@@ -96,9 +98,15 @@ const EventDetailsPage = ({ }) => {
                             ) : (
                                 <Button variant="dark" onClick={handleJoinEvent}>Join Event</Button>
                             )}
-                            <Button variant="dark" onClick={handleRemoveEvent}>Remove Event</Button>
-                            <hr />
-                            <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Edit event</Button>
+                            {loggedUser?._id === event.owner || loggedUser.role === "ADMIN" ?
+                                <>
+                                    <Button variant="dark" onClick={handleRemoveEvent}>Remove Event</Button>
+                                    <hr />
+                                    <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Edit event</Button>
+                                </>
+                                :
+                                null
+                            }
                             <Modal show={showModal} onHide={() => { setShowModal(false) }}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Edit event</Modal.Title>

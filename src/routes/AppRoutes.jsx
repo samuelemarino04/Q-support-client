@@ -27,15 +27,16 @@ const AppRoutes = () => {
             <Route path={'/login'} element={<LoginPage />} />
             <Route path={'/creative/:user_id'} element={<CreativeProfile />} />
             <Route path={'/user/:user_id'} element={<UserProfile />} />
-            <Route path={'/newsubscription'} element={<SubscriptionForm />} />
             <Route path={'/events'} element={<EventPage />} />
-            <Route path={'/events/:event_id/edit'} element={<EditEventPage />} />
             <Route path={'/getOneEvent/:event_id'} element={<EventDetailsPage />} />
             <Route path={'/getSubscriptionsByOwner/:owner_id'} element={<SubscriptionsPage />} />
-            <Route path={'/getAllUsers'} element={<AllUsersPage />} />
 
-            {/* TODO: PROTEGER COMPOPNENTE POR ROL DESDE DENTRO POR DIOS */}
-            {loggedUser?.role === "CREATIVE" && <Route path={'/newsubscription'} element={<SubscriptionForm />} />}
+            <Route element={<PrivateRoute />}>
+                <Route path={'/newsubscription'} element={<SubscriptionForm />} />
+                <Route path={'/events/:event_id/edit'} element={<EditEventPage />} />
+                <Route path={'/newsubscription'} element={<SubscriptionForm />} />
+                <Route path={'/getAllUsers'} element={<AllUsersPage />} />
+            </Route>
 
             <Route path={'*'} element={<NotFoundPage />} />
 

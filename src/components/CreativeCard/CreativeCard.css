@@ -20,6 +20,12 @@
     background-color: #212429;
 }
 
+.text-multiline {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
 .image-container img {
     background: white;
     width: 100px;
