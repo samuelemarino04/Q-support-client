@@ -82,10 +82,13 @@ const NewEventForm = ({ fireFinalActions }) => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="description">
                     <Form.Label>Description</Form.Label>
-                    <Form.Control type="text"
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
                         value={eventData.description}
                         name="description"
-                        onChange={handleInputChange} />
+                        onChange={handleInputChange}
+                    />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="address">
                     <Form.Label>Address</Form.Label>
@@ -108,9 +111,11 @@ const NewEventForm = ({ fireFinalActions }) => {
 
                 {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
-                <Button variant="dark" type="submit" className='mt-2'>
-                    Submit Event
-                </Button>
+                <div className="d-flex align-items-center justify-content-center">
+                    <Button variant="dark" type="submit" className='mt-2'>
+                        Submit Event
+                    </Button>
+                </div>
             </Form>
         </div >
     )

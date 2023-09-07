@@ -1,11 +1,11 @@
-import { Button, Container, FloatingLabel, Form } from 'react-bootstrap'
+import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap'
 import React, { useContext, useState } from 'react'
 import userService from '../../services/user.services'
 import { AuthContext } from '../../contexts/auth.context'
 import FormError from '../FormError/FormError'
 
 
-const PaymentForm = ({ clients, setShowPaymentModal }) => {
+const PaymentForm = ({ subscriptionDetails, clients, setShowPaymentModal }) => {
 
     const { loggedUser } = useContext(AuthContext)
     const [errors, setErrors] = useState([])
@@ -59,8 +59,15 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
     return (
         <Form onSubmit={handleSubmit}>
             <Container>
-                <p>aqui me traigo el objeto subscription y pinto todos los detallitos y lo dejo todo bonito jejeXD</p>
-                <FloatingLabel controlId="floatingInputGrid" label="cardHolder" className="mb-3">
+                <h1><strong>{subscriptionDetails.title}</strong></h1>
+
+                <p>By choosing to support this creative you agree to be charged <strong>{subscriptionDetails.price}{subscriptionDetails.currency}</strong>
+                    ({subscriptionDetails.paymentFrequency}) in exchange of the services offered(<em>{subscriptionDetails.description}</em>).</p>
+                <hr />
+                <h3>Payment Details</h3>
+                <hr />
+                <h6>Cardholder's name</h6>
+                <FloatingLabel controlId="floatingInputGrid" label="Type the carholder's full name" className="mb-3">
                     <Form.Control
                         type="text"
                         name="cardHolder"
@@ -69,7 +76,8 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                         placeholder="CardHolder"
                     />
                 </FloatingLabel>
-                <FloatingLabel controlId="floatingInputGrid" label="cardNumber" className="mb-3">
+                <h6>Card number</h6>
+                <FloatingLabel controlId="floatingInputGrid" label="Type the card's full number" className="mb-3">
                     <Form.Control
                         type="Number"
                         name="cardNumber"
@@ -78,31 +86,40 @@ const PaymentForm = ({ clients, setShowPaymentModal }) => {
                         placeholder="cardNumber"
                     />
                 </FloatingLabel>
+                <Row>
+                    <Col>
+                        <h6>Expiring date</h6>
+                        <FloatingLabel controlId="floatingInputGrid" label="MM/YY" className="m-2 w-100">
+                            <Form.Control
+                                type="text"
+                                name="expiringDate"
+                                value={formData.expiringDate}
+                                onChange={handleInputChange}
+                                placeholder="MM/YY"
+                            />
+                        </FloatingLabel>
+                    </Col>
+                    <Col>
+                        <h6>CVV</h6>
+                        <FloatingLabel controlId="floatingInputGrid" label="CVV" className="m-2 w-100">
+                            <Form.Control
+                                type="text"
+                                name="cvv"
+                                value={formData.cvv}
+                                onChange={handleInputChange}
+                                placeholder="CVV"
+                            />
+                        </FloatingLabel>
+                    </Col>
+                </Row>
 
-                <FloatingLabel controlId="floatingInputGrid" label="expiringDate" className="mb-3">
-                    <Form.Control
-                        type="text"
-                        name="expiringDate"
-                        value={formData.expiringDate}
-                        onChange={handleInputChange}
-                        placeholder="MM/YY"
-                    />
-                </FloatingLabel>
-
-                <FloatingLabel controlId="floatingInputGrid" label="CVV" className="m-2 w-25">
-                    <Form.Control
-                        type="text"
-                        name="cvv"
-                        value={formData.cvv}
-                        onChange={handleInputChange}
-                        placeholder="CVV"
-                    />
-                </FloatingLabel>
 
                 {errors?.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
-                <Button variant="dark" type="submit" className='mt-2'>
-                    Submit Payment
-                </Button>
+                <div className="d-flex align-items-center justify-content-center">
+                    <Button variant="dark" type="submit" className='mt-2'>
+                        Submit Payment
+                    </Button>
+                </div>
             </Container>
         </Form >
     )
