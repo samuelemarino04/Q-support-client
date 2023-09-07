@@ -16,7 +16,6 @@ const Navigation = () => {
     return (
         <Navbar bg={invertedTheme}
             data-bs-theme={invertedTheme}
-            className='mb-3'
             expand="lg">
             <Container>
                 <Navbar.Brand>{import.meta.env.VITE_APP_NAME}</Navbar.Brand>

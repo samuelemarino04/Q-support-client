@@ -1,4 +1,4 @@
-import { Button, Container, Form, Modal, Row, Col } from 'react-bootstrap'
+import { Button, Container, Form, Modal, Row, Col, ButtonGroup } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useParams } from "react-router-dom"
@@ -13,6 +13,7 @@ import { AuthContext } from '../../contexts/auth.context'
 import SignupForm from '../../components/SignupForm/SignupForm';
 import AboutPage from '../AboutPage/AboutPage';
 import './CreativeProfile.css'
+
 
 
 const CreativeProfile = () => {
@@ -101,30 +102,44 @@ const CreativeProfile = () => {
             <Loader />
             :
             <>
-                <Container fluid className="container-fluid">
-                    <div className="image-header">
-                        <img src={creative.backgroundImage} alt="background foto" />
-                    </div>
-                    <div className="container-creative">
-                        <div className="username">
-                            <h2>{creative.username}</h2>
-                        </div>
-                        <div className="avatar">
-                            <img src={creative.avatar} alt="avatar" />
-                        </div>
-                        <div className="about-info">
-                            <h3>{creative.aboutInfo}</h3>
-                        </div>
-                    </div>
+                <div className="CreativeProfile">
+                    <div className="CreativeHeader">
+                        <div className="up-container">
+                            <div className="imageBackground-container">
+                                <img src={creative.backgroundImage} alt="background foto" />
+                            </div>
+                            <div className="imageProfile-container">
+                                <img src={creative.avatar} alt="avatar" className='avatarfoto' />
+                            </div>
+                            <div className="bio-icon">
+                                <Col>
 
-                </Container >
+                                    <Row>
+                                        <p>{creative.username} • <small>({creative.pronouns})</small></p>
+                                    </Row>
+                                    <Row>
+                                        <p>{creative.category}</p>
+                                    </Row>
 
-                {loggedUser?._id === user_id &&
-                    <div>
-                        <Button variant="dark" onClick={() => setShowModal(true)}>Edit profile</Button>
-                        <Button variant="dark" onClick={handleDeleteUser}>Delete Profile</Button>
+                                    <img src="/public/images/instagram.png" alt="instagram" style={{ width: '20px', height: '20px' }} className="icons" />
+                                    <img src="/public/images/linkedin.png" alt="linkedin" style={{ width: '20px', height: '20px' }} className="icons" />
+                                    <img src="/public/images/youtube.png" alt="youtube" style={{ width: '30px', height: '30px' }} className="icons" />
+
+                                </Col>
+                            </div>
+                        </div>
                     </div>
-                }
+                    <div className="low-container">
+                    </div> {loggedUser?._id === user_id &&
+                        <div className='buttonGroup'>
+                            <ButtonGroup aria-label="Basic example" size='sm' className='mb-3 pl-3'>
+                                <Button variant="secondary" onClick={() => setShowModal(true)}>Edit profile</Button>
+                                <Button variant="secondary" onClick={handleDeleteUser}>Delete Profile</Button>
+                            </ButtonGroup>
+                        </div>
+                    }
+                </div>
+
 
                 <Tabs
                     defaultActiveKey="Work"

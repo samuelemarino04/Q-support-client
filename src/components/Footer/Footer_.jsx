@@ -17,6 +17,7 @@ const Footer = () => {
                     <Col md={4}>
                         <section>
                             <h5>CONTACT</h5>
+
                         </section>
                     </Col>
                 </Row>
