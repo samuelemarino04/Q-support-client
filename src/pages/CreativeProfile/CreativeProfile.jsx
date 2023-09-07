@@ -1,4 +1,4 @@
-import { Button, Container, Form, Modal, } from 'react-bootstrap'
+import { Button, Container, Form, Modal, Row, Col } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useParams } from "react-router-dom"
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth.context'
 import SignupForm from '../../components/SignupForm/SignupForm';
 import AboutPage from '../AboutPage/AboutPage';
+import './CreativeProfile.css'
 
 
 const CreativeProfile = () => {
@@ -100,6 +101,23 @@ const CreativeProfile = () => {
             <Loader />
             :
             <>
+                <Container fluid className="container-fluid">
+                    <div className="image-header">
+                        <img src={creative.backgroundImage} alt="background foto" />
+                    </div>
+                    <div className="container-creative">
+                        <div className="username">
+                            <h2>{creative.username}</h2>
+                        </div>
+                        <div className="avatar">
+                            <img src={creative.avatar} alt="avatar" />
+                        </div>
+                        <div className="about-info">
+                            <h3>{creative.aboutInfo}</h3>
+                        </div>
+                    </div>
+
+                </Container >
 
                 {loggedUser?._id === user_id &&
                     <div>
@@ -107,66 +125,64 @@ const CreativeProfile = () => {
                         <Button variant="dark" onClick={handleDeleteUser}>Delete Profile</Button>
                     </div>
                 }
-                <Container>
-                    <Tabs
-                        defaultActiveKey="Work"
-                        id="fill-tab-example"
-                        className="mb-3"
-                    >
-                        <Tab eventKey="Work" title="Work">
-                            <div className="work-content" key={creative._id}>
-                                <header>
-                                    {creative.username}
-                                    <img src={creative.avatar} alt="avatar" style={{ height: '200px', width: '150px' }} />
-                                </header>
-                                {/* TODO: DESACOPLAR EN CREATIEVGALLERY O COMO MINIMO EN GALLERYCARD */}
-                                {
-                                    creative?.images?.map(eachImage => {
-                                        return (
-                                            <>
-                                                <Container>
-                                                    <img key={eachImage} src={eachImage} alt="image"
-                                                        style={{ height: '200px', width: '150px' }} />
-                                                    {loggedUser?._id === user_id &&
-                                                        <Form onSubmit={handleRemoveSubmit(eachImage)}>
-                                                            <Button variant='dark' type='submit' >
-                                                                delete image</Button>
-                                                        </Form>
-                                                    }
-                                                </Container>
-                                            </>
-                                        )
-                                    })
 
-                                }
-                            </div>
-                            {loggedUser?._id === user_id &&
-                                <Form onSubmit={handleFormSubmit}>
-                                    <Form.Control type="file" multiple onChange={handleFileUpload}>
-                                    </Form.Control>
-                                    <Button variant='dark' type='submit' >Upload image</Button>
-                                </Form>
+                <Tabs
+                    defaultActiveKey="Work"
+                    id="fill-tab-example"
+                    className="mb-3"
+
+                >
+                    <Tab eventKey="Work" title="Work">
+                        <div className="work-content" key={creative._id}>
+
+                            {/* TODO: DESACOPLAR EN CREATIEVGALLERY O COMO MINIMO EN GALLERYCARD */}
+                            {
+                                creative?.images?.map(eachImage => {
+                                    return (
+                                        <>
+                                            <Container>
+                                                <img key={eachImage} src={eachImage} alt="image"
+                                                    style={{ height: '200px', width: '150px' }} />
+                                                {loggedUser?._id === user_id &&
+                                                    <Form onSubmit={handleRemoveSubmit(eachImage)}>
+                                                        <Button variant='dark' type='submit' >
+                                                            delete image</Button>
+                                                    </Form>
+                                                }
+                                            </Container>
+                                        </>
+                                    )
+                                })
+
                             }
-                        </Tab >
-                        <Tab eventKey="subscriptions" title="Subscriptions" >
-                            < SubscriptionsPage creative={creative} owner_id={user_id} />
-                        </Tab>
+                        </div>
+                        {loggedUser?._id === user_id &&
+                            <Form onSubmit={handleFormSubmit}>
+                                <Form.Control type="file" multiple onChange={handleFileUpload}>
+                                </Form.Control>
+                                <Button variant='dark' type='submit' >Upload image</Button>
+                            </Form>
+                        }
+                    </Tab >
+                    <Tab eventKey="subscriptions" title="Subscriptions" >
+                        < SubscriptionsPage creative={creative} owner_id={user_id} />
+                    </Tab>
 
-                        <Tab eventKey="About" title="About">
-                            <AboutPage creative={creative} />
-                        </Tab>
+                    <Tab eventKey="About" title="About">
+                        <AboutPage creative={creative} />
+                    </Tab>
 
-                        <Tab eventKey="Events" title="Events">
-                            Tab content for your programmed events
-                            <CreativeEventsPage creative={creative} owner_id={user_id} />
+                    <Tab eventKey="Events" title="Events">
+                        Tab content for your programmed events
+                        <CreativeEventsPage creative={creative} owner_id={user_id} />
 
-                        </Tab>
-                        {/* {/* <Tab eventKey="contact" title="Open Projects" disabled>
+                    </Tab>
+                    {/* {/* <Tab eventKey="contact" title="Open Projects" disabled>
                     Tab content for Contact
                 </Tab> */}
-                    </Tabs >
+                </Tabs >
 
-                </Container >
+
 
                 <Modal show={showModal} onHide={() => { setShowModal(false) }}>
                     <Modal.Header closeButton>

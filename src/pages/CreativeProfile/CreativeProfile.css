@@ -1,0 +1,58 @@
+.image-header {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.image-header img {
+    width: 100%;
+    height: 400px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: 0;
+}
+
+
+.avatar img {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    background: rgb(40, 34, 34);
+    padding-left: 2px;
+    padding-right: 2px;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.profile-name {
+    font-weight: lighter;
+    text-align: center;
+}
+
+.container-creative {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    height: 150px;
+    text-align: center;
+    z-index: 1;
+}
+
+
+.username,
+.avatar,
+.about-info {
+    margin: 10px;
+}
+
+.nav-tabs {
+    width: 100%;
+    justify-content: space-between;
+    color: rgba(235, 225, 225, 0.056);
+}

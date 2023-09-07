@@ -7,9 +7,7 @@ const CreativeCard = ({ _id, username, avatar, category, aboutInfo, backgroundIm
         <Col lg={{ span: 4 }} md={{ span: 6 }}>
             <div className="CreativeCard">
                 <div className="Card">
-                    <div className="background-image">
-                        <img src={backgroundImage} alt="background foto" />
-
+                    <div className="upper-container">
                         <div className="image-container">
                             <img src={avatar} alt="#" height='100px' width='100px' />
                         </div>
@@ -24,6 +22,41 @@ const CreativeCard = ({ _id, username, avatar, category, aboutInfo, backgroundIm
             </div>
         </Col>
     )
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 export default CreativeCard
+
+// return (
+    //     <Col lg={{ span: 4 }} md={{ span: 6 }}>
+    //         <div className="CreativeCard">
+    //             <div className="Card">
+    //                 <div className="background-image">
+    //                     <img src={backgroundImage} alt="background foto" />
+
+    //                     <div className="image-container">
+    //                         <img src={avatar} alt="#" height='100px' width='100px' />
+    //                     </div>
+    //                 </div>
+    //                 <div className="lower-container">
+    //                     <h4>{username}</h4>
+    //                     <h3>{category}</h3>
+    //                     <p>{aboutInfo}</p>
+    //                     <Link className={'btn btn-outline-dark nodeco'} to={`/creative/${_id}`}>Visit Profile</Link>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </Col>
+    // )
