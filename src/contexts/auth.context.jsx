@@ -34,7 +34,7 @@ function AuthProviderWrapper(props) {
         localStorage.removeItem('authToken')
         setLoggedUser(null)
         setIsLoading(false)
-        navigate('/login')
+        navigate('/')
     }
 
 

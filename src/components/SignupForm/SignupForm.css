@@ -1,0 +1,11 @@
+.SignupForm {
+    background-color: red;
+}
+
+.flags {
+    height: 50px;
+    width: 70px;
+    padding-left: 3px;
+    padding-top: 3px;
+    border: 2px solid white;
+}
