@@ -2,9 +2,7 @@ import { Button, Container } from "react-bootstrap";
 import Loader from "../../components/Loader/Loader";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/auth.context";
-
-//WIP: (esta hecho en el signup pero molaria sacarlo de ahí)
-//  crear el modal para que el user meta su about( un formulario con un unico textArea de texto???)
+import './AboutPage.css'
 
 const AboutPage = ({ creative }) => {
 
@@ -14,13 +12,12 @@ const AboutPage = ({ creative }) => {
     return (
         !creative ? <Loader /> :
             <>
-                <Container>
+                <Container className="AboutCard">
                     {loggedUser?._id === creative._id && (
                         <Button variant="dark" onClick={() => setShowModal(true)}>
                             Edit About
                         </Button>
                     )}
-                    <p>aqui tenemos que meter mas cositas beibes, una fotito, un tikitkitiki miaumiau</p>
                     <p>{creative.aboutInfo}</p>
                 </Container>
                 {/* ... aqui meter la modal para el edit ... */}

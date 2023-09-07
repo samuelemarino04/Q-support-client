@@ -104,100 +104,93 @@ const CreativeProfile = () => {
             <>
                 <div className="CreativeProfile">
                     <div className="CreativeHeader">
-                        <div className="up-container">
-                            <div className="imageBackground-container">
-                                <img src={creative.backgroundImage} alt="background foto" />
-                            </div>
+                        <div className="up-container" style={{ backgroundImage: `url(${creative.backgroundImage})` }} >
                             <div className="imageProfile-container">
-                                <img src={creative.avatar} alt="avatar" className='avatarfoto' />
+                                <img src={creative.avatar} alt="avatar" className='avatarfoto' style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 2 }} />
                             </div>
-                            <div className="bio-icon">
-                                <Col>
 
-                                    <Row>
-                                        <p>{creative.username} • <small>({creative.pronouns})</small></p>
-                                    </Row>
-                                    <Row>
-                                        <p>{creative.category}</p>
-                                    </Row>
-
-                                    <img src="/public/images/instagram.png" alt="instagram" style={{ width: '20px', height: '20px' }} className="icons" />
-                                    <img src="/public/images/linkedin.png" alt="linkedin" style={{ width: '20px', height: '20px' }} className="icons" />
-                                    <img src="/public/images/youtube.png" alt="youtube" style={{ width: '30px', height: '30px' }} className="icons" />
-
-                                </Col>
-                            </div>
                         </div>
                     </div>
                     <div className="low-container">
+                        <div className="bio-icon">
+                            <Col>
+                                <Row>
+                                    <p>{creative.username} • <small>({creative.pronouns})</small></p>
+                                </Row>
+                                <Row>
+                                    <p>{creative.category}</p>
+                                </Row>
+                                <img src="/public/images/instagram.png" alt="instagram" style={{ width: '20px', height: '20px' }} className="icons" />
+                                <img src="/public/images/linkedin.png" alt="linkedin" style={{ width: '20px', height: '20px' }} className="icons" />
+                                <img src="/public/images/youtube.png" alt="youtube" style={{ width: '30px', height: '30px' }} className="icons" />
+
+                            </Col>
+                        </div>
                     </div> {loggedUser?._id === user_id &&
                         <div className='buttonGroup'>
-                            <ButtonGroup aria-label="Basic example" size='sm' className='mb-3 pl-3'>
+                            <ButtonGroup aria-label="Basic example" size='sm' className='mb-3'>
                                 <Button variant="secondary" onClick={() => setShowModal(true)}>Edit profile</Button>
                                 <Button variant="secondary" onClick={handleDeleteUser}>Delete Profile</Button>
                             </ButtonGroup>
                         </div>
                     }
                 </div>
+                <Container>
 
+                    <Tabs
+                        defaultActiveKey="Work"
+                        id="fill-tab-example"
+                        className="mb-3 justify-content-center"
 
-                <Tabs
-                    defaultActiveKey="Work"
-                    id="fill-tab-example"
-                    className="mb-3"
+                    >
+                        <Tab eventKey="Work" title="Work">
+                            <div className="work-content" key={creative._id}>
 
-                >
-                    <Tab eventKey="Work" title="Work">
-                        <div className="work-content" key={creative._id}>
+                                {/* TODO: DESACOPLAR EN CREATIEVGALLERY O COMO MINIMO EN GALLERYCARD */}
+                                {
+                                    creative?.images?.map(eachImage => {
+                                        return (
+                                            <>
+                                                <Container>
+                                                    <img key={eachImage} src={eachImage} alt="image"
+                                                        style={{ height: '200px', width: '150px' }} />
+                                                    {loggedUser?._id === user_id &&
+                                                        <Form onSubmit={handleRemoveSubmit(eachImage)}>
+                                                            <Button variant='dark' type='submit' >
+                                                                delete image</Button>
+                                                        </Form>
+                                                    }
+                                                </Container>
+                                            </>
+                                        )
+                                    })
 
-                            {/* TODO: DESACOPLAR EN CREATIEVGALLERY O COMO MINIMO EN GALLERYCARD */}
-                            {
-                                creative?.images?.map(eachImage => {
-                                    return (
-                                        <>
-                                            <Container>
-                                                <img key={eachImage} src={eachImage} alt="image"
-                                                    style={{ height: '200px', width: '150px' }} />
-                                                {loggedUser?._id === user_id &&
-                                                    <Form onSubmit={handleRemoveSubmit(eachImage)}>
-                                                        <Button variant='dark' type='submit' >
-                                                            delete image</Button>
-                                                    </Form>
-                                                }
-                                            </Container>
-                                        </>
-                                    )
-                                })
-
+                                }
+                            </div>
+                            {loggedUser?._id === user_id &&
+                                <Form onSubmit={handleFormSubmit}>
+                                    <Form.Control type="file" multiple onChange={handleFileUpload}>
+                                    </Form.Control>
+                                    <Button variant='dark' type='submit' >Upload image</Button>
+                                </Form>
                             }
-                        </div>
-                        {loggedUser?._id === user_id &&
-                            <Form onSubmit={handleFormSubmit}>
-                                <Form.Control type="file" multiple onChange={handleFileUpload}>
-                                </Form.Control>
-                                <Button variant='dark' type='submit' >Upload image</Button>
-                            </Form>
-                        }
-                    </Tab >
-                    <Tab eventKey="subscriptions" title="Subscriptions" >
-                        < SubscriptionsPage creative={creative} owner_id={user_id} />
-                    </Tab>
+                        </Tab >
+                        <Tab eventKey="subscriptions" title="Subscriptions" >
+                            < SubscriptionsPage creative={creative} owner_id={user_id} />
+                        </Tab>
 
-                    <Tab eventKey="About" title="About">
-                        <AboutPage creative={creative} />
-                    </Tab>
+                        <Tab eventKey="About" title="About">
+                            <AboutPage creative={creative} />
+                        </Tab>
 
-                    <Tab eventKey="Events" title="Events">
-                        Tab content for your programmed events
-                        <CreativeEventsPage creative={creative} owner_id={user_id} />
+                        <Tab eventKey="Events" title="Events">
+                            Tab content for your programmed events
+                            <CreativeEventsPage creative={creative} owner_id={user_id} />
 
-                    </Tab>
-                    {/* {/* <Tab eventKey="contact" title="Open Projects" disabled>
-                    Tab content for Contact
-                </Tab> */}
-                </Tabs >
+                        </Tab>
+                    </Tabs >
 
-
+                </Container>
 
                 <Modal show={showModal} onHide={() => { setShowModal(false) }}>
                     <Modal.Header closeButton>

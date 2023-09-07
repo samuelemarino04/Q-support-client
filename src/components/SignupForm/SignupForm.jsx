@@ -38,7 +38,7 @@ const SignupForm = ({ setShowModal }) => {
     const [loadingImage, setLoadingImage] = useState(false)
     const navigate = useNavigate()
 
-
+    console.log("este es el id del user", loggedUser._id)
     const editingUser = () => {
         userService
             .getUserDetails(loggedUser._id)
@@ -77,7 +77,7 @@ const SignupForm = ({ setShowModal }) => {
 
         setLoadingImage(true)
 
-        const signupData = new FormData()
+        const formData = new FormData()
         formData.append('imageData', e.target.files[0])
 
         uploadServices
@@ -111,7 +111,7 @@ const SignupForm = ({ setShowModal }) => {
 
     const handleEditUser = e => {
         e.preventDefault()
-
+        console.log("esto es lo que me llega al edit user", signupData)
         userService
             .editProfile(loggedUser._id, signupData)
             .then(() => setShowModal(false))
@@ -175,7 +175,8 @@ const SignupForm = ({ setShowModal }) => {
                         </Form.Control>
                     </Form.Group>}
 
-                {!loggedUser &&
+                {
+                    !loggedUser &&
                     <>
                         <Form.Group className="mb-3" controlId="birth">
                             <Form.Label>Birth Date <small>(You must be 18 or older to sign up.)</small></Form.Label>
@@ -204,20 +205,23 @@ const SignupForm = ({ setShowModal }) => {
                             <Form.Control type="password" value={signupData.password}
                                 onChange={handleInputChange} name="password" />
                         </Form.Group>
-                    </>}
+                    </>
+                }
 
-                {loggedUser ?
-                    <div className="d-grid">
-                        <Button variant="dark" type="submit" disabled={loadingImage}>
-                            {loadingImage ? 'Loading Image' : 'Edit'}</Button>
-                    </div>
-                    :
-                    <div className="d-grid">
-                        {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
-                        <Button variant="dark" type="submit" disabled={loadingImage}>
-                            {loadingImage ? 'Loading Image' : 'Register'}</Button>
-                    </div>}
-            </Form>
+                {
+                    loggedUser ?
+                        <div className="d-grid">
+                            <Button variant="dark" type="submit" disabled={loadingImage}>
+                                {loadingImage ? 'Loading Image' : 'Edit'}</Button>
+                        </div>
+                        :
+                        <div className="d-grid">
+                            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+                            <Button variant="dark" type="submit" disabled={loadingImage}>
+                                {loadingImage ? 'Loading Image' : 'Register'}</Button>
+                        </div>
+                }
+            </Form >
         </div >
     )
 }

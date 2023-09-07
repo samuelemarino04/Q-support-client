@@ -12,7 +12,7 @@ const CreativeCard = ({ _id, username, avatar, category, aboutInfo, backgroundIm
         <Col lg={{ span: 4 }} md={{ span: 6 }}>
             <div className="CreativeCard">
                 <div className="Card">
-                    <div className="upper-container">
+                    <div className="upper-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: "cover", backgroundPosition: " center", }}>
                         <div className="image-container">
                             <img src={avatar} alt="#" height='100px' width='100px' />
                         </div>

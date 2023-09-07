@@ -7,6 +7,8 @@
     overflow: hidden;
 }
 
+
+
 .CreativeCard {
     display: flex;
     width: 100%;
@@ -17,7 +19,7 @@
 
 .upper-container {
     height: 150px;
-    background-color: #212429;
+
 }
 
 .text-multiline {
@@ -37,7 +39,7 @@
 }
 
 .CreativeCard img {
-    border: 2px solid rgb(0, 77, 0);
+    border: px solid rgb(255, 255, 255);
 }
 
 .lower-container {

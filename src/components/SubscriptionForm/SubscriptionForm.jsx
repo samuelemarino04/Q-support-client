@@ -78,7 +78,7 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
 
         subscriptionService
             .editSubscription(subscription._id, formData)
-            .then(() => setShowEditModal(false)) //comprobar con mis compis <3
+            .then(() => setShowEditModal(false))
             .catch(err => console.log(err))
     }
 
