@@ -50,7 +50,7 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                 subscriptionService
                     .subscribe(_id)
                     .then(() => {
-                        setHasJoined(value)
+                        setHasJoined(true)
                         loadSubscriptions()
                     }
                     )
@@ -62,7 +62,7 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
     return (
         <>
             <Card key={_id} style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={image} />
+                <Card.Img variant="top" src={image} style={{ marginTop: '10px', borderRadius: '3px' }} />
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>
@@ -78,10 +78,13 @@ const SubscriptionCard = ({ _id, title, description, clients, type, price, curre
                     {loggedUser?._id !== owner ?
 
                         clients.includes(loggedUser?._id) ?
-                            <Button variant="dark" size='sm' onClick={() => { handleSubscriptionChange(false) }}>Cancel subscription</Button>
+                            <div className="d-flex justify-content-center">
+                                <Button variant="dark" size='sm' onClick={() => { handleSubscriptionChange(false) }}>Cancel subscription</Button>
+                            </div>
                             :
-                            <Button variant="dark" size='sm' onClick={() => { setShowPaymentModal(true) }}>Join</Button>
-                        :
+                            <div className="d-flex justify-content-center">
+                                <Button variant="dark" size='md' onClick={() => { setShowPaymentModal(true) }}>Join</Button>
+                            </div> :
                         null
                     }
 

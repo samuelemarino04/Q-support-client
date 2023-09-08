@@ -156,7 +156,7 @@ const SubscriptionForm = ({ setShowEditModal, subscription }) => {
                 {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
                 <div className="d-flex align-items-center justify-content-center">
-                    <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? 'Loading Image' : 'Submit'}</Button>
+                    <Button variant="dark" type="submit" className='mt-2 mb-2' disabled={loadingImage}>{loadingImage ? 'Loading Image' : 'Submit'}</Button>
                 </div>
             </Container>
         </Form >
