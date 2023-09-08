@@ -2,8 +2,8 @@ import { useContext } from 'react'
 import './App.css'
 import AppRoutes from './routes/AppRoutes'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from './components/Footer/Footer_'
-import Navigation from './components/Navigation/Navigation_'
+import Footer from './components/Footer/Footer'
+import Navigation from './components/Navigation/Navigation'
 import { ThemeContext } from './contexts/theme.context'
 
 function App() {

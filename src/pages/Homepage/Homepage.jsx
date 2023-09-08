@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap'
-import CreativesList from '../../components/CreativesList/CreativesList_'
+import CreativesList from '../../components/CreativesList/CreativesList'
 
 
 const Homepage = () => {
