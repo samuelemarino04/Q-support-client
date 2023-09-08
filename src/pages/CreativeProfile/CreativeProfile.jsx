@@ -107,7 +107,7 @@ const CreativeProfile = () => {
                     <div className="CreativeHeader">
                         <div className="up-container" style={{ backgroundImage: `url(${creative.backgroundImage})` }} >
                             <div className="imageProfile-container">
-                                <img src={creative.avatar} alt="avatar" className='avatarfoto' style={{ position: 'absolute', top: '450px', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 2 }} />
+                                <img src={creative.avatar} alt="avatar" className='avatarfoto' style={{ position: 'absolute', top: '400px', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 2 }} />
                             </div>
 
                         </div>
