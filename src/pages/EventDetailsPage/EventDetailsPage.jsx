@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import eventsService from "../../services/events.services"
 import { useParams, Link } from "react-router-dom"
-import { Container, Row, Button, Modal } from "react-bootstrap";
+import { Container, Row, Button, Modal, ButtonGroup } from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import Loader from "../../components/Loader/Loader";
 import formatCustomDateTime from "../../utils/date-util";
@@ -10,6 +10,7 @@ import { AuthContext } from "../../contexts/auth.context";
 import EditEventForm from "../../components/EditEventForm/EditEventForm";
 import { useContext } from "react";
 import Maps from "../../components/Maps/Maps";
+import './EventDetailsPage.css'
 
 
 const EventDetailsPage = ({ }) => {
@@ -21,8 +22,7 @@ const EventDetailsPage = ({ }) => {
     const [showModal, setShowModal] = useState(false)
     const { loggedUser } = useContext(AuthContext)
 
-    console.log("esto es lo que me llega dentro del evento", event)
-    console.log("esto es lo que me llega del loggedUser", loggedUser)
+
 
     useEffect(() => {
         loadEventDetails()
@@ -82,45 +82,46 @@ const EventDetailsPage = ({ }) => {
             :
             <>
                 <Container>
-                    <h1 className="mb-4">{event.title} details</h1>
+                    <div className="d-flex justify-content-between">
+                        <h4 className="mt-4">{event.title}</h4>
+                        {loggedUser?._id === event.owner || loggedUser.role === "ADMIN" ?
+                            <>
+                                <ButtonGroup className="custom-event-button">
+                                    <Button variant='outline-dark' size='sm' onClick={() => setShowModal(true)}>Edit</Button>
+                                    <Button variant="outline-danger" size="sm" onClick={handleRemoveEvent}>Remove</Button>
+                                </ButtonGroup>
+                            </>
+                            :
+                            null
+                        }
+                    </div>
                     <hr />
                     <Row>
                         <Col md={{ span: 6, offset: 1 }}>
-                            <h3>Infos</h3>
+                            <h5>Info</h5>
                             <p>{event.description}</p>
                             <ul>
                                 <li>Attenders: {event.attendees.length}</li>
                                 <li>Date: {formatCustomDateTime(event.date)}</li>
-                                <li>{event.address}</li>
+                                <li className="mb-4">{event.address}</li>
+                                <Maps event={event} />
                             </ul>
                             {userJoined ? (
-                                <Button variant="dark" onClick={handleUnjoinEvent}>Unjoin Event</Button>
+                                <Button variant="outline-danger" onClick={handleUnjoinEvent}>Unjoin Event</Button>
                             ) : (
-                                <Button variant="dark" onClick={handleJoinEvent}>Join Event</Button>
+                                <Button variant="success" onClick={handleJoinEvent}>Join Event</Button>
                             )}
-                            {loggedUser?._id === event.owner || loggedUser.role === "ADMIN" ?
-                                <>
-                                    <Button variant="dark" onClick={handleRemoveEvent}>Remove Event</Button>
-                                    <hr />
-                                    <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>Edit event</Button>
-                                </>
-                                :
-                                null
-                            }
                             <Modal show={showModal} onHide={() => { setShowModal(false) }}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Edit event</Modal.Title>
                                 </Modal.Header>
-                                {/* // TODO: EDIT ISSUE - ADAPTAR PROPS FINALKESs */}
                                 <EditEventForm event={event} fireFinalActions={fireFinalActions} />
                             </Modal>
+                            <hr />
                             <Link to='/events' className="btn btn-dark">Volver a la galería</Link>
                         </Col>
                         <Col md={{ span: 4 }}>
-                            <img src={event.icon} style={{ width: '100%' }} />
-                        </Col>
-                        <Col>
-                            <Maps event={event} />
+                            <img src={event.icon} style={{ width: '500px', height: '400px', objectFit: 'cover' }} />
                         </Col>
                     </Row>
                 </Container >
