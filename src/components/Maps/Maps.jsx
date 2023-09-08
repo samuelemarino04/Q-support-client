@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 
 const Maps = ({ event }) => {
     const containerStyle = {
-        width: '400px',
-        height: '400px',
+        width: '300px',
+        height: '200px',
     };
 
     console.log('En los maps', event)

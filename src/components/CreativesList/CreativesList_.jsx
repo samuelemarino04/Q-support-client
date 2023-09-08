@@ -55,12 +55,12 @@ const CreativesList = () => {
             <>
                 <Row className="align-items-center">
                     <Col md={6}>
-                        <h3>Filter creative</h3>
+                        <h4 className='mt-3' >Filter creative</h4>
                         <input
                             type="text"
                             value={searchQuery}
                             onChange={handleInputChange}
-                            placeholder='Search...'
+                            placeholder='Search for a creative...'
                             className="form-control"
                         />
                     </Col>
