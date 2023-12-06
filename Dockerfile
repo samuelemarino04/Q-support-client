@@ -14,7 +14,7 @@ RUN npm install
 RUN npm run build
 
 ENV VITE_API_URL=http://localhost:5005/api
-ENV VITE_APP_NAME= Creatives Q+ 
+ENV VITE_APP_NAME=CreativesQ+ 
 ENV VITE_MAPS_API_KEY=AIzaSyBsRneeSd2He0UERMXg95M7mefD9lDZNJM
 
 # Expose the port your app will run on
