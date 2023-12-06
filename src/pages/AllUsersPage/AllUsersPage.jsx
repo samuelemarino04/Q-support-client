@@ -28,7 +28,7 @@ const AllUsersPage = () => {
             .then(({ data }) => setUsers(data))
             .catch(err => console.log(err))
     }
-    // console.log("estos son los users", )
+
     const handleDeleteUser = (user_id, e) => {
         e.preventDefault();
 
